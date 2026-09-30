@@ -1,4 +1,3 @@
-import { Interface, type TransactionDescription } from "ethers";
 import { Left, Right } from "purify-ts";
 
 import { type HttpTokenDataSource } from "@/modules/ethereum/token/data/HttpTokenDataSource";
@@ -10,6 +9,8 @@ import { type CommandDecoderDataSource } from "@/modules/ethereum/uniswap/data/C
 import { DefaultCommandDecoderDataSource } from "@/modules/ethereum/uniswap/data/DefaultCommandDecoderDataSource";
 import { EthersAbiDecoderDataSource } from "@/modules/ethereum/uniswap/data/EthersAbiDecoderDataSource";
 import { ClearSignContextType } from "@/shared/model/ClearSignContext";
+import * as abi from "@/shared/utils/abi";
+import { type AbiResult } from "@/shared/utils/abi";
 
 import {
   type UniswapContextInput,
@@ -201,7 +202,7 @@ describe("UniswapContextLoader", () => {
       });
     });
 
-    describe("with mocked ethers parseTransaction", () => {
+    describe("with mocked ABI decoder", () => {
       beforeEach(() => {
         vi.resetAllMocks();
         loader = new UniswapContextLoader(
@@ -219,9 +220,10 @@ describe("UniswapContextLoader", () => {
           selector: UNISWAP_EXECUTE_SELECTOR,
         } as UniswapContextInput;
         const commands = `0x0809`; // V2_SWAP_EXACT_IN, V2_SWAP_EXACT_OUT
-        vi.spyOn(Interface.prototype, "parseTransaction").mockReturnValue({
-          args: [commands, ["0x0001", "0x0002"]],
-        } as TransactionDescription);
+        vi.spyOn(abi, "decodeFunctionData").mockReturnValue([
+          commands,
+          ["0x0001", "0x0002"],
+        ] as AbiResult);
         vi.spyOn(commandDecoderMock, "decode")
           .mockReturnValueOnce(["0x01", "0x04", "0x02"])
           .mockReturnValueOnce(["0x02", "0x03"]);
@@ -289,9 +291,10 @@ describe("UniswapContextLoader", () => {
           selector: UNISWAP_EXECUTE_SELECTOR,
         } as UniswapContextInput;
         const commands = `0x0b0004`; // WRAP_ETH, V3_SWAP_EXACT_IN, SWEEP
-        vi.spyOn(Interface.prototype, "parseTransaction").mockReturnValue({
-          args: [commands, ["0x0001", "0x0002", "0x0003"]],
-        } as TransactionDescription);
+        vi.spyOn(abi, "decodeFunctionData").mockReturnValue([
+          commands,
+          ["0x0001", "0x0002", "0x0003"],
+        ] as AbiResult);
         vi.spyOn(commandDecoderMock, "decode")
           .mockReturnValueOnce(["0x01"])
           .mockReturnValueOnce(["0x02", "0x03"])
@@ -353,9 +356,10 @@ describe("UniswapContextLoader", () => {
           selector: UNISWAP_EXECUTE_SELECTOR,
         } as UniswapContextInput;
         const commands = `0x0809`; // V2_SWAP_EXACT_IN, V2_SWAP_EXACT_OUT
-        vi.spyOn(Interface.prototype, "parseTransaction").mockReturnValue({
-          args: [commands, ["0x0001", "0x0002"]],
-        } as TransactionDescription);
+        vi.spyOn(abi, "decodeFunctionData").mockReturnValue([
+          commands,
+          ["0x0001", "0x0002"],
+        ] as AbiResult);
         vi.spyOn(commandDecoderMock, "decode")
           .mockReturnValueOnce(["0x01", "0x02"])
           .mockReturnValueOnce(["0x02", "0x03"]);
@@ -414,9 +418,10 @@ describe("UniswapContextLoader", () => {
           selector: UNISWAP_EXECUTE_SELECTOR,
         } as UniswapContextInput;
         const commands = `0x0809`; // V2_SWAP_EXACT_IN, V2_SWAP_EXACT_OUT
-        vi.spyOn(Interface.prototype, "parseTransaction").mockReturnValue({
-          args: [commands, ["0x0001", "0x0002"]],
-        } as TransactionDescription);
+        vi.spyOn(abi, "decodeFunctionData").mockReturnValue([
+          commands,
+          ["0x0001", "0x0002"],
+        ] as AbiResult);
         vi.spyOn(commandDecoderMock, "decode").mockReturnValueOnce([
           "0x01",
           "0x02",
@@ -453,9 +458,7 @@ describe("UniswapContextLoader", () => {
           selector: UNISWAP_EXECUTE_SELECTOR,
           chainId: 1,
         };
-        vi.spyOn(Interface.prototype, "parseTransaction").mockReturnValue({
-          args: [""],
-        } as TransactionDescription);
+        vi.spyOn(abi, "decodeFunctionData").mockReturnValue([""] as AbiResult);
 
         // WHEN
         const result = await loader.load(input);
@@ -473,9 +476,10 @@ describe("UniswapContextLoader", () => {
           selector: UNISWAP_EXECUTE_SELECTOR,
           chainId: 1,
         };
-        vi.spyOn(Interface.prototype, "parseTransaction").mockReturnValue({
-          args: ["0x08", []],
-        } as TransactionDescription);
+        vi.spyOn(abi, "decodeFunctionData").mockReturnValue([
+          "0x08",
+          [],
+        ] as AbiResult);
         vi.spyOn(commandDecoderMock, "decode").mockReturnValue([]);
 
         // WHEN
@@ -493,11 +497,9 @@ describe("UniswapContextLoader", () => {
           selector: UNISWAP_EXECUTE_SELECTOR,
           chainId: 1,
         };
-        vi.spyOn(Interface.prototype, "parseTransaction").mockImplementation(
-          () => {
-            throw new Error();
-          },
-        );
+        vi.spyOn(abi, "decodeFunctionData").mockImplementation(() => {
+          throw new Error();
+        });
 
         // WHEN
         const result = await loader.load(input);
@@ -516,9 +518,10 @@ describe("UniswapContextLoader", () => {
           selector: UNISWAP_EXECUTE_SELECTOR,
         };
         const commands = `0x080900`; // V2_SWAP_EXACT_IN, V2_SWAP_EXACT_OUT, V3_SWAP_EXACT_IN
-        vi.spyOn(Interface.prototype, "parseTransaction").mockReturnValue({
-          args: [commands, ["0x00", "0x01", "0x02"]],
-        } as TransactionDescription);
+        vi.spyOn(abi, "decodeFunctionData").mockReturnValue([
+          commands,
+          ["0x00", "0x01", "0x02"],
+        ] as AbiResult);
         vi.spyOn(commandDecoderMock, "decode").mockReturnValue([
           "0x01",
           "0x02",
@@ -575,9 +578,10 @@ describe("UniswapContextLoader", () => {
           selector: UNISWAP_EXECUTE_SELECTOR,
         } as UniswapContextInput;
         const commands = `0x0809`; // V2_SWAP_EXACT_IN, V2_SWAP_EXACT_OUT
-        vi.spyOn(Interface.prototype, "parseTransaction").mockReturnValue({
-          args: [commands, ["0x0001"]],
-        } as TransactionDescription);
+        vi.spyOn(abi, "decodeFunctionData").mockReturnValue([
+          commands,
+          ["0x0001"],
+        ] as AbiResult);
 
         // WHEN
         const result = await loader.load(input);

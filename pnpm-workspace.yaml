@@ -14,6 +14,8 @@ patchedDependencies:
 catalog:
   '@exodus/bytes': 1.16.0
   '@exodus/crypto': 1.0.0-rc.34
+  '@exodus/ethereumjs': 1.12.0
+  '@exodus/ethersproject-rlp': 5.4.2-exodus.2
   '@babel/core': ^7.25.2
   '@babel/preset-env': ^7.25.3
   '@babel/runtime': ^7.28.3
@@ -91,7 +93,6 @@ catalog:
   globals: 16.0.0
   hygen: ^6.2.11
   inversify: 7.5.1
-  isomorphic-ws: ^5.0.0
   js-flipper: ^0.273.0
   jsdom: ^26.0.0
   lottie-react: ^2.4.0

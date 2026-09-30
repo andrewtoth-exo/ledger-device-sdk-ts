@@ -1,4 +1,8 @@
 import {
+  decode as decodeRlp,
+  encode as encodeRlp,
+} from "@exodus/ethersproject-rlp";
+import {
   APDU_MAX_PAYLOAD,
   ByteArrayBuilder,
   type CommandResult,
@@ -10,7 +14,6 @@ import {
   type LoggerPublisherService,
 } from "@ledgerhq/device-management-kit";
 import { DerivationPathUtils } from "@ledgerhq/signer-utils";
-import { decodeRlp, encodeRlp } from "ethers";
 import { Nothing } from "purify-ts";
 
 import { type Signature } from "@api/index";
@@ -150,7 +153,7 @@ export class SendSignTransactionTask {
     if (this.args.transactionType === TransactionType.LEGACY) {
       try {
         // Decode the RLP of the transaction and keep only the last 3 elements (v, r, s)
-        const decodedRlp = decodeRlp(serializedTransaction);
+        const decodedRlp: unknown = decodeRlp(serializedTransaction);
         if (Array.isArray(decodedRlp)) {
           const decodedVrs = decodedRlp.slice(-3);
           // Encode those values back to RLP in order to get the length of this serialized list

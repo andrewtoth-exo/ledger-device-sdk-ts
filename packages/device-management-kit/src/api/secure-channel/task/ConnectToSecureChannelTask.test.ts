@@ -1,4 +1,3 @@
-import WebSocket from "isomorphic-ws";
 import { Right } from "purify-ts";
 import { describe, it, vi } from "vitest";
 
@@ -17,25 +16,25 @@ import {
   type ConnectToSecureChannelTaskArgs,
 } from "./ConnectToSecureChannelTask";
 
-vi.mock("isomorphic-ws", () => ({
-  ...vi.importActual("isomorphic-ws"),
-  __esModule: true,
-  default: class {
-    onopen: (() => void) | null = null;
-    onmessage: ((event: { data: string }) => void) | null = null;
-    send = vi.fn();
-    close = vi.fn();
-    url: string;
-    constructor(url: string) {
-      this.url = url;
-    }
-  },
-}));
+class MockWebSocket {
+  onopen: ((event: { type: string; target: WebSocket }) => void) | null = null;
+  onmessage:
+    | ((event: { data: string; type: string; target: WebSocket }) => void)
+    | null = null;
+  onerror: ((event: Event) => void) | null = null;
+  onclose: ((event: CloseEvent) => void) | null = null;
+  send = vi.fn();
+  close = vi.fn();
+  url: string;
+  constructor(url: string) {
+    this.url = url;
+  }
+}
 
 const TEST_DELAY = 5;
 
 describe("ConnectToSecureChannelTask", () => {
-  let mockWebSocket: WebSocket;
+  let mockWebSocket: MockWebSocket;
   let mockInternalApi: InternalApi;
   let taskArgs: ConnectToSecureChannelTaskArgs;
   let task: ConnectToSecureChannelTask;
@@ -50,17 +49,37 @@ describe("ConnectToSecureChannelTask", () => {
   beforeEach(() => {
     // vi.useFakeTimers({ shouldAdvanceTime: true });
 
-    mockWebSocket = new WebSocket("wss://test-host.com");
+    vi.stubGlobal("WebSocket", MockWebSocket);
+    mockWebSocket = new MockWebSocket("wss://test-host.com");
     mockInternalApi = {
       sendApdu: sendApduFn,
       disableRefresher: (_: unknown) => vi.fn(),
     } as unknown as InternalApi;
-    taskArgs = { connection: Right(mockWebSocket) };
+    taskArgs = { connection: Right(mockWebSocket as unknown as WebSocket) };
     task = new ConnectToSecureChannelTask(mockInternalApi, taskArgs);
   });
 
   afterEach(() => {
     vi.resetAllMocks();
+    vi.unstubAllGlobals();
+  });
+
+  it("handles browser error events without a message and closes the connection", () => {
+    const events: SecureChannelEvent[] = [];
+    const complete = vi.fn();
+    task.run().subscribe({ next: (event) => events.push(event), complete });
+    mockWebSocket.onerror!(new Event("error"));
+    expect(events).toEqual([
+      {
+        type: SecureChannelEventType.Error,
+        error: new SecureChannelError({
+          url: mockWebSocket.url,
+          errorMessage: "WebSocket connection failed",
+        }),
+      },
+    ]);
+    expect(complete).toHaveBeenCalledOnce();
+    expect(mockWebSocket.close).toHaveBeenCalledOnce();
   });
 
   it("should emit Opened event on WebSocket open", async () => {
@@ -206,7 +225,7 @@ describe("ConnectToSecureChannelTask", () => {
     };
 
     const taskWithMockCrypto = new ConnectToSecureChannelTask(mockInternalApi, {
-      connection: Right(mockWebSocket),
+      connection: Right(mockWebSocket as unknown as WebSocket),
       cryptoService: mockCryptoService,
     });
 

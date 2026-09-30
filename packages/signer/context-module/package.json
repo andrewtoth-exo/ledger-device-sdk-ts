@@ -45,15 +45,17 @@
     "@ledgerhq/prettier-config-dsdk": "workspace:^",
     "@ledgerhq/tsconfig-dsdk": "workspace:^",
     "@ledgerhq/vitest-config-dmk": "workspace:^",
+    "ethers": "catalog:",
     "ts-node": "catalog:"
   },
   "dependencies": {
-    "ethers": "catalog:",
+    "buffer": "catalog:",
     "inversify": "catalog:",
     "purify-ts": "catalog:",
     "reflect-metadata": "catalog:",
     "@exodus/bytes": "catalog:",
-    "@exodus/crypto": "catalog:"
+    "@exodus/crypto": "catalog:",
+    "@exodus/ethereumjs": "catalog:"
   },
   "peerDependencies": {
     "@ledgerhq/device-management-kit": "workspace:^"

@@ -1,5 +1,4 @@
 import { inject, injectable } from "inversify";
-import WebSocket from "isomorphic-ws";
 import { Either, Left, Right } from "purify-ts";
 
 import { type DmkConfig } from "@api/DmkConfig";

@@ -1,4 +1,3 @@
-import WebSocket from "isomorphic-ws";
 import { Right } from "purify-ts";
 
 import { type DmkConfig } from "@api/DmkConfig";
@@ -7,22 +6,18 @@ import { WebSocketConnectionError } from "@internal/secure-channel/model/Errors"
 import { DefaultSecureChannelDataSource } from "./DefaultSecureChannelDataSource";
 import { type SecureChannelDataSource } from "./SecureChannelDataSource";
 
-vi.mock("isomorphic-ws", () => {
-  // The chained mockImplementationOnce is used to simulate the WebSocket connection success and failure respectively, the order is important
-  return {
-    default: vi
-      .fn()
-      .mockImplementationOnce(() => {})
-      .mockImplementationOnce(() => {
-        throw new Error("WebSocket connection failed");
-      }),
-  };
-});
-
 describe("Secure Channel Data Source", () => {
   describe("Connection establishment", () => {
+    beforeEach(() => {
+      vi.stubGlobal(
+        "WebSocket",
+        vi.fn(function () {}),
+      );
+    });
+
     afterEach(() => {
       vi.clearAllMocks();
+      vi.unstubAllGlobals();
     });
 
     it("should return a WebSocket if the WebSocket connection succeeds", () => {
@@ -40,6 +35,12 @@ describe("Secure Channel Data Source", () => {
     });
 
     it("should return an error if the WebSocket connection fails", () => {
+      vi.stubGlobal(
+        "WebSocket",
+        vi.fn(function () {
+          throw new Error("WebSocket connection failed");
+        }),
+      );
       // given
       const api = new DefaultSecureChannelDataSource({
         webSocketUrl: "wss://test-websocket-url",
@@ -50,6 +51,16 @@ describe("Secure Channel Data Source", () => {
 
       // then
       expect(res.extract()).toBeInstanceOf(WebSocketConnectionError);
+    });
+
+    it("returns a connection error when the host has no WebSocket", () => {
+      vi.stubGlobal("WebSocket", undefined);
+      const api = new DefaultSecureChannelDataSource({
+        webSocketUrl: "wss://test-websocket-url",
+      } as DmkConfig);
+      expect(
+        api._connectWebSocket("wss://test-websocket-url/test").extract(),
+      ).toBeInstanceOf(WebSocketConnectionError);
     });
   });
   describe("Connections with different pathname", () => {

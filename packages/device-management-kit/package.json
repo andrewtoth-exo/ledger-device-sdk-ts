@@ -37,11 +37,9 @@
   },
   "dependencies": {
     "inversify": "catalog:",
-    "isomorphic-ws": "catalog:",
     "purify-ts": "catalog:",
     "reflect-metadata": "catalog:",
     "semver": "catalog:",
-    "ws": "catalog:",
     "xstate": "catalog:",
     "@exodus/crypto": "catalog:"
   },
@@ -56,7 +54,6 @@
     "@ledgerhq/vitest-config-dmk": "workspace:^",
     "@statelyai/inspect": "catalog:",
     "@types/semver": "catalog:",
-    "@types/ws": "catalog:",
     "rxjs": "catalog:",
     "ts-node": "catalog:"
   }

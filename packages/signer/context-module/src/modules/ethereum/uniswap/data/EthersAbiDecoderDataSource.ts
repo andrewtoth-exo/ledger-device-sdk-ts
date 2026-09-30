@@ -1,5 +1,6 @@
-import { AbiCoder } from "ethers";
 import { injectable } from "inversify";
+
+import { decodeAbiParameters } from "@/shared/utils/abi";
 
 import { type AbiDecoderDataSource } from "./AbiDecoderDataSource";
 
@@ -7,7 +8,7 @@ import { type AbiDecoderDataSource } from "./AbiDecoderDataSource";
 export class EthersAbiDecoderDataSource implements AbiDecoderDataSource {
   decode(types: string[], data: string): unknown[] {
     try {
-      return AbiCoder.defaultAbiCoder().decode(types, data);
+      return decodeAbiParameters(types, data);
     } catch (_) {
       return [];
     }

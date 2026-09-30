@@ -1,4 +1,3 @@
-import type WebSocket from "isomorphic-ws";
 import { type Either } from "purify-ts";
 
 import { type WebSocketConnectionError } from "@internal/secure-channel/model/Errors";

@@ -3,14 +3,16 @@ import type {
   InternalApi,
   LoggerPublisherService,
 } from "@ledgerhq/device-management-kit";
-import type { TypedDataField } from "ethers";
-import { TypedDataEncoder } from "ethers";
 import { Just } from "purify-ts";
 
 import type { Signature } from "@api/model/Signature";
-import type { TypedData } from "@api/model/TypedData";
+import type { TypedData, TypedDataField } from "@api/model/TypedData";
 import { SignEIP712Command } from "@internal/app-binder/command/SignEIP712Command";
 import type { EthErrorCodes } from "@internal/app-binder/command/utils/ethAppErrors";
+import {
+  hashTypedDataDomain,
+  hashTypedDataStruct,
+} from "@internal/shared/utils/typedData";
 
 export class SignTypedDataLegacyTask {
   private readonly _logger: LoggerPublisherService;
@@ -33,7 +35,7 @@ export class SignTypedDataLegacyTask {
     });
 
     // Compute domain hash and message hash on client side
-    const domainHash = TypedDataEncoder.hashDomain(this.data.domain);
+    const domainHash = hashTypedDataDomain(this.data.domain);
 
     if (!this.data.types[this.data.primaryType]) {
       this._logger.error("[run] Primary type not defined in types", {
@@ -46,7 +48,7 @@ export class SignTypedDataLegacyTask {
 
     const typesRecord: Record<string, TypedDataField[]> = this.data.types;
     const { EIP712Domain, ...rest } = typesRecord;
-    const messageHash = TypedDataEncoder.hashStruct(
+    const messageHash = hashTypedDataStruct(
       this.data.primaryType,
       rest,
       this.data.message,

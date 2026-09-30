@@ -41,7 +41,11 @@
   "dependencies": {
     "@ledgerhq/device-contacts-kit": "workspace:^",
     "@ledgerhq/signer-utils": "workspace:^",
-    "ethers": "catalog:",
+    "@exodus/bytes": "catalog:",
+    "@exodus/crypto": "catalog:",
+    "@exodus/ethereumjs": "catalog:",
+    "@exodus/ethersproject-rlp": "catalog:",
+    "buffer": "catalog:",
     "inversify": "catalog:",
     "purify-ts": "catalog:",
     "reflect-metadata": "catalog:",
@@ -57,6 +61,7 @@
     "@ledgerhq/tsconfig-dsdk": "workspace:^",
     "@ledgerhq/vitest-config-dmk": "workspace:^",
     "@types/semver": "catalog:",
+    "ethers": "catalog:",
     "rxjs": "catalog:",
     "ts-node": "catalog:"
   },

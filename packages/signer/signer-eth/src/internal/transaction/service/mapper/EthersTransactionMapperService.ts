@@ -1,9 +1,10 @@
+import { fromHex } from "@exodus/bytes/hex.js";
 import { bufferToHexaString } from "@ledgerhq/device-management-kit";
-import { ethers, getBytes } from "ethers";
 import { injectable } from "inversify";
 import { Either, Left, Right } from "purify-ts";
 
 import { TransactionMapperResult } from "./model/TransactionMapperResult";
+import { parseTransaction } from "./parseTransaction";
 import { TransactionMapperService } from "./TransactionMapperService";
 
 const SELECTOR_LENGTH = 10; // 0x prefix + 4 bytes for the selector
@@ -18,7 +19,7 @@ export class EthersTransactionMapperService
     transaction: Uint8Array,
   ): Either<Error, TransactionMapperResult> {
     try {
-      const tx = ethers.Transaction.from(bufferToHexaString(transaction));
+      const tx = parseTransaction(bufferToHexaString(transaction));
       const chainId = Number(tx.chainId.toString());
 
       if (chainId <= 0) {
@@ -36,7 +37,7 @@ export class EthersTransactionMapperService
               : tx.data,
           value: tx.value,
         },
-        serializedTransaction: getBytes(tx.unsignedSerialized),
+        serializedTransaction: fromHex(tx.unsignedSerialized.slice(2)),
         type: tx.type || 0,
       });
     } catch (_error) {

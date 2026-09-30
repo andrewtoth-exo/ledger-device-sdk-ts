@@ -1,7 +1,17 @@
 import { type HexaString } from "@ledgerhq/device-management-kit";
 
 export const UNISWAP_EXECUTE_ABI = [
-  "function execute(bytes calldata commands, bytes[] calldata inputs, uint256 deadline) external payable",
+  {
+    type: "function",
+    name: "execute",
+    stateMutability: "payable",
+    inputs: [
+      { name: "commands", type: "bytes" },
+      { name: "inputs", type: "bytes[]" },
+      { name: "deadline", type: "uint256" },
+    ],
+    outputs: [],
+  },
 ];
 
 export const UNISWAP_EXECUTE_SELECTOR = "0x3593564c";

@@ -4,7 +4,6 @@ import {
   parseSocketMessage,
   WEBSOCKET_MESSAGE_TYPES,
 } from "@ledgerhq/device-management-kit-devtools-websocket-common";
-import WebSocket from "isomorphic-ws";
 import { ReplaySubject, Subject, type Subscription } from "rxjs";
 
 type Params = {
@@ -146,7 +145,7 @@ export class DevToolsWebSocketConnector implements Connector {
 
     this.ws.onerror = (event) => {
       this.warn("[DevToolsWebSocketConnector] WebSocket error", event);
-      if (event.target.readyState === WebSocket.CLOSED) {
+      if (this.ws?.readyState === WebSocket.CLOSED) {
         this.ws = null;
         this.wsUrl = null;
         this.scheduleReconnect(params);
