@@ -5,6 +5,11 @@ import type { TypedDataSchema } from "@/modules/ethereum/model/TypedDataContext"
 import { getSchemaHash } from "./getSchemaHash";
 
 describe("getSchemaHash", () => {
+  it("preserves SHA-224 over UTF-8 schema names", () => {
+    expect(getSchemaHash({ Éclair: [{ name: "naïve", type: "string" }] })).toBe(
+      "71dae3910b316f093b4b0dd607384edce33f940f8e3f5d025fb6a79c",
+    );
+  });
   it("returns SHA-224 hex digest of compact sorted JSON", () => {
     const schema: TypedDataSchema = {
       Mail: [

@@ -1,6 +1,6 @@
+import { fromBase58 } from "@exodus/bytes/base58.js";
 import { getCompiledTransactionMessageDecoder } from "@solana/transaction-messages";
 import { Connection } from "@solana/web3.js";
-import bs58 from "bs58";
 import { injectable } from "inversify";
 
 const PUBLIC_KEY_LENGTH = 32;
@@ -199,6 +199,6 @@ export class BlockhashService {
   async fetchLatestBlockhash(rpcUrl: string): Promise<Uint8Array> {
     const connection = new Connection(rpcUrl, { commitment: "finalized" });
     const { blockhash } = await connection.getLatestBlockhash("finalized");
-    return bs58.decode(blockhash);
+    return fromBase58(blockhash);
   }
 }

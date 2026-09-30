@@ -19,8 +19,8 @@ import { type TransportService } from "@internal/transport/service/TransportServ
 
 import { ConnectUseCase } from "./ConnectUseCase";
 
-vi.mock("uuid", () => ({
-  v4: vi.fn().mockReturnValue("fakeSessionId"),
+vi.mock("@exodus/crypto/randomUUID", () => ({
+  randomUUID: vi.fn().mockReturnValue("fakeSessionId"),
 }));
 
 let transport: Transport;

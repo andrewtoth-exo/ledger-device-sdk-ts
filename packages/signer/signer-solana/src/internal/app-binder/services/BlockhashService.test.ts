@@ -1,3 +1,4 @@
+import { fromBase58 } from "@exodus/bytes/base58.js";
 import {
   AccountRole,
   address,
@@ -13,7 +14,6 @@ import {
   setTransactionMessageLifetimeUsingDurableNonce,
 } from "@solana/kit";
 import { PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
-import bs58 from "bs58";
 
 import { BlockhashService } from "./BlockhashService";
 
@@ -26,7 +26,7 @@ vi.mock("@solana/web3.js", async (importOriginal) => {
 });
 
 const BLOCKHASH = "a3PD566oU2nE9JHwuC897aaT7ispdqaQ63Si6jzyKAg";
-const BLOCKHASH_BYTES = bs58.decode(BLOCKHASH);
+const BLOCKHASH_BYTES = fromBase58(BLOCKHASH);
 
 const payer = new PublicKey("2cHm11EeTGQixAkyaqNRFczpi1XB1n6rK7bSwNiZbCdB");
 const recipient = new PublicKey("7Np41oeYqPefeNQEHSv1UDhYrehxin3NStELsSKCT4K2");

@@ -53,7 +53,7 @@
     "@ledgerhq/prettier-config-dsdk": "workspace:^",
     "@ledgerhq/tsconfig-dsdk": "workspace:^",
     "@ledgerhq/vitest-config-dmk": "workspace:^",
-    "@types/pako": "^2.0.3",
+    "@types/pako": "*",
     "@types/semver": "catalog:",
     "ts-node": "catalog:"
   },

@@ -1,3 +1,4 @@
+import { randomValues } from "@exodus/crypto/randomBytes";
 import {
   bufferToHexaString,
   hexaStringToBuffer,
@@ -38,9 +39,7 @@ export class LKRPBlockStream {
     parentHash?: string,
   ): LKRPBlockStream {
     const blocks: LKRPBlock[] = [];
-    let hash =
-      parentHash ??
-      bufferToHexaString(crypto.getRandomValues(new Uint8Array(32)), false);
+    let hash = parentHash ?? bufferToHexaString(randomValues(32), false);
 
     for (const blockData of blocksData) {
       const block = LKRPBlock.fromData({

@@ -1,10 +1,10 @@
+import { toBase58 } from "@exodus/bytes/base58.js";
 import {
   Keypair,
   type PublicKey,
   SystemProgram,
   Transaction,
 } from "@solana/web3.js";
-import bs58 from "bs58";
 import { describe, expect, it } from "vitest";
 
 import {
@@ -12,7 +12,7 @@ import {
   type SolanaMessageNormaliser,
 } from "./DefaultSolanaMessageNormaliser";
 
-const DUMMY_BLOCKHASH = bs58.encode(new Uint8Array(32).fill(0xaa));
+const DUMMY_BLOCKHASH = toBase58(new Uint8Array(32).fill(0xaa));
 
 function makeSignedRawTx(
   instructions: Parameters<Transaction["add"]>[0][],

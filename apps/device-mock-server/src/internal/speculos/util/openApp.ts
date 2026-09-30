@@ -1,4 +1,4 @@
-import { randomUUID } from "node:crypto";
+import { randomUUID } from "@exodus/crypto/randomUUID";
 
 /**
  * Helpers for the Speculos proxy: detecting the *Open App* / *Close App* APDUs,

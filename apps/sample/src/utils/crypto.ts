@@ -1,9 +1,13 @@
+import { randomValues } from "@exodus/crypto/randomBytes";
+import {
+  privateKeyIsValid,
+  privateKeyToPublicKey,
+} from "@exodus/crypto/secp256k1";
 import {
   base64StringToBuffer,
   bufferToBase64String,
   bufferToHexaString,
 } from "@ledgerhq/device-management-kit";
-import * as secp from "@noble/secp256k1";
 
 export function bytesFromBase64(base64: string): Uint8Array {
   // return Uint8Array.fromBase64(base64) // Not supported in all browsers yet
@@ -20,8 +24,11 @@ export function base64FromBytes(bytes: Uint8Array): string {
 }
 
 export function genIdentity() {
-  const priv = secp.utils.randomPrivateKey();
-  const pub = secp.getPublicKey(priv, true);
-  const clientName = `DMK Playground-${bufferToHexaString(pub).slice(0, 6)}`;
-  return { clientName, privateKey: bufferToHexaString(priv) };
+  let privateKey: Uint8Array<ArrayBuffer>;
+  do {
+    privateKey = randomValues(32);
+  } while (!privateKeyIsValid({ privateKey }));
+  const publicKey = privateKeyToPublicKey({ privateKey });
+  const clientName = `DMK Playground-${bufferToHexaString(publicKey).slice(0, 6)}`;
+  return { clientName, privateKey: bufferToHexaString(privateKey) };
 }

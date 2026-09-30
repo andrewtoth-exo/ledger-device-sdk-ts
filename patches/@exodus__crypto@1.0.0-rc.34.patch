@@ -1,0 +1,30 @@
+diff --git a/utils/assertHash.d.ts b/utils/assertHash.d.ts
+new file mode 100644
+index 0000000..0529235
+--- /dev/null
++++ b/utils/assertHash.d.ts
+@@ -0,0 +1,24 @@
++export type HashType =
++  | 'sha224'
++  | 'sha256'
++  | 'sha384'
++  | 'sha512'
++  | 'sha512-256'
++  | 'sha3-256'
++  | 'sha3-384'
++  | 'sha3-512'
++  | 'keccak256'
++  | 'keccak512'
++  | 'blake256'
++  | 'blake2b160'
++  | 'blake2b192'
++  | 'blake2b224'
++  | 'blake2b256'
++  | 'blake2b512'
++  | 'blake2b-4bytes'
++  | 'blake2b-5bytes'
++  | 'ripemd160'
++  | 'hash160'
++  | 'p2sh-hash160'
++export type HmacType = 'sha256' | 'sha384' | 'sha512'
++export type Pbkdf2Type = HmacType

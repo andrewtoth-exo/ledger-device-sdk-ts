@@ -39,11 +39,11 @@
   },
   "dependencies": {
     "@ledgerhq/signer-utils": "workspace:^",
-    "@noble/hashes": "^1.8.0",
     "inversify": "catalog:",
     "purify-ts": "catalog:",
     "reflect-metadata": "catalog:",
-    "xstate": "catalog:"
+    "xstate": "catalog:",
+    "@exodus/crypto": "catalog:"
   },
   "devDependencies": {
     "@ledgerhq/device-management-kit": "workspace:^",

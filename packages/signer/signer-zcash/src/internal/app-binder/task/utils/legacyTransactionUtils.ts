@@ -1,5 +1,4 @@
-import { ripemd160 } from "@noble/hashes/ripemd160";
-import { sha256 } from "@noble/hashes/sha256";
+import { hashSync } from "@exodus/crypto/hash";
 
 import {
   type LegacyTransaction,
@@ -291,7 +290,7 @@ export const compressPublicKey = (publicKey: Uint8Array): Uint8Array => {
 };
 
 export const hashPublicKey = (buffer: Uint8Array): Uint8Array =>
-  ripemd160(sha256(buffer));
+  hashSync("hash160", buffer.slice(), "uint8");
 
 /** P2PKH `scriptPubKey` for a transparent Zcash address from a Ledger `GetAddress` pubkey. */
 export const buildP2pkhScriptPubKeyFromLedgerZcashPublicKey = (

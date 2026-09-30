@@ -39,10 +39,8 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@sentry/minimal": "catalog:",
-    "js-base64": "catalog:",
     "purify-ts": "catalog:",
-    "uuid": "catalog:"
+    "@exodus/bytes": "catalog:"
   },
   "devDependencies": {
     "@ledgerhq/device-management-kit": "workspace:^",
@@ -51,7 +49,6 @@
     "@ledgerhq/prettier-config-dsdk": "workspace:^",
     "@ledgerhq/tsconfig-dsdk": "workspace:^",
     "@ledgerhq/vitest-config-dmk": "workspace:^",
-    "@types/uuid": "catalog:",
     "@vitejs/plugin-react": "catalog:",
     "react-native": "catalog:",
     "react-native-ble-plx": "catalog:",

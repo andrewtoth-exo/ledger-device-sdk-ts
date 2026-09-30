@@ -1,7 +1,7 @@
-import { randomUUID } from "node:crypto";
 import { type Server } from "node:http";
 import { type Socket } from "node:net";
 
+import { randomUUID } from "@exodus/crypto/randomUUID";
 import { type Device } from "@ledgerhq/device-mockserver-client";
 import { inject, injectable } from "inversify";
 import { type WebSocket, WebSocketServer } from "ws";

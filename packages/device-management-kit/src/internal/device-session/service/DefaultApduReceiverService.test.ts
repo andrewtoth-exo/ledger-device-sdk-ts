@@ -1,4 +1,4 @@
-vi.mock("uuid");
+vi.mock("@exodus/crypto/randomUUID");
 
 import { Just, Left, type Maybe, Nothing, Right } from "purify-ts";
 
@@ -58,8 +58,8 @@ describe("DefaultApduReceiverService", () => {
   let service: ApduReceiverService;
 
   beforeAll(() => {
-    vi.mock("uuid", () => ({
-      v4: vi.fn().mockReturnValue("42"),
+    vi.mock("@exodus/crypto/randomUUID", () => ({
+      randomUUID: vi.fn().mockReturnValue("42"),
     }));
   });
 

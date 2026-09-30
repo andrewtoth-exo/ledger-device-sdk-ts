@@ -1,6 +1,6 @@
+import { randomUUID as v4 } from "@exodus/crypto/randomUUID";
 import { inject, injectable } from "inversify";
 import { Either, Left, Maybe, Right } from "purify-ts";
-import { v4 } from "uuid";
 
 import {
   APDU_DATA_LENGTH_LENGTH,

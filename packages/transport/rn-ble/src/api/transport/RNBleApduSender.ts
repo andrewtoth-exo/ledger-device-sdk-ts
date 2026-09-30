@@ -4,6 +4,7 @@ import {
   type Device,
   type Subscription as BleCharacteristicSubscription,
 } from "react-native-ble-plx";
+import { fromBase64, toBase64 } from "@exodus/bytes/base64.js";
 import {
   type ApduReceiverService,
   type ApduReceiverServiceFactory,
@@ -20,7 +21,6 @@ import {
   type LoggerPublisherService,
   SendApduTimeoutError,
 } from "@ledgerhq/device-management-kit";
-import { Base64 } from "js-base64";
 import { type Either, Left, Maybe, Nothing, Right } from "purify-ts";
 import { BehaviorSubject, type Subscription } from "rxjs";
 
@@ -116,7 +116,7 @@ export class RNBleApduSender
       return;
     }
 
-    const apdu = Base64.toUint8Array(characteristic.value);
+    const apdu = fromBase64(characteristic.value);
     if (!this._isDeviceReady.value) {
       this.onReceiveSetupApduResponse(apdu);
     } else {
@@ -204,7 +204,7 @@ export class RNBleApduSender
     }
 
     const requestMtuFrame = Uint8Array.from([0x08, 0x00, 0x00, 0x00, 0x00]);
-    await this.write(Base64.fromUint8Array(requestMtuFrame)).catch((error) => {
+    await this.write(toBase64(requestMtuFrame)).catch((error) => {
       // Android pairing refused error
       this._logger.error("Pairing failed", {
         data: { error },
@@ -261,7 +261,7 @@ export class RNBleApduSender
 
     for (const frame of frames) {
       try {
-        await this.write(Base64.fromUint8Array(frame.getRawData()));
+        await this.write(toBase64(frame.getRawData()));
       } catch (error) {
         this._logger.info("Error sending frame", { data: { error } });
       }

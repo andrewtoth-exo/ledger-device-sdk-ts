@@ -42,12 +42,11 @@
   },
   "dependencies": {
     "@ledgerhq/signer-utils": "workspace:^",
-    "@types/crypto-js": "catalog:",
-    "crypto-js": "catalog:",
     "inversify": "catalog:",
     "purify-ts": "catalog:",
     "reflect-metadata": "catalog:",
-    "xstate": "catalog:"
+    "xstate": "catalog:",
+    "@exodus/crypto": "catalog:"
   },
   "devDependencies": {
     "@ledgerhq/device-management-kit": "workspace:^",

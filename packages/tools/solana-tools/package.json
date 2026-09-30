@@ -39,7 +39,6 @@
     "@solana/addresses": "catalog:",
     "@solana/transaction-messages": "catalog:",
     "@solana/web3.js": "catalog:",
-    "bs58": "catalog:",
     "buffer": "catalog:",
     "inversify": "catalog:",
     "purify-ts": "catalog:",

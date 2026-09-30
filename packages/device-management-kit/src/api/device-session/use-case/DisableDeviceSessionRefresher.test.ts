@@ -16,8 +16,8 @@ import { type SecureChannelService } from "@internal/secure-channel/service/Secu
 
 import { DisableDeviceSessionRefresherUseCase } from "./DisableDeviceSessionRefresher";
 
-vi.mock("uuid", () => ({
-  v4: () => "fakeUuid",
+vi.mock("@exodus/crypto/randomUUID", () => ({
+  randomUUID: () => "fakeUuid",
 }));
 
 let logger: LoggerPublisherService;

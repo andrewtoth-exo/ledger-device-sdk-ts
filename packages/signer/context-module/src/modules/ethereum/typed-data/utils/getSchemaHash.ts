@@ -1,4 +1,4 @@
-import SHA224 from "crypto-js/sha224";
+import { hashSync } from "@exodus/crypto/hash";
 
 import type { TypedDataSchema } from "@/modules/ethereum/model/TypedDataContext";
 
@@ -30,5 +30,5 @@ function sortSchema(schema: TypedDataSchema): TypedDataSchema {
 export function getSchemaHash(schema: TypedDataSchema): SchemaHash {
   const sortedSchema = sortSchema(schema);
   const schemaStr = JSON.stringify(sortedSchema);
-  return SHA224(schemaStr).toString();
+  return hashSync("sha224", schemaStr, "hex");
 }

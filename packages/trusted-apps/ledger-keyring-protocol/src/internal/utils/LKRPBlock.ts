@@ -1,9 +1,9 @@
+import { hashSync } from "@exodus/crypto/hash";
 import {
   bufferToHexaString,
   ByteArrayBuilder,
   hexaStringToBuffer,
 } from "@ledgerhq/device-management-kit";
-import { sha256 } from "@noble/hashes/sha256";
 import { Either, Just, type Maybe, Nothing, Right } from "purify-ts";
 
 import { type LKRPParsingError } from "@api/model/Errors";
@@ -94,7 +94,7 @@ export class LKRPBlock {
 
   hash(): string {
     return this.hashValue.orDefaultLazy(() => {
-      const hashValue = sha256(this.bytes);
+      const hashValue = hashSync("sha256", this.bytes.slice(), "uint8");
       return bufferToHexaString(hashValue, false);
     });
   }

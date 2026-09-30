@@ -1,3 +1,4 @@
+import { randomUUID as uuid } from "@exodus/crypto/randomUUID";
 import {
   type ApduReceiverServiceFactory,
   type ApduSenderServiceFactory,
@@ -34,7 +35,6 @@ import {
 } from "purify-ts";
 import { BehaviorSubject, from, map, type Observable, switchMap } from "rxjs";
 import { type Device, usb } from "usb";
-import { v4 as uuid } from "uuid";
 
 import { RECONNECT_DEVICE_TIMEOUT } from "@api/data/NodeHidConfig";
 import { NodeHidTransportNotSupportedError } from "@api/model/Errors";
