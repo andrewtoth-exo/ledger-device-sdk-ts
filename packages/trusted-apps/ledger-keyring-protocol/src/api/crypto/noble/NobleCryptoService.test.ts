@@ -45,6 +45,20 @@ describe("NobleCryptoService", () => {
     expect(keyPair instanceof NobleKeyPair).toBeTruthy();
   });
 
+  it("preserves HMAC-SHA256 with an empty key", () => {
+    expect(
+      cryptoService.hmac(
+        new Uint8Array(),
+        new TextEncoder().encode("test message"),
+        HashAlgo.SHA256,
+      ),
+    ).toEqual(
+      hexaStringToBuffer(
+        "64697812da66f837b971ede84bfd9ed7ef53ceb504dc406b39128362328a6bdd",
+      ),
+    );
+  });
+
   it("should import a key pair", () => {
     const privateKey = new Uint8Array(32).fill(1);
     const keyPair = cryptoService.importKeyPair(privateKey, Curve.K256);

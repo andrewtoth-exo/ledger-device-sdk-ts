@@ -49,11 +49,8 @@
     "@ledgerhq/speculos-device-controller": "workspace:^",
     "@ledgerhq/react-ui": "catalog:",
     "@ledgerhq/solana-tools": "workspace:^",
-    "@noble/secp256k1": "^2.3.0",
     "@playwright/test": "catalog:",
     "@reduxjs/toolkit": "catalog:",
-    "@sentry/nextjs": "catalog:",
-    "bs58": "catalog:",
     "ethers": "catalog:",
     "lottie-react": "catalog:",
     "next": "catalog:",
@@ -61,7 +58,9 @@
     "react-dom": "catalog:",
     "react-redux": "catalog:",
     "rxjs": "catalog:",
-    "styled-components": "catalog:"
+    "styled-components": "catalog:",
+    "@exodus/bytes": "catalog:",
+    "@exodus/crypto": "catalog:"
   },
   "devDependencies": {
     "@ledgerhq/device-mock-server": "workspace:^",

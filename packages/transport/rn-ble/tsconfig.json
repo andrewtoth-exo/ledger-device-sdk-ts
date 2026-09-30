@@ -10,7 +10,7 @@
     "paths": {
       "@api/*": ["./src/api/*"]
     },
-    "types": ["node", "vitest/globals", "uuid"],
+    "types": ["node", "vitest/globals"],
     "skipLibCheck": true,
     "resolveJsonModule": true
   },

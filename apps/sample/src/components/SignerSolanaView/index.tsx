@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { fromBase58 } from "@exodus/bytes/base58.js";
 import {
   ContextModuleBuilder,
   ContextModuleChainID,
@@ -35,7 +36,6 @@ import {
   type GenerateTransactionDAOutput,
   SolanaToolsBuilder,
 } from "@ledgerhq/solana-tools";
-import bs58 from "bs58";
 
 import { DeviceActionsList } from "@/components/DeviceActionsView/DeviceActionsList";
 import { type DeviceActionProps } from "@/components/DeviceActionsView/DeviceActionTester";
@@ -339,7 +339,7 @@ export const SignerSolanaView: React.FC<{ sessionId: string }> = ({
                   .split(",")
                   .map((s) => s.trim())
                   .filter(Boolean)
-                  .map((s) => bs58.decode(s))
+                  .map((s) => fromBase58(s))
               : undefined;
           return signer.signMessage(derivationPath, payload, {
             version,

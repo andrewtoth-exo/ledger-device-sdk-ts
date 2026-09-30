@@ -34,9 +34,7 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@sentry/minimal": "catalog:",
-    "purify-ts": "catalog:",
-    "uuid": "catalog:"
+    "purify-ts": "catalog:"
   },
   "devDependencies": {
     "@ledgerhq/device-management-kit": "workspace:^",
@@ -45,7 +43,6 @@
     "@ledgerhq/prettier-config-dsdk": "workspace:^",
     "@ledgerhq/tsconfig-dsdk": "workspace:^",
     "@ledgerhq/vitest-config-dmk": "workspace:^",
-    "@types/uuid": "catalog:",
     "@types/web-bluetooth": "catalog:",
     "rxjs": "catalog:",
     "ts-node": "catalog:"

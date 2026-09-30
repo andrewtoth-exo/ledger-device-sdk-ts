@@ -1,4 +1,4 @@
-import { sha3_256 } from "@noble/hashes/sha3";
+import { hashSync } from "@exodus/crypto/hash";
 
 import { type CryptoService } from "./CryptoService";
 
@@ -7,6 +7,6 @@ import { type CryptoService } from "./CryptoService";
  */
 export class NobleCryptoService implements CryptoService {
   sha3_256(data: Uint8Array): Uint8Array {
-    return sha3_256(data);
+    return hashSync("sha3-256", data.slice(), "uint8");
   }
 }

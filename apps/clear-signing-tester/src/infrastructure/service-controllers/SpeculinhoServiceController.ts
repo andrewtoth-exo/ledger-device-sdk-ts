@@ -1,5 +1,5 @@
+import { randomUUID } from "@exodus/crypto/randomUUID";
 import { LoggerPublisherService } from "@ledgerhq/device-management-kit";
-import { randomUUID } from "crypto";
 import { inject, injectable } from "inversify";
 
 import { TYPES } from "@root/src/di/types";

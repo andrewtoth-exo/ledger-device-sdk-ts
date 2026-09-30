@@ -1,6 +1,6 @@
+import { randomUUID as v4 } from "@exodus/crypto/randomUUID";
 import { inject, injectable } from "inversify";
 import { Either, Just, Left, Maybe, Nothing, Right } from "purify-ts";
-import { v4 } from "uuid";
 
 import { ApduResponse } from "@api/device-session/ApduResponse";
 import {

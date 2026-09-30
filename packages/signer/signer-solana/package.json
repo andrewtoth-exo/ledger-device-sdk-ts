@@ -43,13 +43,13 @@
     "@ledgerhq/signer-utils": "workspace:^",
     "@solana/transaction-messages": "catalog:",
     "@solana/web3.js": "catalog:",
-    "bs58": "catalog:",
     "buffer": "catalog:",
     "inversify": "catalog:",
     "purify-ts": "catalog:",
     "reflect-metadata": "catalog:",
     "semver": "catalog:",
-    "xstate": "catalog:"
+    "xstate": "catalog:",
+    "@exodus/bytes": "catalog:"
   },
   "devDependencies": {
     "@ledgerhq/device-management-kit": "workspace:^",

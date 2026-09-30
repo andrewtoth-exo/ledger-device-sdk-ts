@@ -8,7 +8,12 @@ packages:
   - packages/transport/*
   - packages/trusted-apps/*
 
+patchedDependencies:
+  '@exodus/crypto@1.0.0-rc.34': patches/@exodus__crypto@1.0.0-rc.34.patch
+
 catalog:
+  '@exodus/bytes': 1.16.0
+  '@exodus/crypto': 1.0.0-rc.34
   '@babel/core': ^7.25.2
   '@babel/preset-env': ^7.25.3
   '@babel/runtime': ^7.28.3
@@ -40,8 +45,6 @@ catalog:
   '@reduxjs/toolkit': ^2.11.2
   '@rozenite/plugin-bridge': 1.1.0
   '@rozenite/vite-plugin': 1.1.0
-  '@sentry/minimal': 6.19.7
-  '@sentry/nextjs': ^9.33.0
   '@solana/addresses': ^8.3.0
   '@solana/kit': ^8.3.0
   '@solana/rpc-types': ^8.3.0
@@ -50,30 +53,26 @@ catalog:
   '@statelyai/inspect': ^0.4.0
   '@tsconfig/react-native': ^3.0.5
   '@tsconfig/recommended': ^1.0.8
-  '@types/crypto-js': ^4.2.0
-  '@types/express': ^4.17.21
-  '@types/node': 24.13.2
-  '@types/react': 18.3.12
-  '@types/react-dom': 18.3.1
-  '@types/react-test-renderer': ^18.0.0
-  '@types/semver': 7.7.0
-  '@types/styled-components': ^5.1.25
-  '@types/styled-components-react-native': ^5.2.5
-  '@types/uuid': ^10.0.0
-  '@types/w3c-web-hid': ^1.0.6
-  '@types/web-bluetooth': ^0.0.20
-  '@types/ws': ^8.5.14
+  '@types/express': '*'
+  '@types/node': '*'
+  '@types/react': '*'
+  '@types/react-dom': '*'
+  '@types/react-test-renderer': '*'
+  '@types/semver': '*'
+  '@types/styled-components': '*'
+  '@types/styled-components-react-native': '*'
+  '@types/w3c-web-hid': '*'
+  '@types/web-bluetooth': '*'
+  '@types/ws': '*'
   '@vitejs/plugin-react': ^5.0.0
   '@vitest/coverage-istanbul': ^3.2.4
   autoprefixer: ^10.4.17
 
   babel-plugin-module-resolver: ^5.0.2
   bitcoinjs-lib: ^6.1.6
-  bs58: ^6.0.0
   buffer: ^6.0.3
   commander: ^14.0.1
   concurrently: ^9.1.0
-  crypto-js: ^4.2.0
   danger: 13.0.4
   electron: 39.8.10
   electron-builder: 26.15.3
@@ -93,7 +92,6 @@ catalog:
   hygen: ^6.2.11
   inversify: 7.5.1
   isomorphic-ws: ^5.0.0
-  js-base64: ^3.7.8
   js-flipper: ^0.273.0
   jsdom: ^26.0.0
   lottie-react: ^2.4.0
@@ -136,7 +134,6 @@ catalog:
   url: ^0.11.4
   usb: ^2.16.0
   util: ^0.12.5
-  uuid: 11.0.3
   vite: 7.3.6
   vitest: 3.2.6
   vitest-react-native: ^0.1.5

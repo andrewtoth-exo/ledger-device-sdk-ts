@@ -8,8 +8,8 @@ import { type ConnectUseCase } from "./ConnectUseCase";
 import { type DisconnectUseCase } from "./DisconnectUseCase";
 import { ReconnectUseCase } from "./ReconnectUseCase";
 
-vi.mock("uuid", () => ({
-  v4: vi.fn().mockReturnValue("newSessionId"),
+vi.mock("@exodus/crypto/randomUUID", () => ({
+  randomUUID: vi.fn().mockReturnValue("newSessionId"),
 }));
 
 let logger: LoggerPublisherService;

@@ -90,7 +90,12 @@
   "packageManager": "pnpm@10.34.4",
   "pnpm": {
     "overrides": {
-      "zod@>=4.4.0": "4.3.6"
+      "zod@>=4.4.0": "4.3.6",
+      "@exodus/crypto>@exodus/bytes": "1.16.0",
+      "@exodus/bytes>@noble/hashes": "2.0.1",
+      "@exodus/crypto>@noble/curves": "2.0.1",
+      "@exodus/crypto>@noble/hashes": "2.0.1",
+      "@exodus/crypto>@noble/ciphers": "1.2.1"
     }
   }
 }

@@ -46,7 +46,8 @@
     "inversify": "catalog:",
     "purify-ts": "catalog:",
     "reflect-metadata": "catalog:",
-    "ws": "catalog:"
+    "ws": "catalog:",
+    "@exodus/crypto": "catalog:"
   },
   "devDependencies": {
     "@ledgerhq/device-mock-server-ui": "workspace:^",
@@ -57,7 +58,7 @@
     "@ledgerhq/tsconfig-dsdk": "workspace:^",
     "@ledgerhq/vitest-config-dmk": "workspace:^",
     "@types/express": "catalog:",
-    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-jsdoc": "*",
     "@types/ws": "catalog:",
     "swagger-jsdoc": "^6.3.0",
     "tsx": "catalog:",

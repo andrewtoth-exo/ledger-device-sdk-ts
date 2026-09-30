@@ -14,7 +14,7 @@ import {
   type LoggerSubscriberService,
   SendApduTimeoutError,
 } from "@ledgerhq/device-management-kit";
-import { Left, Maybe, Right } from "purify-ts";
+import { Left, Maybe, Nothing, Right } from "purify-ts";
 
 import { RNBleApduSender, type RNBleInternalDevice } from "./RNBleApduSender";
 
@@ -44,6 +44,79 @@ let apduReceiverFactory: ApduReceiverServiceFactory;
 let apduSender: RNBleApduSender;
 let manager: BleManager;
 const cancelConnection = vi.fn();
+
+describe("RNBleApduSender Base64 transport", () => {
+  it.each([true, false])(
+    "preserves MTU writes and binary notifications (without response: %s)",
+    async (withoutResponse) => {
+      const loggerFactory = (tag: string) =>
+        new LoggerPublisherServiceStub([], tag);
+      const receiver = defaultApduReceiverServiceStubBuilder(
+        undefined,
+        loggerFactory,
+      );
+      const handleFrame = vi
+        .spyOn(receiver, "handleFrame")
+        .mockReturnValue(Right(Nothing));
+      const senderFactory = vi.fn((props) =>
+        defaultApduSenderServiceStubBuilder(props, loggerFactory),
+      );
+      let monitor!: Parameters<Device["monitorCharacteristicForService"]>[2];
+      const write = vi.fn(() => {
+        monitor(null, { value: "CAAAAACY" } as Characteristic);
+        return Promise.resolve({} as Characteristic);
+      });
+      const device = {
+        id: "device",
+        mtu: 156,
+        monitorCharacteristicForService: vi.fn(
+          (
+            _service,
+            _notify,
+            listener: Parameters<Device["monitorCharacteristicForService"]>[2],
+          ) => {
+            monitor = listener;
+            return { remove: vi.fn() };
+          },
+        ),
+      } as unknown as Device;
+      const bleManager = {
+        characteristicsForDevice: vi.fn().mockResolvedValue([
+          {
+            uuid: "write",
+            isWritableWithoutResponse: withoutResponse,
+            writeWithoutResponse: write,
+            writeWithResponse: write,
+          },
+        ]),
+      } as unknown as BleManager;
+      const sender = new RNBleApduSender(
+        {
+          dependencies: {
+            device,
+            manager: bleManager,
+            internalDevice: {
+              bleDeviceInfos: {
+                serviceUuid: "service",
+                notifyUuid: "notify",
+                writeCmdUuid: "write",
+              },
+            } as RNBleInternalDevice,
+          },
+          apduSenderFactory: senderFactory,
+          apduReceiverFactory: () => receiver,
+        },
+        loggerFactory,
+      );
+
+      await sender.setupConnection();
+      expect(write).toHaveBeenCalledWith("CAAAAAA=");
+      expect(senderFactory).toHaveBeenCalledWith({ frameSize: 152 });
+      monitor(null, { value: "AP+A" } as Characteristic);
+      expect(handleFrame).toHaveBeenCalledWith(new Uint8Array([0, 255, 128]));
+    },
+  );
+});
 
 // TODO: fix these tests, sorry they are completely broken now
 describe.skip("RNBleApduSender", () => {

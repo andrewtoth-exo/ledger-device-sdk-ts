@@ -1,6 +1,6 @@
-import { randomBytes } from "@noble/ciphers/webcrypto";
-import { hmac } from "@noble/hashes/hmac";
-import { sha256 } from "@noble/hashes/sha256";
+import { hashSync } from "@exodus/crypto/hash";
+import { hmacSync } from "@exodus/crypto/hmac";
+import { randomValues } from "@exodus/crypto/randomBytes";
 
 import {
   type CryptoService,
@@ -16,13 +16,13 @@ import { NobleKeyPair } from "./NobleKeyPair";
 
 export class NobleCryptoService implements CryptoService {
   randomBytes(len: number): Uint8Array {
-    return randomBytes(len);
+    return randomValues(len);
   }
 
   hash(bytes: Uint8Array, algo: HashAlgo): Uint8Array {
     switch (algo) {
       case HashAlgo.SHA256:
-        return sha256(bytes);
+        return hashSync("sha256", bytes.slice(), "uint8");
       default:
         throw new Error("Unsupported hash algorithm", algo);
     }
@@ -31,7 +31,12 @@ export class NobleCryptoService implements CryptoService {
   hmac(key: Uint8Array, message: Uint8Array, algo: HashAlgo): Uint8Array {
     switch (algo) {
       case HashAlgo.SHA256:
-        return hmac(sha256, key, message);
+        return hmacSync(
+          "sha256",
+          key.length ? key.slice() : new Uint8Array(64),
+          message.slice(),
+          "uint8",
+        );
       default:
         throw new Error("Unsupported hash algorithm", algo);
     }

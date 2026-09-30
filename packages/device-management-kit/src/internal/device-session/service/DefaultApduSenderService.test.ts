@@ -6,8 +6,8 @@ import { DefaultLoggerPublisherService } from "@internal/logger-publisher/servic
 
 import { DefaultApduSenderService } from "./DefaultApduSenderService";
 
-vi.mock("uuid", () => ({
-  v4: vi.fn().mockReturnValue("42"),
+vi.mock("@exodus/crypto/randomUUID", () => ({
+  randomUUID: vi.fn().mockReturnValue("42"),
 }));
 
 const loggerService = new DefaultLoggerPublisherService([], "frame");

@@ -1,5 +1,5 @@
+import { randomValues } from "@exodus/crypto/randomBytes";
 import { gcm } from "@noble/ciphers/aes";
-import { randomBytes } from "@noble/ciphers/webcrypto";
 
 import { EncryptionAlgo } from "@api/crypto/CryptoService";
 import { AES256_BLOCK_SIZE, AES256_KEY_SIZE, type Key } from "@api/crypto/Key";
@@ -11,7 +11,7 @@ export class NobleKey implements Key {
     if (algo !== EncryptionAlgo.AES256_GCM) {
       throw new Error(`Unsupported encryption algorithm ${algo}`);
     }
-    return new NobleKey(randomBytes(AES256_KEY_SIZE));
+    return new NobleKey(randomValues(AES256_KEY_SIZE));
   }
 
   static from(

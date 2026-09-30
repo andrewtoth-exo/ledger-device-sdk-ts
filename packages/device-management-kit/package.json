@@ -36,16 +36,14 @@
     "module:create": "pnpm hygen core-module with-prompt"
   },
   "dependencies": {
-    "@noble/hashes": "^1.8.0",
-    "@sentry/minimal": "catalog:",
     "inversify": "catalog:",
     "isomorphic-ws": "catalog:",
     "purify-ts": "catalog:",
     "reflect-metadata": "catalog:",
     "semver": "catalog:",
-    "uuid": "catalog:",
     "ws": "catalog:",
-    "xstate": "catalog:"
+    "xstate": "catalog:",
+    "@exodus/crypto": "catalog:"
   },
   "peerDependencies": {
     "rxjs": "catalog:"
@@ -58,7 +56,6 @@
     "@ledgerhq/vitest-config-dmk": "workspace:^",
     "@statelyai/inspect": "catalog:",
     "@types/semver": "catalog:",
-    "@types/uuid": "catalog:",
     "@types/ws": "catalog:",
     "rxjs": "catalog:",
     "ts-node": "catalog:"

@@ -1,4 +1,4 @@
-import bs58 from "bs58";
+import { fromBase58, toBase58 } from "@exodus/bytes/base58.js";
 
 export interface Bs58Encoder {
   encode(data: Uint8Array): string;
@@ -7,9 +7,9 @@ export interface Bs58Encoder {
 
 export class DefaultBs58Encoder {
   static encode(data: Uint8Array): string {
-    return bs58.encode(data);
+    return toBase58(data);
   }
   static decode(encoded: string): Uint8Array {
-    return bs58.decode(encoded);
+    return fromBase58(encoded);
   }
 }

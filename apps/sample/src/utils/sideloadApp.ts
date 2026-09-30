@@ -2,28 +2,18 @@
  * SCP v2 — Secure Channel Protocol for Ledger device app sideloading.
  *
  * Port of ledgerwallet's Python SCP implementation to TypeScript.
- * Uses @noble/secp256k1 for ECDH and signing, WebCrypto for AES-CBC.
+ * Uses @exodus/crypto for hashing, ECDH, signing, randomness and AES-CBC.
  */
 
-import type { Signature } from "@noble/secp256k1";
-import * as secp from "@noble/secp256k1";
-
-// Configure noble-secp256k1 v2 with async HMAC-SHA256 via WebCrypto
-secp.etc.hmacSha256Async = async (
-  key: Uint8Array,
-  ...messages: Uint8Array[]
-): Promise<Uint8Array> => {
-  const cryptoKey = await crypto.subtle.importKey(
-    "raw",
-    key as BufferSource,
-    { name: "HMAC", hash: "SHA-256" },
-    false,
-    ["sign"],
-  );
-  const data = secp.etc.concatBytes(...messages);
-  const sig = await crypto.subtle.sign("HMAC", cryptoKey, data as BufferSource);
-  return new Uint8Array(sig);
-};
+import { aes, type AesCipher } from "@exodus/crypto/aes";
+import { hash as exodusHash } from "@exodus/crypto/hash";
+import { randomValues } from "@exodus/crypto/randomBytes";
+import {
+  ecdsaSignHash,
+  privateKeyIsValid,
+  privateKeyToPublicKey,
+  publicKeyTweakMultiply,
+} from "@exodus/crypto/secp256k1";
 
 const CLA = 0xe0;
 const BLOCK_SIZE = 16;
@@ -218,15 +208,12 @@ function checkSw(resp: Uint8Array, context: string): Uint8Array {
   return resp.slice(0, resp.length - 2);
 }
 
-async function sha256(data: Uint8Array): Promise<Uint8Array> {
-  const hash = await crypto.subtle.digest("SHA-256", data as BufferSource);
-  return new Uint8Array(hash);
+async function sha256(data: Uint8Array): Promise<Uint8Array<ArrayBuffer>> {
+  return exodusHash("sha256", data.slice(), "uint8");
 }
 
-function randomBytes(n: number): Uint8Array {
-  const buf = new Uint8Array(n);
-  crypto.getRandomValues(buf);
-  return buf;
+function randomBytes(size: number): Uint8Array {
+  return randomValues(size);
 }
 
 function uint32BE(n: number): Uint8Array {
@@ -238,41 +225,30 @@ function uint32BE(n: number): Uint8Array {
 // --- secp256k1 helpers ---
 
 function generatePrivateKey(): Uint8Array {
-  return secp.utils.randomPrivateKey();
+  let privateKey: Uint8Array<ArrayBuffer>;
+  do {
+    privateKey = randomValues(32);
+  } while (!privateKeyIsValid({ privateKey }));
+  return privateKey;
 }
 
 function getPublicKeyUncompressed(privKey: Uint8Array): Uint8Array {
-  return secp.getPublicKey(privKey, false);
+  return privateKeyToPublicKey({
+    privateKey: privKey.slice(),
+    compressed: false,
+  });
 }
 
 async function signDER(
   privKey: Uint8Array,
   msg: Uint8Array,
 ): Promise<Uint8Array> {
-  // BOLOS verifies against sha256(msg) directly, and noble's signAsync
-  // already treats its first argument as a pre-hashed digest.
-  const msgHash = await sha256(msg);
-  let sig: Signature = await secp.signAsync(msgHash, privKey);
-  if (sig.hasHighS()) sig = sig.normalizeS();
-  const compact = sig.toCompactRawBytes();
-  return encodeDER(compact.slice(0, 32), compact.slice(32, 64));
-}
-
-function encodeDERInteger(val: Uint8Array): Uint8Array {
-  let start = 0;
-  while (start < val.length - 1 && val[start] === 0) start++;
-  let trimmed = val.slice(start);
-  if ((trimmed[0] ?? 0) & 0x80) {
-    const padded = new Uint8Array(trimmed.length + 1);
-    padded.set(trimmed, 1);
-    trimmed = padded;
-  }
-  return concat(new Uint8Array([0x02, trimmed.length]), trimmed);
-}
-
-function encodeDER(r: Uint8Array, s: Uint8Array): Uint8Array {
-  const body = concat(encodeDERInteger(r), encodeDERInteger(s));
-  return concat(new Uint8Array([0x30, body.length]), body);
+  return ecdsaSignHash({
+    hash: await sha256(msg),
+    privateKey: privKey.slice(),
+    extraEntropy: null,
+    der: true,
+  });
 }
 
 /**
@@ -283,35 +259,29 @@ async function ecdh(
   privKey: Uint8Array,
   pubKeyUncompressed: Uint8Array,
 ): Promise<Uint8Array> {
-  const shared = secp.getSharedSecret(privKey, pubKeyUncompressed, true);
+  const shared = publicKeyTweakMultiply({
+    publicKey: pubKeyUncompressed.slice(),
+    tweak: privKey.slice(),
+    compressed: true,
+  });
   return sha256(shared);
 }
 
 // --- AES-CBC helpers (WebCrypto) ---
 
-async function importAesKey(raw: Uint8Array): Promise<CryptoKey> {
-  return crypto.subtle.importKey(
-    "raw",
-    raw as BufferSource,
-    { name: "AES-CBC" },
-    false,
-    ["encrypt", "decrypt"],
-  );
+async function importAesKey(raw: Uint8Array): Promise<AesCipher> {
+  return aes("CBC", raw.slice());
 }
 
 async function aesCbcEncrypt(
-  key: CryptoKey,
+  key: AesCipher,
   iv: Uint8Array,
   data: Uint8Array,
 ): Promise<{ ct: Uint8Array; newIv: Uint8Array }> {
   // WebCrypto always adds one block of PKCS7 padding; our data is already
   // block-aligned (ISO 9797 padded), so we strip that extra block back off.
   const ct = new Uint8Array(
-    await crypto.subtle.encrypt(
-      { name: "AES-CBC", iv: iv as BufferSource },
-      key,
-      data as BufferSource,
-    ),
+    await key.encrypt({ nonce: iv.slice(), data: data.slice() }),
   );
   const result = ct.slice(0, data.length);
   const newIv = result.slice(result.length - BLOCK_SIZE);
@@ -319,7 +289,7 @@ async function aesCbcEncrypt(
 }
 
 async function aesCbcDecrypt(
-  key: CryptoKey,
+  key: AesCipher,
   iv: Uint8Array,
   data: Uint8Array,
 ): Promise<{ pt: Uint8Array; newIv: Uint8Array }> {
@@ -328,11 +298,7 @@ async function aesCbcDecrypt(
   const padBlock = new Uint8Array(BLOCK_SIZE).fill(BLOCK_SIZE);
   const input = concat(data, padBlock);
   const pt = new Uint8Array(
-    await crypto.subtle.decrypt(
-      { name: "AES-CBC", iv: iv as BufferSource },
-      key,
-      input as BufferSource,
-    ),
+    await key.decrypt({ nonce: iv.slice(), data: input.slice() }),
   );
   return { pt: pt.slice(0, data.length), newIv };
 }
@@ -393,8 +359,8 @@ async function deriveKey(
 // --- SCP Session ---
 
 class ScpSession {
-  private encKey!: CryptoKey;
-  private macKey!: CryptoKey;
+  private encKey!: AesCipher;
+  private macKey!: AesCipher;
   private encIv: Uint8Array = new Uint8Array(BLOCK_SIZE);
   private macIv: Uint8Array = new Uint8Array(BLOCK_SIZE);
 

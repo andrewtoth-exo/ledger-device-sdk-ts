@@ -1,5 +1,4 @@
-import { randomUUID } from "node:crypto";
-
+import { randomUUID } from "@exodus/crypto/randomUUID";
 import {
   type CatalogApp,
   type Device,

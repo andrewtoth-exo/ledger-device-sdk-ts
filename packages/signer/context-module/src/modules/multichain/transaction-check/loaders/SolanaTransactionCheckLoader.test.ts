@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { toBase58 } from "@exodus/bytes/base58.js";
 import { DeviceModelId } from "@ledgerhq/device-management-kit";
-import bs58 from "bs58";
 import { Left, Right } from "purify-ts";
 
 import { type PkiCertificateLoader } from "@/modules/multichain/pki/domain/PkiCertificateLoader";
@@ -143,7 +143,7 @@ describe("SolanaTransactionCheckLoader", () => {
       expect(sent.path).toBe(TransactionCheckPaths.SOLANA_TRANSACTION);
       expect(sent.body.tx.from).toBe("signer");
       expect(sent.body.chain).toBe(SolanaTransactionScanChainId.MAINNET);
-      expect(sent.body.tx.raw).toBe(bs58.encode(transactionBytes));
+      expect(sent.body.tx.raw).toBe(toBase58(transactionBytes));
     });
   });
 
