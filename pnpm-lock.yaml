@@ -39,6 +39,12 @@ catalogs:
     '@exodus/crypto':
       specifier: 1.0.0-rc.34
       version: 1.0.0-rc.34
+    '@exodus/ethereumjs':
+      specifier: 1.12.0
+      version: 1.12.0
+    '@exodus/ethersproject-rlp':
+      specifier: 5.4.2-exodus.2
+      version: 5.4.2-exodus.2
     '@inquirer/prompts':
       specifier: ^7.3.3
       version: 7.3.3
@@ -237,9 +243,6 @@ catalogs:
     inversify:
       specifier: 7.5.1
       version: 7.5.1
-    isomorphic-ws:
-      specifier: ^5.0.0
-      version: 5.0.0
     jsdom:
       specifier: ^26.0.0
       version: 26.0.0
@@ -376,6 +379,10 @@ catalogs:
 overrides:
   zod@>=4.4.0: 4.3.6
   '@exodus/crypto>@exodus/bytes': 1.16.0
+  '@exodus/ethereumjs>@exodus/crypto': 1.0.0-rc.34
+  '@exodus/ethereumjs>rlp': 2.2.6
+  '@exodus/ethersproject-bignumber>bn.js': 4.12.2
+  rlp@2.2.6>bn.js: 4.12.2
   '@exodus/bytes>@noble/hashes': 2.0.1
   '@exodus/crypto>@noble/curves': 2.0.1
   '@exodus/crypto>@noble/hashes': 2.0.1
@@ -1298,9 +1305,6 @@ importers:
       inversify:
         specifier: 'catalog:'
         version: 7.5.1(reflect-metadata@0.2.2)
-      isomorphic-ws:
-        specifier: 'catalog:'
-        version: 5.0.0(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       purify-ts:
         specifier: 'catalog:'
         version: 2.1.0
@@ -1310,9 +1314,6 @@ importers:
       semver:
         specifier: 'catalog:'
         version: 7.7.2
-      ws:
-        specifier: 'catalog:'
-        version: 8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
       xstate:
         specifier: 'catalog:'
         version: 5.19.2
@@ -1334,13 +1335,10 @@ importers:
         version: link:../config/vitest
       '@statelyai/inspect':
         specifier: 'catalog:'
-        version: 0.4.0(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))(xstate@5.19.2)
+        version: 0.4.0(ws@8.21.3(bufferutil@4.0.9)(utf-8-validate@5.0.10))(xstate@5.19.2)
       '@types/semver':
         specifier: 'catalog:'
         version: 7.7.0
-      '@types/ws':
-        specifier: 'catalog:'
-        version: 8.5.14
       rxjs:
         specifier: 'catalog:'
         version: 7.8.2
@@ -1508,9 +1506,6 @@ importers:
       '@ledgerhq/device-management-kit-devtools-websocket-common':
         specifier: workspace:^
         version: link:../websocket-common
-      isomorphic-ws:
-        specifier: 'catalog:'
-        version: 5.0.0(ws@8.21.3(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       rxjs:
         specifier: 'catalog:'
         version: 7.8.2
@@ -1699,9 +1694,12 @@ importers:
       '@exodus/crypto':
         specifier: 'catalog:'
         version: 1.0.0-rc.34(patch_hash=a086ca12f13cdb3406cf98d4c949e695f54cf3f686fb740c8af7274f55b445a0)
-      ethers:
+      '@exodus/ethereumjs':
         specifier: 'catalog:'
-        version: 6.14.1(bufferutil@4.0.9)(utf-8-validate@5.0.10)
+        version: 1.12.0
+      buffer:
+        specifier: 'catalog:'
+        version: 6.0.3
       inversify:
         specifier: 'catalog:'
         version: 7.5.1(reflect-metadata@0.2.2)
@@ -1730,6 +1728,9 @@ importers:
       '@ledgerhq/vitest-config-dmk':
         specifier: workspace:^
         version: link:../../config/vitest
+      ethers:
+        specifier: 'catalog:'
+        version: 6.14.1(bufferutil@4.0.9)(utf-8-validate@5.0.10)
       ts-node:
         specifier: 'catalog:'
         version: 10.9.2(@types/node@24.13.2)(typescript@5.9.2)
@@ -1920,15 +1921,27 @@ importers:
 
   packages/signer/signer-eth:
     dependencies:
+      '@exodus/bytes':
+        specifier: 'catalog:'
+        version: 1.16.0(@noble/hashes@2.0.1)
+      '@exodus/crypto':
+        specifier: 'catalog:'
+        version: 1.0.0-rc.34(patch_hash=a086ca12f13cdb3406cf98d4c949e695f54cf3f686fb740c8af7274f55b445a0)
+      '@exodus/ethereumjs':
+        specifier: 'catalog:'
+        version: 1.12.0
+      '@exodus/ethersproject-rlp':
+        specifier: 'catalog:'
+        version: 5.4.2-exodus.2
       '@ledgerhq/device-contacts-kit':
         specifier: workspace:^
         version: link:../../device-contacts-kit
       '@ledgerhq/signer-utils':
         specifier: workspace:^
         version: link:../signer-utils
-      ethers:
+      buffer:
         specifier: 'catalog:'
-        version: 6.14.1(bufferutil@4.0.9)(utf-8-validate@5.0.10)
+        version: 6.0.3
       inversify:
         specifier: 'catalog:'
         version: 7.5.1(reflect-metadata@0.2.2)
@@ -1969,6 +1982,9 @@ importers:
       '@types/semver':
         specifier: 'catalog:'
         version: 7.7.0
+      ethers:
+        specifier: 'catalog:'
+        version: 6.14.1(bufferutil@4.0.9)(utf-8-validate@5.0.10)
       rxjs:
         specifier: 'catalog:'
         version: 7.8.2
@@ -4659,6 +4675,27 @@ packages:
   '@exodus/crypto@1.0.0-rc.34':
     resolution: {integrity: sha512-vatlfAs8fBJ7drzM1uRtN4y8Q6CZix6sDwRSyuTMPzPFYWo97Fw/no3yztiVBPtaoXnG57+hpiXu3diltOGsfg==}
     engines: {node: ^20.19.0 || >=22.13.0}
+
+  '@exodus/ethereumjs@1.12.0':
+    resolution: {integrity: sha512-2vfh+0w1ach5lpov3/j/bxgqt3/DXUoRA9O0uN7MNe5DzIOHzNERYWcFJe9smm5of7aMJI9TIX6ig88hvb1ZLQ==}
+
+  '@exodus/ethersproject-bignumber@5.4.2-exodus.2':
+    resolution: {integrity: sha512-APODZvrcui0BM71Gr7sfhEbl2B8zZ8bl7t0P7+6L52Pm8nM3Qew4XvGnjDm4SDRn9VdK5C4XVY5CnTa89GQngQ==}
+
+  '@exodus/ethersproject-bytes@5.4.2-exodus.2':
+    resolution: {integrity: sha512-aZtoyd7ITpmJrOMLl9ySVx0fzqOMaeH7+QOD+lXhBF8FcTW9nkYdB+wxAyY1JMJPUBDTvSlkn3iX7NVM1Zvmqg==}
+
+  '@exodus/ethersproject-constants@5.4.2-exodus.2':
+    resolution: {integrity: sha512-oj34VPD6mblfln2h04qcNqc7XkTM22pTCkjD6pNdYuEsv8v7GWwRikdJJARuO8gssZ975bY6uYEuuGkQytTXbg==}
+
+  '@exodus/ethersproject-logger@5.4.2-exodus.2':
+    resolution: {integrity: sha512-AtPwvf9GBB48OlTv2GP8txCafYLYbaiuHThXbyJ5/+Trn0i/zkAXMtsJvD844oK0imw4znqYsNlqJfatlAmSFg==}
+
+  '@exodus/ethersproject-rlp@5.4.2-exodus.2':
+    resolution: {integrity: sha512-ENVWMyX4/ZIOsGZg8zm/RRFq+8POhPayJ33bTCqpr1YTqv+tS+6CSmvtoCqeQbqZ/0aNsAV0Cw+XoXs7cDy/7g==}
+
+  '@exodus/ethersproject-strings@5.4.2-exodus.2':
+    resolution: {integrity: sha512-lI3rgB5ktbjSb5aeAJP99E9eHJ66zQPWVScctPFnBuy+uZsck0+8s2BLDmMF46vwBKeZAYIDGrPdmAhFx5VqOw==}
 
   '@floating-ui/core@1.6.2':
     resolution: {integrity: sha512-+2XpQV9LLZeanU4ZevzRnGFg2neDeKHgFLjP6YLW+tly0IvrhqT4u8enLGjLH3qeh85g19xY5rsAusfwTdn5lg==}
@@ -7880,6 +7917,9 @@ packages:
   bluebird@3.7.2:
     resolution: {integrity: sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==}
 
+  bn.js@4.12.2:
+    resolution: {integrity: sha512-n4DSx829VRTRByMRGdjQ9iqsN0Bh4OolPsFnaZBLcbi8iXcB+kJ9s7EnRt4wILZNV3kPLHkRVfOc/HvhC3ovDw==}
+
   bn.js@5.2.2:
     resolution: {integrity: sha512-v2YAxEmKaBLahNwE1mjp4WON6huMNeuDvagFZW+ASCuA/ku0bXR9hSMw0XpiqMoA3+rmnyck/tPRSFQkoC9Cuw==}
 
@@ -8394,6 +8434,11 @@ packages:
     peerDependenciesMeta:
       typescript:
         optional: true
+
+  crc-32@1.2.2:
+    resolution: {integrity: sha512-ROmzCKrTnOwybPcJApAA6WBWij23HVfGVNKqqrZpuyZOHqK2CwHSvpGuyt/UNNvaIjEd8X5IFGp4Mh+Ie1IHJQ==}
+    engines: {node: '>=0.8'}
+    hasBin: true
 
   create-require@1.1.1:
     resolution: {integrity: sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==}
@@ -9213,6 +9258,10 @@ packages:
 
   eventemitter3@5.0.1:
     resolution: {integrity: sha512-GWkBvjiSZK87ELrYOSESUYeVIc9mvLLf/nXalMOS5dYrgZq9o5OVkbZAVM06CVxYsCwH9BDZFPlQTlPA1j4ahA==}
+
+  events@3.3.0:
+    resolution: {integrity: sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==}
+    engines: {node: '>=0.8.x'}
 
   execa@5.1.1:
     resolution: {integrity: sha512-8uSpZZocAZRBAPIEINJj3Lo9HyGitllczc27Eh5YYojjMFMn8yHMDMaUHE2Jqfq05D/wucwI4JGURyXt1vchyg==}
@@ -11139,6 +11188,9 @@ packages:
     resolution: {integrity: sha512-z0yWI+4FDrrweS8Zmt4Ej5HdJmky15+L2e6Wgn3+iK5fWzb6T3fhNFq2+MeTRb064c6Wr4N/wv0DzQTjNzHNGQ==}
     engines: {node: '>=10'}
 
+  minimalistic-assert@1.0.1:
+    resolution: {integrity: sha512-UtJcAD4yEaGtjPezWuO9wC4nwUnVH/8/Im3yEHQP4b67cXlD/Qr9hdITCU1xDbSEXg2XKNaP8jsReV7vQd00/A==}
+
   minimatch@10.0.3:
     resolution: {integrity: sha512-IPZ167aShDZZUMdRk66cyQAW3qr0WzbHkPdMYa8bzZhlHhO3jALbKdxcaak7W9FfT2rZNpQuUu4Od7ILEpXSaw==}
     engines: {node: 20 || >=22}
@@ -12648,6 +12700,10 @@ packages:
   rimraf@6.0.1:
     resolution: {integrity: sha512-9dkvaxAsk/xNXSJzMgFqqMCuFgt2+KsOFek3TMLfo8NCPfWpBmqwyNn5Y+NX56QUYfCtsyhF3ayiboEoUmJk/A==}
     engines: {node: 20 || >=22}
+    hasBin: true
+
+  rlp@2.2.6:
+    resolution: {integrity: sha512-HAfAmL6SDYNWPUOJNrM500x4Thn4PZsEy5pijPh40U9WfNk0z15hUYzO9xVIMAdIHdFtD8CBDHd75Td1g36Mjg==}
     hasBin: true
 
   rn-range-slider@2.1.1:
@@ -16016,6 +16072,47 @@ snapshots:
       '@noble/hashes': 2.0.1
       pako: 1.0.11
 
+  '@exodus/ethereumjs@1.12.0':
+    dependencies:
+      '@exodus/crypto': 1.0.0-rc.34(patch_hash=a086ca12f13cdb3406cf98d4c949e695f54cf3f686fb740c8af7274f55b445a0)
+      '@exodus/ethersproject-bignumber': 5.4.2-exodus.2
+      '@exodus/ethersproject-bytes': 5.4.2-exodus.2
+      '@exodus/ethersproject-constants': 5.4.2-exodus.2
+      '@exodus/ethersproject-logger': 5.4.2-exodus.2
+      '@exodus/ethersproject-strings': 5.4.2-exodus.2
+      bn.js: 5.2.2
+      crc-32: 1.2.2
+      events: 3.3.0
+      minimalistic-assert: 1.0.1
+      rlp: 2.2.6
+
+  '@exodus/ethersproject-bignumber@5.4.2-exodus.2':
+    dependencies:
+      '@exodus/ethersproject-bytes': 5.4.2-exodus.2
+      '@exodus/ethersproject-logger': 5.4.2-exodus.2
+      bn.js: 4.12.2
+
+  '@exodus/ethersproject-bytes@5.4.2-exodus.2':
+    dependencies:
+      '@exodus/ethersproject-logger': 5.4.2-exodus.2
+
+  '@exodus/ethersproject-constants@5.4.2-exodus.2':
+    dependencies:
+      '@exodus/ethersproject-bignumber': 5.4.2-exodus.2
+
+  '@exodus/ethersproject-logger@5.4.2-exodus.2': {}
+
+  '@exodus/ethersproject-rlp@5.4.2-exodus.2':
+    dependencies:
+      '@exodus/ethersproject-bytes': 5.4.2-exodus.2
+      '@exodus/ethersproject-logger': 5.4.2-exodus.2
+
+  '@exodus/ethersproject-strings@5.4.2-exodus.2':
+    dependencies:
+      '@exodus/ethersproject-bytes': 5.4.2-exodus.2
+      '@exodus/ethersproject-constants': 5.4.2-exodus.2
+      '@exodus/ethersproject-logger': 5.4.2-exodus.2
+
   '@floating-ui/core@1.6.2':
     dependencies:
       '@floating-ui/utils': 0.2.8
@@ -18568,10 +18665,10 @@ snapshots:
 
   '@standard-schema/utils@0.3.0': {}
 
-  '@statelyai/inspect@0.4.0(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))(xstate@5.19.2)':
+  '@statelyai/inspect@0.4.0(ws@8.21.3(bufferutil@4.0.9)(utf-8-validate@5.0.10))(xstate@5.19.2)':
     dependencies:
       fast-safe-stringify: 2.1.1
-      isomorphic-ws: 5.0.0(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))
+      isomorphic-ws: 5.0.0(ws@8.21.3(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       partysocket: 0.0.25
       safe-stable-stringify: 2.4.3
       superjson: 1.13.3
@@ -19979,6 +20076,8 @@ snapshots:
 
   bluebird@3.7.2: {}
 
+  bn.js@4.12.2: {}
+
   bn.js@5.2.2: {}
 
   body-parser@1.20.5:
@@ -20572,6 +20671,8 @@ snapshots:
       parse-json: 5.2.0
     optionalDependencies:
       typescript: 5.9.2
+
+  crc-32@1.2.2: {}
 
   create-require@1.1.1: {}
 
@@ -21699,6 +21800,8 @@ snapshots:
   event-target-shim@6.0.2: {}
 
   eventemitter3@5.0.1: {}
+
+  events@3.3.0: {}
 
   execa@5.1.1:
     dependencies:
@@ -22926,10 +23029,6 @@ snapshots:
   isomorphic-ws@4.0.1(ws@7.5.10(bufferutil@4.0.9)(utf-8-validate@5.0.10)):
     dependencies:
       ws: 7.5.10(bufferutil@4.0.9)(utf-8-validate@5.0.10)
-
-  isomorphic-ws@5.0.0(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)):
-    dependencies:
-      ws: 8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
 
   isomorphic-ws@5.0.0(ws@8.21.3(bufferutil@4.0.9)(utf-8-validate@5.0.10)):
     dependencies:
@@ -24420,6 +24519,8 @@ snapshots:
   mimic-response@1.0.1: {}
 
   mimic-response@3.1.0: {}
+
+  minimalistic-assert@1.0.1: {}
 
   minimatch@10.0.3:
     dependencies:
@@ -26250,6 +26351,10 @@ snapshots:
     dependencies:
       glob: 11.1.0
       package-json-from-dist: 1.0.0
+
+  rlp@2.2.6:
+    dependencies:
+      bn.js: 4.12.2
 
   rn-range-slider@2.1.1: {}
 

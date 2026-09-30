@@ -1,5 +1,4 @@
 import { inject, injectable } from "inversify";
-import WebSocket from "isomorphic-ws";
 import { Either } from "purify-ts";
 
 import { type GetOsVersionResponse } from "@api/index";

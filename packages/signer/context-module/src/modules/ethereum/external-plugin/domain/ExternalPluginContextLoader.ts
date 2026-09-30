@@ -3,7 +3,6 @@ import {
   isHexaString,
   LoggerPublisherService,
 } from "@ledgerhq/device-management-kit";
-import { ethers, Interface } from "ethers";
 import { inject, injectable } from "inversify";
 import { Either, EitherAsync, Left, Right } from "purify-ts";
 
@@ -19,6 +18,7 @@ import {
   ClearSignContext,
   ClearSignContextType,
 } from "@/shared/model/ClearSignContext";
+import { type AbiResult, decodeFunctionData } from "@/shared/utils/abi";
 
 export type ExternalPluginContextInput = {
   to: HexaString;
@@ -141,8 +141,7 @@ export class ExternalPluginContextLoader
         }
 
         // decodedCallData is a Right so we can extract it safely
-        const extractedDecodedCallData =
-          decodedCallData.extract() as ethers.Result;
+        const extractedDecodedCallData = decodedCallData.extract() as AbiResult;
 
         // get the token payload for each erc20OfInterest
         // and return the payload or the error
@@ -179,7 +178,7 @@ export class ExternalPluginContextLoader
   private getTokenPayload(
     input: ExternalPluginContextInput,
     erc20Path: string,
-    decodedCallData: ethers.Result,
+    decodedCallData: AbiResult,
   ) {
     const address = this.getAddressFromPath(erc20Path, decodedCallData);
 
@@ -197,10 +196,9 @@ export class ExternalPluginContextLoader
     abi: object[],
     method: string,
     data: string,
-  ): Either<Error, ethers.Result> {
+  ): Either<Error, AbiResult> {
     try {
-      const contractInterface = new Interface(abi);
-      return Right(contractInterface.decodeFunctionData(method, data));
+      return Right(decodeFunctionData(abi, data, method));
     } catch (_error) {
       return Left(
         new Error(
@@ -212,12 +210,16 @@ export class ExternalPluginContextLoader
 
   private getAddressFromPath(
     path: string,
-    decodedCallData: ethers.Result,
+    decodedCallData: AbiResult,
   ): HexaString {
-    // ethers.Result is a record string, any
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let value: any = decodedCallData;
     for (const key of path.split(".")) {
+      if (Array.isArray(value) && /^-?\d+$/.test(key)) {
+        const index = key === "-1" ? value.length - 1 : Number(key);
+        if (index < 0 || index >= value.length)
+          throw new RangeError("out of result range");
+      }
       // In Solidity, a struct cannot begin with a number
       // Additionally, when we use -1, it signifies the last element of the array.
       if (key === "-1") {

@@ -3,7 +3,6 @@ import {
   isHexaString,
   LoggerPublisherService,
 } from "@ledgerhq/device-management-kit";
-import { Interface } from "ethers";
 import { inject, injectable } from "inversify";
 import { Maybe, Nothing } from "purify-ts";
 
@@ -24,6 +23,7 @@ import {
   ClearSignContext,
   ClearSignContextType,
 } from "@/shared/model/ClearSignContext";
+import { decodeFunctionData } from "@/shared/utils/abi";
 
 export type UniswapContextInput = {
   data: HexaString;
@@ -99,11 +99,9 @@ export class UniswapContextLoader
     chainId: number,
   ): Promise<ClearSignContext[]> {
     try {
-      const iface = new Interface(UNISWAP_EXECUTE_ABI);
-
-      const tx = iface.parseTransaction({ data: calldata });
-      const commands: unknown = tx?.args[0];
-      const inputs: unknown = tx?.args[1];
+      const args = decodeFunctionData(UNISWAP_EXECUTE_ABI, calldata);
+      const commands = args[0];
+      const inputs = args[1];
 
       if (!isHexaString(commands) || !this._isHexaStringArray(inputs)) {
         return [];

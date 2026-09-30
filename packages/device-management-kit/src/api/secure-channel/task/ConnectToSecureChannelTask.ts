@@ -1,4 +1,3 @@
-import WebSocket from "isomorphic-ws";
 import { type Either } from "purify-ts";
 import { Observable } from "rxjs";
 
@@ -82,7 +81,10 @@ export class ConnectToSecureChannelTask {
           type: SecureChannelEventType.Error,
           error: new SecureChannelError({
             url: this._connection.url,
-            errorMessage: error.message,
+            errorMessage:
+              "message" in error && typeof error.message === "string"
+                ? error.message
+                : "WebSocket connection failed",
           }),
         });
         subscriber.complete();
