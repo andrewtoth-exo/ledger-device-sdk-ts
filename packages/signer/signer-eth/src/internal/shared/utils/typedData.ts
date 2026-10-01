@@ -1,5 +1,3 @@
-import "./ethereumBuffer";
-
 import { fromHex, toHex } from "@exodus/bytes/hex.js";
 import {
   SignTypedDataVersion,

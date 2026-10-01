@@ -1,5 +1,3 @@
-import "@internal/shared/utils/ethereumBuffer";
-
 import { fromHex } from "@exodus/bytes/hex.js";
 import { hashSync } from "@exodus/crypto/hash";
 import { getAddress } from "@exodus/ethereumjs/ethers5-address";

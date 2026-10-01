@@ -45,7 +45,6 @@
     "@exodus/crypto": "catalog:",
     "@exodus/ethereumjs": "catalog:",
     "@exodus/ethersproject-rlp": "catalog:",
-    "buffer": "catalog:",
     "inversify": "catalog:",
     "purify-ts": "catalog:",
     "reflect-metadata": "catalog:",

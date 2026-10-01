@@ -1697,9 +1697,6 @@ importers:
       '@exodus/ethereumjs':
         specifier: 'catalog:'
         version: 1.12.0
-      buffer:
-        specifier: 'catalog:'
-        version: 6.0.3
       inversify:
         specifier: 'catalog:'
         version: 7.5.1(reflect-metadata@0.2.2)
@@ -1939,9 +1936,6 @@ importers:
       '@ledgerhq/signer-utils':
         specifier: workspace:^
         version: link:../signer-utils
-      buffer:
-        specifier: 'catalog:'
-        version: 6.0.3
       inversify:
         specifier: 'catalog:'
         version: 7.5.1(reflect-metadata@0.2.2)
