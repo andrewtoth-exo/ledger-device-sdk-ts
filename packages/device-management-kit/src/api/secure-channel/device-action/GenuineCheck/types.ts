@@ -1,5 +1,5 @@
+import { type Observable } from "@ledgerhq/device-sdk-reactivity";
 import { type EitherAsync } from "purify-ts";
-import { type Observable } from "rxjs";
 
 import {
   type GetOsVersionCommandResult,

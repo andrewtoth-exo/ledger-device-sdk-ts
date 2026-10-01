@@ -16,9 +16,9 @@ import {
   TransportDeviceModel,
   UserInteractionRequired,
 } from "@ledgerhq/device-management-kit";
+import { lastValueFrom, Observable } from "@ledgerhq/device-sdk-reactivity";
 import { Transaction } from "ethers";
 import { Right } from "purify-ts";
-import { lastValueFrom, Observable } from "rxjs";
 
 import {
   SignTransactionDAError,

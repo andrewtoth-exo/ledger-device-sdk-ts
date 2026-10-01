@@ -10,6 +10,13 @@ import {
   hexaStringToBuffer,
 } from "@ledgerhq/device-management-kit";
 import {
+  catchError,
+  from,
+  map,
+  of,
+  tap,
+} from "@ledgerhq/device-sdk-reactivity";
+import {
   type AuthenticateDAError,
   type AuthenticateDAIntermediateValue,
   type AuthenticateDAOutput,
@@ -17,7 +24,6 @@ import {
   LKRPUnknownError,
   NobleCryptoService,
 } from "@ledgerhq/device-trusted-app-kit-ledger-keyring-protocol";
-import { catchError, from, map, of, tap } from "rxjs";
 import styled from "styled-components";
 
 import { DeviceActionsList } from "@/components/DeviceActionsView/DeviceActionsList";
@@ -270,10 +276,10 @@ function fnToDAReturn<Output, Error>(
           output,
         }) satisfies DeviceActionState<Output, Error, never>,
     ),
-    catchError((error: Error) =>
+    catchError((error) =>
       of({
         status: DeviceActionStatus.Error,
-        error,
+        error: error as Error,
       } satisfies DeviceActionState<Output, Error, never>),
     ),
   );

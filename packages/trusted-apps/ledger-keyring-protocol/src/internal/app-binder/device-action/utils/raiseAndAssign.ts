@@ -1,13 +1,11 @@
-import { type Either, Left } from "purify-ts";
 import {
   type ActionArgs,
   type ActionFunction,
   enqueueActions,
   type EventObject,
   type MachineContext,
-  type ParameterizedObject,
-  type ProvidedActor,
-} from "xstate";
+} from "@ledgerhq/device-sdk-reactivity/state-machine";
+import { type Either, Left } from "purify-ts";
 
 type UnwrapEither<T extends Either<unknown, unknown>> =
   T extends Either<infer L, infer R> ? { L: L; R: R } : never;
@@ -45,43 +43,26 @@ export function raiseAndAssign<
     _internalState: Either<unknown, object>;
   },
   TExpressionEvent extends EventObject,
-  TParams extends ParameterizedObject["params"] | undefined,
-  TEvent extends EventObject = TExpressionEvent,
-  TActor extends ProvidedActor = ProvidedActor,
-  TAction extends ParameterizedObject = ParameterizedObject,
-  TGuard extends ParameterizedObject = ParameterizedObject,
-  TDelay extends string = never,
-  TEmitted extends EventObject = EventObject,
 >(
-  args: (args: ActionArgs<TContext, TExpressionEvent, TEvent>) => Either<
+  args: (args: ActionArgs<TContext, TExpressionEvent>) => Either<
     UnwrapEither<TContext["_internalState"]>["L"],
     {
-      raise: TEvent["type"];
+      raise: string;
       assign?: Partial<UnwrapEither<TContext["_internalState"]>["R"]>;
     }
   >,
-): ActionFunction<
-  TContext,
-  TExpressionEvent,
-  TEvent,
-  TParams,
-  TActor,
-  TAction,
-  TGuard,
-  TDelay,
-  TEmitted
-> {
+): ActionFunction<TContext, TExpressionEvent> {
   return enqueueActions(({ enqueue, ...actionArgs }) => {
     args(actionArgs)
       .ifLeft((error) => {
         enqueue.assign({ _internalState: Left(error) } as Partial<TContext>);
-        enqueue.raise({ type: "error" } as TEvent);
+        enqueue.raise({ type: "error" } as TExpressionEvent);
       })
 
       .ifRight(({ raise, assign }) => {
         // Double check internal state
         if (actionArgs.context._internalState.isLeft()) {
-          return enqueue.raise({ type: "error" } as TEvent);
+          return enqueue.raise({ type: "error" } as TExpressionEvent);
         }
 
         if (assign) {
@@ -91,7 +72,7 @@ export function raiseAndAssign<
             >((prev) => ({ ...prev, ...assign })),
           } as Partial<TContext>);
         }
-        enqueue.raise({ type: raise } as TEvent);
+        enqueue.raise({ type: raise } as TExpressionEvent);
       });
   });
 }

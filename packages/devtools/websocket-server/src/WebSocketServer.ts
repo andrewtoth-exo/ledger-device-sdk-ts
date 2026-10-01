@@ -5,7 +5,10 @@ import {
   parseSocketMessage,
   WEBSOCKET_MESSAGE_TYPES,
 } from "@ledgerhq/device-management-kit-devtools-websocket-common";
-import { ReplaySubject, type Subscription } from "rxjs";
+import {
+  ReplaySubject,
+  type Subscription,
+} from "@ledgerhq/device-sdk-reactivity";
 import { WebSocket, WebSocketServer } from "ws";
 
 export type ServerConfig = {

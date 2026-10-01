@@ -13,8 +13,8 @@ import {
   TransportDeviceModel,
   UserInteractionRequired,
 } from "@ledgerhq/device-management-kit";
+import { lastValueFrom, Observable } from "@ledgerhq/device-sdk-reactivity";
 import { Left, Right } from "purify-ts";
-import { lastValueFrom, Observable } from "rxjs";
 
 import {
   VerifySafeAddressDAError,

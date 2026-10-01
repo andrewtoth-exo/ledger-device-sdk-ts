@@ -42,7 +42,8 @@
     "@sentry/minimal": "catalog:",
     "js-base64": "catalog:",
     "purify-ts": "catalog:",
-    "uuid": "catalog:"
+    "uuid": "catalog:",
+    "@ledgerhq/device-sdk-reactivity": "workspace:^"
   },
   "devDependencies": {
     "@ledgerhq/device-management-kit": "workspace:^",
@@ -55,14 +56,12 @@
     "@vitejs/plugin-react": "catalog:",
     "react-native": "catalog:",
     "react-native-ble-plx": "catalog:",
-    "rxjs": "catalog:",
     "ts-node": "catalog:",
     "vitest-react-native": "catalog:"
   },
   "peerDependencies": {
     "@ledgerhq/device-management-kit": "workspace:^",
     "react-native": ">0.74.1",
-    "react-native-ble-plx": "3.4.0",
-    "rxjs": "catalog:"
+    "react-native-ble-plx": "3.4.0"
   }
 }

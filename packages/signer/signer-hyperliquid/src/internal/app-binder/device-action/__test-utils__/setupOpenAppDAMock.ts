@@ -2,9 +2,12 @@ import {
   OpenAppDeviceAction,
   UserInteractionRequired,
 } from "@ledgerhq/device-management-kit";
+import {
+  assign,
+  createMachine,
+} from "@ledgerhq/device-sdk-reactivity/state-machine";
 import { Left, Right } from "purify-ts";
 import { type Mock } from "vitest";
-import { assign, createMachine } from "xstate";
 
 export const setupOpenAppDAMock = (error?: unknown) => {
   (OpenAppDeviceAction as Mock).mockImplementation(() => ({

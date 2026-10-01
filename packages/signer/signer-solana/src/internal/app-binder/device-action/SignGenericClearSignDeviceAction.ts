@@ -8,8 +8,12 @@ import {
   UserInteractionRequired,
   XStateDeviceAction,
 } from "@ledgerhq/device-management-kit";
+import {
+  assign,
+  fromPromise,
+  setup,
+} from "@ledgerhq/device-sdk-reactivity/state-machine";
 import { Left, type Maybe, Right } from "purify-ts";
-import { assign, fromPromise, setup } from "xstate";
 
 import { signClearSignDAStateSteps } from "@api/app-binder/SignClearSignDeviceActionTypes";
 import {

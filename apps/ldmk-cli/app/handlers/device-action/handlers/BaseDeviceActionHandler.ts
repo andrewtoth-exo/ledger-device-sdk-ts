@@ -11,7 +11,7 @@ import {
   DeviceActionStatus,
   type DeviceManagementKit,
 } from "@ledgerhq/device-management-kit";
-import { type Observable } from "rxjs";
+import { type Observable } from "@ledgerhq/device-sdk-reactivity";
 
 export abstract class BaseDeviceActionHandler<
   Output,

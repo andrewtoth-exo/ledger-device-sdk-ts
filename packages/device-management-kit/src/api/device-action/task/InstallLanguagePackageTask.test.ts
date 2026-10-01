@@ -1,5 +1,5 @@
+import { lastValueFrom, toArray } from "@ledgerhq/device-sdk-reactivity";
 import { Left, Right } from "purify-ts";
-import { lastValueFrom, toArray } from "rxjs";
 
 import type { InternalApi } from "@api/device-action/DeviceAction";
 import {

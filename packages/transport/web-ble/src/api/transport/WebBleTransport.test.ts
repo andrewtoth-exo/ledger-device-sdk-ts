@@ -42,8 +42,8 @@ import {
   type TransportConnectedDevice,
   UnknownDeviceError,
 } from "@ledgerhq/device-management-kit";
+import { firstValueFrom } from "@ledgerhq/device-sdk-reactivity";
 import { Left, Right } from "purify-ts";
-import { firstValueFrom } from "rxjs";
 
 import { bleDeviceStubBuilder } from "@api/model/BleDevice.stub";
 

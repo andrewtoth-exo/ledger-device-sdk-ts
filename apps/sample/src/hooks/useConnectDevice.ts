@@ -62,7 +62,7 @@ export function useConnectDevice(): UseConnectDeviceResult {
             });
         },
         error: (error) => {
-          onError?.(error);
+          onError?.(error as DmkError);
           console.error(`Error from discovery`, error);
         },
       });

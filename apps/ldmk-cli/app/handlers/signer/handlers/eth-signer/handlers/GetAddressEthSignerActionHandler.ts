@@ -12,13 +12,13 @@ import {
   type DeviceActionState,
 } from "@ledgerhq/device-management-kit";
 import { DeviceManagementKit } from "@ledgerhq/device-management-kit";
+import { Observable } from "@ledgerhq/device-sdk-reactivity";
 import {
   GetAddressDAError,
   type GetAddressDAOutput,
   SignerEthBuilder,
 } from "@ledgerhq/device-signer-kit-ethereum";
 import { inject, injectable } from "inversify";
-import { Observable } from "rxjs";
 
 import { BaseEthSignerActionHandler } from "./BaseEthSignerActionHandler";
 

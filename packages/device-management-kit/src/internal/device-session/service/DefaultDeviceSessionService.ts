@@ -1,6 +1,6 @@
+import { Observable, ReplaySubject } from "@ledgerhq/device-sdk-reactivity";
 import { inject, injectable } from "inversify";
 import { Either, Maybe } from "purify-ts";
-import { Observable, ReplaySubject } from "rxjs";
 
 import { LoggerPublisherService } from "@api/logger-publisher/service/LoggerPublisherService";
 import { DeviceId } from "@api/types";

@@ -47,8 +47,8 @@
     "antd": "5.20.0",
     "react-inspector": "9.0.0",
     "react-resizable-panels": "^4.4.1",
-    "rxjs": "catalog:",
-    "styled-components": "catalog:"
+    "styled-components": "catalog:",
+    "@ledgerhq/device-sdk-reactivity": "workspace:^"
   },
   "devDependencies": {
     "@ledgerhq/device-management-kit": "workspace:^",

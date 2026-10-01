@@ -5,8 +5,12 @@ import {
   UserInteractionRequired,
   XStateDeviceAction,
 } from "@ledgerhq/device-management-kit";
+import {
+  assign,
+  fromPromise,
+  setup,
+} from "@ledgerhq/device-sdk-reactivity/state-machine";
 import { type Either, EitherAsync, Left, Right } from "purify-ts";
-import { assign, fromPromise, setup } from "xstate";
 
 import {
   type AuthenticateDAError,

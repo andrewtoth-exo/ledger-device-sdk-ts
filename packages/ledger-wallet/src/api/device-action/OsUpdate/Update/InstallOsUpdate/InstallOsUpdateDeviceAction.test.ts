@@ -8,9 +8,12 @@ import {
   UnknownDAError,
   UserInteractionRequired,
 } from "@ledgerhq/device-management-kit";
+import { Observable, of } from "@ledgerhq/device-sdk-reactivity";
+import {
+  assign,
+  createMachine,
+} from "@ledgerhq/device-sdk-reactivity/state-machine";
 import { type Either, Left, Right } from "purify-ts";
-import { Observable, of } from "rxjs";
-import { assign, createMachine } from "xstate";
 
 import { makeDeviceActionInternalApiMock } from "@api/device-action/__test-utils__/makeInternalApi";
 import { testDeviceActionStates } from "@api/device-action/__test-utils__/testDeviceActionStates";

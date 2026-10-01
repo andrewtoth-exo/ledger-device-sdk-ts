@@ -1,4 +1,4 @@
-import { concat, of, throwError } from "rxjs";
+import { concat, of, throwError } from "@ledgerhq/device-sdk-reactivity";
 
 import { DeviceStatus } from "@api/device/DeviceStatus";
 import { BTC_APP } from "@api/device-action/__test-utils__/data";

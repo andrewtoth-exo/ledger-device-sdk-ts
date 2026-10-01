@@ -20,8 +20,8 @@
   },
   "dependencies": {
     "@rozenite/plugin-bridge": "catalog:",
-    "rxjs": "catalog:",
-    "@ledgerhq/device-management-kit-devtools-ui": "workspace:^"
+    "@ledgerhq/device-management-kit-devtools-ui": "workspace:^",
+    "@ledgerhq/device-sdk-reactivity": "workspace:^"
   },
   "devDependencies": {
     "@ledgerhq/device-management-kit-devtools-core": "workspace:^",

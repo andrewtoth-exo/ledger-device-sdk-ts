@@ -18,8 +18,12 @@ import {
   type TransportDiscoveredDevice,
   UnknownDeviceError,
 } from "@ledgerhq/device-management-kit";
+import {
+  lastValueFrom,
+  Subject,
+  toArray,
+} from "@ledgerhq/device-sdk-reactivity";
 import { Left, Right } from "purify-ts";
-import { lastValueFrom, Subject, toArray } from "rxjs";
 
 import { RECONNECT_DEVICE_TIMEOUT } from "@api/data/WebHidConfig";
 import { WebHidTransportNotSupportedError } from "@api/model/Errors";

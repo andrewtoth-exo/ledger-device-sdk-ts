@@ -1,4 +1,4 @@
-import { lastValueFrom } from "rxjs";
+import { lastValueFrom } from "@ledgerhq/device-sdk-reactivity";
 
 import { InvalidStatusWordError } from "@api/command/Errors";
 import { CommandResultFactory } from "@api/command/model/CommandResult";

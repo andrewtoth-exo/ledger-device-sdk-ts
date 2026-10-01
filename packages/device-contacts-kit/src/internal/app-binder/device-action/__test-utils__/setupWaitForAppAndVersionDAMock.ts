@@ -2,9 +2,9 @@ import {
   UserInteractionRequired,
   WaitForAppAndVersionDeviceAction,
 } from "@ledgerhq/device-management-kit";
+import { createMachine } from "@ledgerhq/device-sdk-reactivity/state-machine";
 import { Left, Right } from "purify-ts";
 import { type Mock } from "vitest";
-import { createMachine } from "xstate";
 
 /**
  * Mock WaitForAppAndVersionDeviceAction to resolve immediately with either a

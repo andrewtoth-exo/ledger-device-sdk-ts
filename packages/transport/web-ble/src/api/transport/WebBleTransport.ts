@@ -17,9 +17,13 @@ import {
   type TransportIdentifier,
   UnknownDeviceError,
 } from "@ledgerhq/device-management-kit";
+import {
+  BehaviorSubject,
+  from,
+  type Observable,
+} from "@ledgerhq/device-sdk-reactivity";
+import { switchMap } from "@ledgerhq/device-sdk-reactivity";
 import { type Either, Left, Right } from "purify-ts";
-import { BehaviorSubject, from, type Observable } from "rxjs";
-import { switchMap } from "rxjs/operators";
 
 import {
   ADVERTISING_DELAY,

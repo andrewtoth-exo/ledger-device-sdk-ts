@@ -2,7 +2,7 @@ import {
   type DeviceActionStatus,
   type UserInteractionRequired,
 } from "@ledgerhq/device-management-kit";
-import { type Observable } from "rxjs";
+import { type Observable } from "@ledgerhq/device-sdk-reactivity";
 
 /** Observable wrapper returned by signing service methods. */
 export type SigningServiceResult = {

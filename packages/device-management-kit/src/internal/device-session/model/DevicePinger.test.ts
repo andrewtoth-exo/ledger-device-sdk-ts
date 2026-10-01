@@ -1,4 +1,4 @@
-import { Subject } from "rxjs";
+import { Subject } from "@ledgerhq/device-sdk-reactivity";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { DeviceModelId } from "@api/device/DeviceModel";

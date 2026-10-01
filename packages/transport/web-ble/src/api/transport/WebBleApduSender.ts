@@ -13,8 +13,8 @@ import {
   type LoggerPublisherService,
   SendApduTimeoutError,
 } from "@ledgerhq/device-management-kit";
+import { BehaviorSubject } from "@ledgerhq/device-sdk-reactivity";
 import { type Either, Left, Maybe, Right } from "purify-ts";
-import { BehaviorSubject } from "rxjs";
 
 export type WebBleApduSenderDependencies = {
   writeCharacteristic: BluetoothRemoteGATTCharacteristic;

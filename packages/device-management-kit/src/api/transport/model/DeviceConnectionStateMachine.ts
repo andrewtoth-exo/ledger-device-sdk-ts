@@ -1,6 +1,11 @@
-// import { createBrowserInspector } from "@statelyai/inspect";
+import {
+  type Actor,
+  assign,
+  createActor,
+  emit,
+  setup,
+} from "@ledgerhq/device-sdk-reactivity/state-machine";
 import { type Either, Left, Maybe, Nothing, Right } from "purify-ts";
-import { type Actor, assign, createActor, emit, setup } from "xstate";
 
 import { GetAppAndVersionCommand } from "@api/command/os/GetAppAndVersionCommand";
 import { CommandUtils } from "@api/command/utils/CommandUtils";
@@ -14,8 +19,6 @@ import {
   DeviceDisconnectedBeforeSendingApdu,
   DeviceDisconnectedWhileSendingError,
 } from "./Errors";
-
-// const { inspect } = createBrowserInspector();
 
 const TRANSPORT_BUSY_WAIT_TIME = 10000; // 10 seconds
 
@@ -115,9 +118,6 @@ export class DeviceConnectionStateMachine<Dependencies> {
           this.deviceAdpuSender.closeConnection();
         },
       }),
-      // {
-      //   // inspect,
-      // },
     );
     this.machineActor.start();
   }

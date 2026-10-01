@@ -1,0 +1,48 @@
+{
+  "name": "@ledgerhq/device-sdk-reactivity",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ExodusForks/ledger-device-sdk-ts.git"
+  },
+  "exports": {
+    ".": {
+      "types": "./lib/types/src/streams.d.ts",
+      "import": "./lib/esm/streams.js",
+      "require": "./lib/cjs/streams.js"
+    },
+    "./state-machine": {
+      "types": "./lib/types/src/state-machine.d.ts",
+      "import": "./lib/esm/state-machine.js",
+      "require": "./lib/cjs/state-machine.js"
+    }
+  },
+  "files": [
+    "lib/esm",
+    "lib/cjs",
+    "lib/types/src",
+    "README.md"
+  ],
+  "scripts": {
+    "prebuild": "rimraf lib",
+    "build": "pnpm ldmk-tool build --entryPoints src/channel.ts,src/streams.ts,src/state-machine.ts --tsconfig tsconfig.prod.json",
+    "lint": "eslint",
+    "lint:fix": "pnpm lint --fix",
+    "prettier": "prettier . --check",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@nx-js/observer-util": "catalog:"
+  },
+  "devDependencies": {
+    "@ledgerhq/eslint-config-dsdk": "workspace:^",
+    "@ledgerhq/ldmk-tool": "workspace:^",
+    "@ledgerhq/prettier-config-dsdk": "workspace:^",
+    "@ledgerhq/tsconfig-dsdk": "workspace:^",
+    "@ledgerhq/vitest-config-dmk": "workspace:^",
+    "rxjs": "catalog:",
+    "xstate": "catalog:"
+  }
+}

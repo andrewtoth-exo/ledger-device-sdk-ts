@@ -36,7 +36,8 @@
   "dependencies": {
     "@sentry/minimal": "catalog:",
     "purify-ts": "catalog:",
-    "uuid": "catalog:"
+    "uuid": "catalog:",
+    "@ledgerhq/device-sdk-reactivity": "workspace:^"
   },
   "devDependencies": {
     "@ledgerhq/device-management-kit": "workspace:^",
@@ -47,11 +48,9 @@
     "@ledgerhq/vitest-config-dmk": "workspace:^",
     "@types/uuid": "catalog:",
     "@types/w3c-web-hid": "catalog:",
-    "rxjs": "catalog:",
     "ts-node": "catalog:"
   },
   "peerDependencies": {
-    "@ledgerhq/device-management-kit": "workspace:^",
-    "rxjs": "catalog:"
+    "@ledgerhq/device-management-kit": "workspace:^"
   }
 }

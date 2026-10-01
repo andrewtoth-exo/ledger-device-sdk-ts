@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { type DiscoveredDevice } from "@ledgerhq/device-management-kit";
-import { type Subscription } from "rxjs";
+import { type Subscription } from "@ledgerhq/device-sdk-reactivity";
 
 import { useDmk } from "@/providers/DeviceManagementKitProvider";
 import { selectOrderedConnectedDevices } from "@/state/sessions/selectors";

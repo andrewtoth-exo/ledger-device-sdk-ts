@@ -1,5 +1,5 @@
+import { of } from "@ledgerhq/device-sdk-reactivity";
 import { Maybe } from "purify-ts";
-import { of } from "rxjs";
 
 import { DeviceModel } from "@api/device/DeviceModel";
 import { type TransportDeviceModel } from "@api/device-model/model/DeviceModel";

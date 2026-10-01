@@ -49,7 +49,8 @@
   "dependencies": {
     "@sentry/minimal": "catalog:",
     "purify-ts": "catalog:",
-    "uuid": "catalog:"
+    "uuid": "catalog:",
+    "@ledgerhq/device-sdk-reactivity": "workspace:^"
   },
   "devDependencies": {
     "@ledgerhq/device-management-kit": "workspace:^",
@@ -59,12 +60,10 @@
     "@ledgerhq/prettier-config-dsdk": "workspace:^",
     "@ledgerhq/tsconfig-dsdk": "workspace:^",
     "@types/uuid": "catalog:",
-    "react-native": "catalog:",
-    "rxjs": "catalog:"
+    "react-native": "catalog:"
   },
   "peerDependencies": {
     "@ledgerhq/device-management-kit": "workspace:^",
-    "react-native": ">0.74.1",
-    "rxjs": "catalog:"
+    "react-native": ">0.74.1"
   }
 }

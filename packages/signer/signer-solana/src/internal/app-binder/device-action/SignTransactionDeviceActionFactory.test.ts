@@ -1,4 +1,5 @@
 import { type ContextModule } from "@ledgerhq/context-module";
+import { createActor } from "@ledgerhq/device-sdk-reactivity/state-machine";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { type SignTransactionDAInput } from "@api/app-binder/SignTransactionDeviceActionTypes";
@@ -62,7 +63,7 @@ describe("SignTransactionDeviceActionFactory", () => {
     );
   });
 
-  it("should return a device action usable as an XState actor", () => {
+  it("should return a device action usable as a state-machine actor", () => {
     const internalApi = makeDeviceActionInternalApiMock();
     const deviceAction = SignTransactionDeviceActionFactory({
       input: defaultInput,
@@ -71,7 +72,9 @@ describe("SignTransactionDeviceActionFactory", () => {
     const stateMachine = deviceAction.makeStateMachine(internalApi);
 
     expect(stateMachine).toBeDefined();
-    expect(typeof stateMachine.provide).toBe("function");
+    const actor = createActor(stateMachine, { input: defaultInput });
+    expect(actor.getSnapshot().status).toBe("active");
+    actor.stop();
     expect(stateMachine.config).toBeDefined();
   });
 });

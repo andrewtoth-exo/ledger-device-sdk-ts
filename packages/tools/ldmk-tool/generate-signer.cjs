@@ -1065,7 +1065,7 @@ async function generateSigner() {
         inversify: "catalog:",
         "purify-ts": "catalog:",
         "reflect-metadata": "catalog:",
-        xstate: "catalog:",
+        "@ledgerhq/device-sdk-reactivity": "workspace:^",
       },
       devDependencies: {
         "@ledgerhq/device-management-kit": "workspace:^",
@@ -1074,7 +1074,6 @@ async function generateSigner() {
         "@ledgerhq/prettier-config-dsdk": "workspace:^",
         "@ledgerhq/tsconfig-dsdk": "workspace:^",
         "@ledgerhq/vitest-config-dmk": "workspace:^",
-        rxjs: "catalog:",
         "ts-node": "catalog:",
       },
       peerDependencies: {
@@ -2214,7 +2213,7 @@ ${useCaseSections.join("\n\n")}
 
 ## 🔹 Observable Behavior
 
-Each method returns an [Observable](https://rxjs.dev/guide/observable) emitting updates structured as [\`DeviceActionState\`](https://github.com/LedgerHQ/device-sdk-ts/blob/develop/packages/device-management-kit/src/api/device-action/model/DeviceActionState.ts). These updates reflect the operation's progress and status:
+Each method returns an [Observable](https://github.com/ExodusForks/ledger-device-sdk-ts/blob/develop/packages/reactivity/README.md) emitting updates structured as [\`DeviceActionState\`](https://github.com/LedgerHQ/device-sdk-ts/blob/develop/packages/device-management-kit/src/api/device-action/model/DeviceActionState.ts). These updates reflect the operation's progress and status:
 
 - **NotStarted**: The operation hasn't started.
 - **Pending**: The operation is in progress and may require user interaction.

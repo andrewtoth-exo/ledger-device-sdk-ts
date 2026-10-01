@@ -563,7 +563,7 @@ Intermediate value may require `UserInteractionRequired.VerifyAddress` when `che
 
 ## Observable Behavior
 
-Each method returns an [Observable](https://rxjs.dev/guide/observable) of `DeviceActionState` values: `NotStarted`, `Pending` (with `intermediateValue`), `Stopped`, `Completed` (with `output`), or `Error`.
+Each method returns an [Observable](../../reactivity/README.md) of `DeviceActionState` values: `NotStarted`, `Pending` (with `intermediateValue`), `Stopped`, `Completed` (with `output`), or `Error`.
 
 ```typescript
 import { DeviceActionStatus } from "@ledgerhq/device-management-kit";

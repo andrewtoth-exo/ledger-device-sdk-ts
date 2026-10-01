@@ -5,7 +5,7 @@ import {
   type SendApduResult,
   type TransportDiscoveredDevice,
 } from "@ledgerhq/device-management-kit";
-import { Observable } from "rxjs";
+import { Observable } from "@ledgerhq/device-sdk-reactivity";
 
 import { uint8ArrayToBase64 } from "@api/helpers/base64Utils";
 import { type NativeModuleWrapper } from "@api/transport/NativeModuleWrapper";

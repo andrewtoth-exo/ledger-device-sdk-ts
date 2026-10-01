@@ -12,10 +12,10 @@ import {
   type DeviceActionState,
 } from "@ledgerhq/device-management-kit";
 import { DeviceManagementKit } from "@ledgerhq/device-management-kit";
+import { Observable } from "@ledgerhq/device-sdk-reactivity";
 import { SignerEthBuilder } from "@ledgerhq/device-signer-kit-ethereum";
 import { VerifySafeAddressDAError } from "@ledgerhq/device-signer-kit-ethereum/api/app-binder/VerifySafeAddressDeviceActionTypes.js";
 import { inject, injectable } from "inversify";
-import { Observable } from "rxjs";
 
 import { BaseEthSignerActionHandler } from "./BaseEthSignerActionHandler";
 

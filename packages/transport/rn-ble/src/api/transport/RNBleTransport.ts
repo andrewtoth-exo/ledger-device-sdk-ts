@@ -27,7 +27,6 @@ import {
   type TransportIdentifier,
   UnknownDeviceError,
 } from "@ledgerhq/device-management-kit";
-import { Either, EitherAsync, Left, Maybe, Right } from "purify-ts";
 import {
   BehaviorSubject,
   defer,
@@ -40,7 +39,8 @@ import {
   switchMap,
   tap,
   throttleTime,
-} from "rxjs";
+} from "@ledgerhq/device-sdk-reactivity";
+import { Either, EitherAsync, Left, Maybe, Right } from "purify-ts";
 
 import {
   BLE_DISCONNECT_TIMEOUT_ANDROID,

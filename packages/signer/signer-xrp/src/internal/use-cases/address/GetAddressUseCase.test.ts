@@ -1,4 +1,4 @@
-import { from } from "rxjs";
+import { from } from "@ledgerhq/device-sdk-reactivity";
 import { vi } from "vitest";
 
 import { type XrpAppBinder } from "@internal/app-binder/XrpAppBinder";

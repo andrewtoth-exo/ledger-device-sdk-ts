@@ -3,9 +3,12 @@ import {
   UnknownDAError,
   UserInteractionRequired,
 } from "@ledgerhq/device-management-kit";
+import {
+  assign,
+  createMachine,
+} from "@ledgerhq/device-sdk-reactivity/state-machine";
 import { Left, Right } from "purify-ts";
 import { type Mock, vi } from "vitest";
-import { assign, createMachine } from "xstate";
 
 /**
  * Sets up a mock for GoToDashboardDeviceAction.
