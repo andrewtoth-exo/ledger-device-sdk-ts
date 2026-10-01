@@ -18,9 +18,10 @@ secp256k1 operations, and sample AES-CBC use `@exodus/crypto@1.0.0-rc.34`.
 - Transaction parsing preserves types 0–4, signed-to-unsigned normalization,
   access lists, EIP-7702 authorizations and EIP-4844 network wrappers. It does
   not fall back to the older ethers5 transaction parser, which lacks types 3/4.
-- The ethereumjs release uses global `Buffer`. Each importing SDK package
-  installs the `buffer@6.0.3` browser implementation only if the host has no
-  Buffer. An existing native or application-provided Buffer is preserved.
+- The ethereumjs release assumes global `Buffer` already exists. The host must
+  provide it before importing these SDK packages. Context-module and the
+  Ethereum signer do not install a Buffer fallback, assign the global, or
+  directly depend on the `buffer` package.
 - DMK secure-channel and the devtools WebSocket connector use the host's
   global `WebSocket`. Their direct `isomorphic-ws` dependency and DMK's direct
   `ws` dependency are removed. Browsers and supported React Native hosts
@@ -79,5 +80,5 @@ The Ethereum follow-up compares ABI values, EIP-712 hashes and transaction
 normalization against ethers, including malformed envelopes, authorization
 lists and byte-level transaction mutations. WebSocket tests cover native-style
 events, connection failures, reconnects and cleanup. Browser-bundle smoke tests
-exercise the ABI, typed-data and transaction adapters both with and without an
-existing global Buffer.
+exercise the ABI, typed-data and transaction adapters with a host-provided
+global Buffer and verify that the SDK does not replace or reconfigure it.

@@ -1,5 +1,3 @@
-import "./ethereumBuffer";
-
 import { hashSync } from "@exodus/crypto/hash";
 import { defaultAbiCoder } from "@exodus/ethereumjs/ethers5-abi";
 
