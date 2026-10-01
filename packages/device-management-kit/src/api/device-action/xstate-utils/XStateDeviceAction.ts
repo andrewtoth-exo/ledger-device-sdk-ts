@@ -1,11 +1,13 @@
-// import { createBrowserInspector } from "@statelyai/inspect";
-import { Observable, ReplaySubject, share } from "rxjs";
+import {
+  Observable,
+  ReplaySubject,
+  share,
+} from "@ledgerhq/device-sdk-reactivity";
 import {
   createActor,
   type SnapshotFrom,
   type StateMachine,
-  type StateSchema,
-} from "xstate";
+} from "@ledgerhq/device-sdk-reactivity/state-machine";
 
 import {
   type DeviceAction,
@@ -36,21 +38,7 @@ export type DeviceActionStateMachine<
     Error,
     IntermediateValue,
     InternalState
-  >["context"], // context
-  /**
-   * The following usages `any` are OK because this is just a wrapper around the
-   * state machine and we are not directly going to use these types.
-   */
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  any, // event
-  any, // children
-  any, // actor
-  any, // action
-  any, // guard
-  any, // delay
-  any, // state value
-  any, // tag
-  /* eslint-enable @typescript-eslint/no-explicit-any */
+  >["context"],
   StateMachineTypes<
     Output,
     Input,
@@ -64,12 +52,7 @@ export type DeviceActionStateMachine<
     Error,
     IntermediateValue,
     InternalState
-  >["output"],
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  any,
-  any,
-  /* eslint-enable @typescript-eslint/no-explicit-any */
-  StateSchema
+  >["output"]
 >;
 
 /**
@@ -93,7 +76,6 @@ export abstract class XStateDeviceAction<
   /**
    *
    * @param input The input for the DeviceAction
-   * @param inspect If true, the state machine will be inspected in the browser
    * @param logger Optional logger for debugging. If provided, input and internal state will be logged on state transitions.
    * @param loggerFactory Optional logger factory for creating loggers with prefixed tags. Takes precedence over logger.
    */
@@ -155,8 +137,6 @@ export abstract class XStateDeviceAction<
   ): ExecuteDeviceActionReturnType<Output, Error, IntermediateValue> {
     const actor = createActor(stateMachine, {
       input: this.input,
-      // optional inspector for debugging
-      // inspect: this.inspect ? createBrowserInspector().inspect : undefined,
     });
 
     /**
@@ -249,7 +229,10 @@ export abstract class XStateDeviceAction<
       };
     });
 
-    const actorSubscription = actor.subscribe(handleActorSnapshot);
+    const actorSubscription = actor.subscribe({
+      next: handleActorSnapshot,
+      error: (error) => subject.error(error),
+    });
     actor.start();
 
     return {

@@ -24,7 +24,6 @@ import {
   type Device,
   MockClient,
 } from "@ledgerhq/device-mockserver-client";
-import { type Either, Left, Right } from "purify-ts";
 import {
   catchError,
   defer,
@@ -35,7 +34,8 @@ import {
   of,
   switchMap,
   timer,
-} from "rxjs";
+} from "@ledgerhq/device-sdk-reactivity";
+import { type Either, Left, Right } from "purify-ts";
 
 export const mockserverIdentifier: TransportIdentifier = "MOCKSERVER";
 

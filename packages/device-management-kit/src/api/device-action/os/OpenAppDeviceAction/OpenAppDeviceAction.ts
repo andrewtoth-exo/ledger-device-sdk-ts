@@ -1,5 +1,9 @@
+import {
+  assign,
+  fromPromise,
+  setup,
+} from "@ledgerhq/device-sdk-reactivity/state-machine";
 import { Left, Right } from "purify-ts";
-import { assign, fromPromise, setup } from "xstate";
 
 import { isSuccessCommandResult } from "@api/command/model/CommandResult";
 import {
@@ -385,7 +389,6 @@ export class OpenAppDeviceAction extends XStateDeviceAction<
         // success state
         Success: {
           type: "final",
-          actions: "assignNoError", // TODO, we should not need this
         },
 
         // error state

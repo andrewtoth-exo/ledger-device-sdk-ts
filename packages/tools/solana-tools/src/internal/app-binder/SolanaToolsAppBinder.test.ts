@@ -4,7 +4,7 @@ import {
   type DeviceManagementKit,
   type DeviceSessionId,
 } from "@ledgerhq/device-management-kit";
-import { from } from "rxjs";
+import { from } from "@ledgerhq/device-sdk-reactivity";
 
 import {
   type CraftTransactionDAError,

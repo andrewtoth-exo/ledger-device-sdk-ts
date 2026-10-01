@@ -14,8 +14,8 @@ import {
   GetDeviceMetadataDeviceAction,
 } from "@ledgerhq/device-management-kit";
 import { DeviceManagementKit } from "@ledgerhq/device-management-kit";
+import { Observable } from "@ledgerhq/device-sdk-reactivity";
 import { inject, injectable } from "inversify";
-import { Observable } from "rxjs";
 
 import { BaseDeviceActionHandler } from "./BaseDeviceActionHandler";
 

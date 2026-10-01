@@ -7,8 +7,13 @@ import {
   UserInteractionRequired,
   XStateDeviceAction,
 } from "@ledgerhq/device-management-kit";
+import {
+  assign,
+  fromObservable,
+  fromPromise,
+  setup,
+} from "@ledgerhq/device-sdk-reactivity/state-machine";
 import { Left, Right } from "purify-ts";
-import { assign, fromObservable, fromPromise, setup } from "xstate";
 
 import { getOsVersion } from "@api/device-action/OsUpdate/Shared/Substeps/GetOsVersion";
 import { goToDashboard } from "@api/device-action/OsUpdate/Shared/Substeps/GoToDashboard";

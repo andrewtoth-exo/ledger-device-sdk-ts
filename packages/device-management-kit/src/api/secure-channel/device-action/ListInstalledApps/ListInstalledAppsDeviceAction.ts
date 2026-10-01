@@ -1,5 +1,10 @@
+import {
+  assign,
+  fromObservable,
+  fromPromise,
+  setup,
+} from "@ledgerhq/device-sdk-reactivity/state-machine";
 import { Left, Right } from "purify-ts";
-import { assign, fromObservable, fromPromise, setup } from "xstate";
 
 import { isSuccessCommandResult } from "@api/command/model/CommandResult";
 import {

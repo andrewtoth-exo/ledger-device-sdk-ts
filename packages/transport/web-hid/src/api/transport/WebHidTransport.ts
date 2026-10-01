@@ -22,9 +22,15 @@ import {
   type TransportIdentifier,
   UnknownDeviceError,
 } from "@ledgerhq/device-management-kit";
+import {
+  BehaviorSubject,
+  from,
+  map,
+  type Observable,
+  switchMap,
+} from "@ledgerhq/device-sdk-reactivity";
 import * as Sentry from "@sentry/minimal";
 import { type Either, EitherAsync, Left, Maybe, Right } from "purify-ts";
-import { BehaviorSubject, from, map, type Observable, switchMap } from "rxjs";
 import { v4 as uuid } from "uuid";
 
 import { RECONNECT_DEVICE_TIMEOUT } from "@api/data/WebHidConfig";

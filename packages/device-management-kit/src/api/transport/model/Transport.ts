@@ -1,5 +1,5 @@
+import { type Observable } from "@ledgerhq/device-sdk-reactivity";
 import { type Either } from "purify-ts";
-import { type Observable } from "rxjs";
 
 import { type DeviceId } from "@api/device/DeviceModel";
 import { type DeviceModelDataSource } from "@api/device-model/data/DeviceModelDataSource";

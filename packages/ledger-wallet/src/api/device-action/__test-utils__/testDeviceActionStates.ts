@@ -57,7 +57,7 @@ export function testDeviceActionStates<
       observedStates.push(state);
     },
     error: (error) => {
-      onError(error);
+      onError(error as Error);
     },
     complete: () => {
       try {

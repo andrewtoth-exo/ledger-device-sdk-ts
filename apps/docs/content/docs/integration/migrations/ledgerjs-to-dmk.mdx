@@ -161,7 +161,7 @@ const signerEth = new SignerEthBuilder({ dmk, sessionId }).build();
 
 Every method in LedgerJS returned a `Promise`. Every method in the DMK returns an object with two properties:
 
-- `observable`: an [RxJS Observable](https://rxjs.dev/guide/observable) that emits [`DeviceActionState`](https://github.com/LedgerHQ/device-sdk-ts/blob/develop/packages/device-management-kit/src/api/device-action/model/DeviceActionState.ts) updates
+- `observable`: an [Observable](https://github.com/ExodusForks/ledger-device-sdk-ts/blob/develop/packages/reactivity/README.md) that emits [`DeviceActionState`](https://github.com/LedgerHQ/device-sdk-ts/blob/develop/packages/device-management-kit/src/api/device-action/model/DeviceActionState.ts) updates
 - `cancel`: a function to cancel the in-progress action
 
 ```typescript
@@ -192,7 +192,7 @@ observable.subscribe({
 If your codebase is heavily promise-based, you can use this helper to keep the call sites familiar while you migrate incrementally:
 
 ```typescript
-import { type Observable } from "rxjs";
+import { type Observable } from "@ledgerhq/device-sdk-reactivity";
 import { DeviceActionStatus } from "@ledgerhq/device-management-kit";
 
 function toPromise<Output>(action: {
@@ -235,10 +235,10 @@ In LedgerJS, you had to open the correct coin app on the device yourself before 
 
 LedgerJS had no reconnection logic. The DMK exposes `dmk.reconnect({ device, sessionId })` and `dmk.getDeviceSessionState({ sessionId })` to monitor and recover from disconnections.
 
-### `rxjs` is a peer dependency
+### Stream operators
 
-Install it explicitly if it is not already a dependency of your project:
+RxJS is no longer a peer dependency. If you import stream operators, install the SDK wrapper and import them from it instead:
 
 ```bash
-npm install rxjs
+npm install @ledgerhq/device-sdk-reactivity
 ```

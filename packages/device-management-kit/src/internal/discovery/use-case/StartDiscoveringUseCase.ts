@@ -1,5 +1,5 @@
+import { map, mergeMap, Observable, of } from "@ledgerhq/device-sdk-reactivity";
 import { inject, injectable } from "inversify";
-import { map, mergeMap, Observable, of } from "rxjs";
 
 import { DeviceModel } from "@api/device/DeviceModel";
 import { DiscoveredDevice } from "@api/transport/model/DiscoveredDevice";

@@ -1,4 +1,9 @@
-import { finalize, type Observable, Subject, type Subscription } from "rxjs";
+import {
+  finalize,
+  type Observable,
+  Subject,
+  type Subscription,
+} from "@ledgerhq/device-sdk-reactivity";
 
 import {
   type DeviceSessionEventDispatcher,

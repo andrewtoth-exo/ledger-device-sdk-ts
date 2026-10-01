@@ -13,8 +13,13 @@ import {
   UserInteractionRequired,
   XStateDeviceAction,
 } from "@ledgerhq/device-management-kit";
+import {
+  and,
+  assign,
+  fromPromise,
+  setup,
+} from "@ledgerhq/device-sdk-reactivity/state-machine";
 import { Left, Nothing, Right } from "purify-ts";
-import { and, assign, fromPromise, setup } from "xstate";
 
 import {
   type GetAddressCommandArgs,

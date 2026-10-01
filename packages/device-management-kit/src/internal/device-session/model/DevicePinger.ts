@@ -1,4 +1,4 @@
-import { type Subscription } from "rxjs";
+import { type Subscription } from "@ledgerhq/device-sdk-reactivity";
 
 import { DeviceModelId } from "@api/device/DeviceModel";
 import {

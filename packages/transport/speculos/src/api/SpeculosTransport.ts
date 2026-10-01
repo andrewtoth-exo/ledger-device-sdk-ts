@@ -19,8 +19,8 @@ import {
   type TransportFactory,
   type TransportIdentifier,
 } from "@ledgerhq/device-management-kit";
+import { from, type Observable } from "@ledgerhq/device-sdk-reactivity";
 import { type Either, Left, Right } from "purify-ts";
-import { from, type Observable } from "rxjs";
 
 import { HttpSpeculosDatasource } from "@internal/datasource/HttpSpeculosDatasource";
 import { type SpeculosDatasource } from "@internal/datasource/SpeculosDatasource";

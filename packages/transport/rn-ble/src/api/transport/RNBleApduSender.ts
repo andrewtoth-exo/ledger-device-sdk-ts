@@ -20,9 +20,12 @@ import {
   type LoggerPublisherService,
   SendApduTimeoutError,
 } from "@ledgerhq/device-management-kit";
+import {
+  BehaviorSubject,
+  type Subscription,
+} from "@ledgerhq/device-sdk-reactivity";
 import { Base64 } from "js-base64";
 import { type Either, Left, Maybe, Nothing, Right } from "purify-ts";
-import { BehaviorSubject, type Subscription } from "rxjs";
 
 import { PairingRefusedError, UnknownBleError } from "@api/model/Errors";
 

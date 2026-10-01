@@ -1,5 +1,5 @@
+import { map, Observable } from "@ledgerhq/device-sdk-reactivity";
 import { inject, injectable } from "inversify";
-import { map, Observable } from "rxjs";
 
 import { LoggerPublisherService } from "@api/logger-publisher/service/LoggerPublisherService";
 import { ConnectedDevice } from "@api/transport/model/ConnectedDevice";

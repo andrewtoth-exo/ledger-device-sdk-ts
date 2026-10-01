@@ -347,7 +347,7 @@ type AppConfiguration = {
 
 ## 🔹 Observable Behavior
 
-Each method returns an [Observable](https://rxjs.dev/guide/observable) emitting updates structured as [`DeviceActionState`](https://github.com/LedgerHQ/device-sdk-ts/blob/develop/packages/device-management-kit/src/api/device-action/model/DeviceActionState.ts). These updates reflect the operation’s progress and status:
+Each method returns an [Observable](../../reactivity/README.md) emitting updates structured as [`DeviceActionState`](https://github.com/LedgerHQ/device-sdk-ts/blob/develop/packages/device-management-kit/src/api/device-action/model/DeviceActionState.ts). These updates reflect the operation’s progress and status:
 
 - **NotStarted**: The operation hasn’t started.
 - **Pending**: The operation is in progress and may require user interaction.

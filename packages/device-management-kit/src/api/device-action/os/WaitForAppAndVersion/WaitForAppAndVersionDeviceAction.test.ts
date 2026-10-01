@@ -1,4 +1,4 @@
-import { of, throwError } from "rxjs";
+import { of, throwError } from "@ledgerhq/device-sdk-reactivity";
 
 import { CommandResultFactory } from "@api/command/model/CommandResult";
 import {

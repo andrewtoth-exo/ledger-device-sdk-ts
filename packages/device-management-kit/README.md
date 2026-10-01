@@ -38,7 +38,7 @@ npm install @ledgerhq/device-management-kit
 
 ### Prerequisites
 
-Some of the APIs exposed return objects of type `Observable` from RxJS. Ensure you are familiar with the basics of the Observer pattern and RxJS before using this Device Management Kit. You can refer to [RxJS documentation](https://rxjs.dev/guide/overview) for more information.
+Some APIs return `Observable` objects from the SDK's [observer-util wrapper](../reactivity/README.md). Use its operators instead of RxJS operators; subscription and cancellation APIs are unchanged. RxJS is no longer a peer dependency.
 
 ### Main Features
 

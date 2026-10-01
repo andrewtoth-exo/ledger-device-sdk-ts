@@ -22,6 +22,13 @@ import {
   type TransportIdentifier,
   UnknownDeviceError,
 } from "@ledgerhq/device-management-kit";
+import {
+  BehaviorSubject,
+  from,
+  map,
+  type Observable,
+  switchMap,
+} from "@ledgerhq/device-sdk-reactivity";
 import { type Device as NodeHIDDevice, devicesAsync, HIDAsync } from "node-hid";
 import {
   type Either,
@@ -32,7 +39,6 @@ import {
   Nothing,
   Right,
 } from "purify-ts";
-import { BehaviorSubject, from, map, type Observable, switchMap } from "rxjs";
 import { type Device, usb } from "usb";
 import { v4 as uuid } from "uuid";
 

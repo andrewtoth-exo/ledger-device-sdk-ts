@@ -41,7 +41,8 @@
   "dependencies": {
     "@ledgerhq/device-mockserver-client": "workspace:^",
     "@sentry/minimal": "catalog:",
-    "purify-ts": "catalog:"
+    "purify-ts": "catalog:",
+    "@ledgerhq/device-sdk-reactivity": "workspace:^"
   },
   "devDependencies": {
     "@ledgerhq/device-management-kit": "workspace:^",
@@ -50,11 +51,9 @@
     "@ledgerhq/prettier-config-dsdk": "workspace:^",
     "@ledgerhq/tsconfig-dsdk": "workspace:^",
     "@ledgerhq/vitest-config-dmk": "workspace:^",
-    "rxjs": "catalog:",
     "ts-node": "catalog:"
   },
   "peerDependencies": {
-    "@ledgerhq/device-management-kit": "workspace:^",
-    "rxjs": "catalog:"
+    "@ledgerhq/device-management-kit": "workspace:^"
   }
 }

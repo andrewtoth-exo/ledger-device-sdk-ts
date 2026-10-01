@@ -1,6 +1,6 @@
 import { DeviceActionStatus } from "@ledgerhq/device-management-kit";
+import { Subject } from "@ledgerhq/device-sdk-reactivity";
 import { type SolanaTools } from "@ledgerhq/solana-tools";
-import { Subject } from "rxjs";
 import { describe, expect, it, vi } from "vitest";
 
 import { TransactionCraftingService } from "./TransactionCraftingService";

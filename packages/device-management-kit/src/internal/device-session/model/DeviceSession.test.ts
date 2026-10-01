@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { of, Subject, throwError } from "@ledgerhq/device-sdk-reactivity";
+import { delay, take } from "@ledgerhq/device-sdk-reactivity";
 import { Left, Right } from "purify-ts";
-import { of, Subject, throwError } from "rxjs";
-import { delay, take } from "rxjs/operators";
 import { type Mocked } from "vitest";
 
 import { type Command } from "@api/command/Command";

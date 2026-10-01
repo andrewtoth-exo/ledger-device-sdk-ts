@@ -42,9 +42,8 @@
     "@ledgerhq/signer-utils": "workspace:^",
     "pako": "^2.1.0",
     "purify-ts": "catalog:",
-    "rxjs": "catalog:",
     "semver": "catalog:",
-    "xstate": "catalog:"
+    "@ledgerhq/device-sdk-reactivity": "workspace:^"
   },
   "devDependencies": {
     "@ledgerhq/device-management-kit": "workspace:^",

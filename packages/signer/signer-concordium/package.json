@@ -42,7 +42,7 @@
     "inversify": "catalog:",
     "purify-ts": "catalog:",
     "reflect-metadata": "catalog:",
-    "xstate": "catalog:"
+    "@ledgerhq/device-sdk-reactivity": "workspace:^"
   },
   "devDependencies": {
     "@ledgerhq/context-module": "workspace:^",
@@ -52,7 +52,6 @@
     "@ledgerhq/prettier-config-dsdk": "workspace:^",
     "@ledgerhq/tsconfig-dsdk": "workspace:^",
     "@ledgerhq/vitest-config-dmk": "workspace:^",
-    "rxjs": "catalog:",
     "ts-node": "catalog:"
   },
   "peerDependencies": {

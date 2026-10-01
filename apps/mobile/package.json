@@ -33,9 +33,9 @@
     "react-native-safe-area-context": "catalog:",
     "react-native-screens": "catalog:",
     "react-native-svg": "catalog:",
-    "rxjs": "catalog:",
     "styled-components": "catalog:",
-    "util": "catalog:"
+    "util": "catalog:",
+    "@ledgerhq/device-sdk-reactivity": "workspace:^"
   },
   "devDependencies": {
     "@babel/core": "catalog:",

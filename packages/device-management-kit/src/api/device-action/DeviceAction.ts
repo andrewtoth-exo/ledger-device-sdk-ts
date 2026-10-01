@@ -1,5 +1,5 @@
+import { type Observable } from "@ledgerhq/device-sdk-reactivity";
 import { type Either } from "purify-ts";
-import { type Observable } from "rxjs";
 
 import { type Command } from "@api/command/Command";
 import { type CommandResult } from "@api/command/model/CommandResult";

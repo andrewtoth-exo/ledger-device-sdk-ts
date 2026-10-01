@@ -16,8 +16,12 @@ import {
   TransportDeviceModel,
   type TransportDiscoveredDevice,
 } from "@ledgerhq/device-management-kit";
+import {
+  firstValueFrom,
+  Subject,
+  Subscription,
+} from "@ledgerhq/device-sdk-reactivity";
 import { Left, Right } from "purify-ts";
-import { firstValueFrom, Subject, Subscription } from "rxjs";
 import { beforeEach, expect } from "vitest";
 
 import {

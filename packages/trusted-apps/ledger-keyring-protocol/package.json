@@ -46,8 +46,7 @@
     "inversify": "catalog:",
     "purify-ts": "catalog:",
     "reflect-metadata": "catalog:",
-    "rxjs": "catalog:",
-    "xstate": "catalog:"
+    "@ledgerhq/device-sdk-reactivity": "workspace:^"
   },
   "devDependencies": {
     "@ledgerhq/eslint-config-dsdk": "workspace:^",

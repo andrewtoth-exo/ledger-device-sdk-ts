@@ -1,11 +1,11 @@
-import { type EitherAsync, Left, Right } from "purify-ts";
 import {
   type AnyEventObject,
   assign,
   fromCallback,
   fromPromise,
   setup,
-} from "xstate";
+} from "@ledgerhq/device-sdk-reactivity/state-machine";
+import { type EitherAsync, Left, Right } from "purify-ts";
 
 import { type ListAppsResponse } from "@api/command/os/ListAppsCommand";
 import { type InternalApi } from "@api/device-action/DeviceAction";

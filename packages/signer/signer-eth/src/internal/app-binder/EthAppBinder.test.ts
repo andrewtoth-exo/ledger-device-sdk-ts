@@ -6,8 +6,8 @@ import {
 } from "@ledgerhq/device-management-kit";
 import { DeviceActionStatus } from "@ledgerhq/device-management-kit";
 import { UserInteractionRequired } from "@ledgerhq/device-management-kit";
+import { from } from "@ledgerhq/device-sdk-reactivity";
 import { Transaction } from "ethers";
-import { from } from "rxjs";
 
 import {
   type GetAddressDAError,

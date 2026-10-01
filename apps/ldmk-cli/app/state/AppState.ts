@@ -4,8 +4,8 @@ import {
   type DeviceStatus,
   type DiscoveredDevice,
 } from "@ledgerhq/device-management-kit";
+import { Subscription } from "@ledgerhq/device-sdk-reactivity";
 import { injectable } from "inversify";
-import { Subscription } from "rxjs";
 
 @injectable()
 export class AppState {

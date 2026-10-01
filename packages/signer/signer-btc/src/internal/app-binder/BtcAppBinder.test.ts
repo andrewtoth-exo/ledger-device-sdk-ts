@@ -5,7 +5,7 @@ import {
   type DeviceSessionId,
   UserInteractionRequired,
 } from "@ledgerhq/device-management-kit";
-import { from, type Subscription } from "rxjs";
+import { from, type Subscription } from "@ledgerhq/device-sdk-reactivity";
 
 import {
   type GetExtendedDAIntermediateValue,

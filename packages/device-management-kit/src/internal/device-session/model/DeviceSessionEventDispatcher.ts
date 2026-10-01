@@ -1,4 +1,4 @@
-import { type Observable, Subject } from "rxjs";
+import { type Observable, Subject } from "@ledgerhq/device-sdk-reactivity";
 
 import { type GetAppAndVersionResponse } from "@api/index";
 import { type CommandResult } from "@api/types";

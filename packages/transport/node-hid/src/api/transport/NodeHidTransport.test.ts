@@ -18,9 +18,9 @@ import {
   type TransportDiscoveredDevice,
   UnknownDeviceError,
 } from "@ledgerhq/device-management-kit";
+import { lastValueFrom, toArray } from "@ledgerhq/device-sdk-reactivity";
 import type { Device as NodeHIDDevice } from "node-hid";
 import { Left, Right } from "purify-ts";
-import { lastValueFrom, toArray } from "rxjs";
 
 import { RECONNECT_DEVICE_TIMEOUT } from "@api/data/NodeHidConfig";
 import { nodeHidDeviceStubBuilder } from "@api/model/HIDDevice.stub";

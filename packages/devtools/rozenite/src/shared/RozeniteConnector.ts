@@ -1,6 +1,10 @@
 import { Connector } from "@ledgerhq/device-management-kit-devtools-core";
 import { RozeniteDevToolsClient } from "@rozenite/plugin-bridge";
-import { ReplaySubject, Subject, type Subscription } from "rxjs";
+import {
+  ReplaySubject,
+  Subject,
+  type Subscription,
+} from "@ledgerhq/device-sdk-reactivity";
 import { PluginEvents } from "./PluginEvents";
 
 export class RozeniteConnector implements Connector {

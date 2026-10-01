@@ -1,4 +1,4 @@
-import { from } from "rxjs";
+import { from } from "@ledgerhq/device-sdk-reactivity";
 
 import { getObservableOfArraysNewItems } from "./getObservableOfArraysNewItems";
 

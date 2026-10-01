@@ -1,6 +1,11 @@
+import { type Observable } from "@ledgerhq/device-sdk-reactivity";
+import {
+  assign,
+  fromObservable,
+  fromPromise,
+  setup,
+} from "@ledgerhq/device-sdk-reactivity/state-machine";
 import { Left, Right } from "purify-ts";
-import { type Observable } from "rxjs";
-import { assign, fromObservable, fromPromise, setup } from "xstate";
 
 import { type InternalApi } from "@api/device-action/DeviceAction";
 import { UserInteractionRequired } from "@api/device-action/model/UserInteractionRequired";

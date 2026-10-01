@@ -63,10 +63,18 @@ describe("GetDeviceSessionStateUseCase", () => {
     const res = useCase.execute({ sessionId: fakeSessionId });
     const expected = deviceSession.state;
 
+    const observed: unknown[] = [];
+    const expectedStates: unknown[] = [];
+    const subscription = res.subscribe((state) => observed.push(state));
+    const expectedSubscription = expected.subscribe((state) =>
+      expectedStates.push(state),
+    );
     deviceSession.close();
+    subscription.unsubscribe();
+    expectedSubscription.unsubscribe();
 
-    // then
-    expect(res).toStrictEqual(expected);
+    expect(observed).toEqual(expectedStates);
+    expect(observed.length).toBeGreaterThan(0);
   });
 
   it("should throw error when deviceSession is not found", () =>

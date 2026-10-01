@@ -26,10 +26,10 @@
     "@ledgerhq/device-transport-kit-node-hid": "workspace:^",
     "@ledgerhq/ldmk-tool": "workspace:^",
     "inversify": "catalog:",
-    "rxjs": "catalog:",
     "semver": "catalog:",
     "tsx": "catalog:",
-    "zx": "catalog:"
+    "zx": "catalog:",
+    "@ledgerhq/device-sdk-reactivity": "workspace:^"
   },
   "devDependencies": {
     "@ledgerhq/eslint-config-dsdk": "workspace:^",

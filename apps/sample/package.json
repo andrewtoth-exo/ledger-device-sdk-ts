@@ -60,8 +60,8 @@
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-redux": "catalog:",
-    "rxjs": "catalog:",
-    "styled-components": "catalog:"
+    "styled-components": "catalog:",
+    "@ledgerhq/device-sdk-reactivity": "workspace:^"
   },
   "devDependencies": {
     "@ledgerhq/device-mock-server": "workspace:^",

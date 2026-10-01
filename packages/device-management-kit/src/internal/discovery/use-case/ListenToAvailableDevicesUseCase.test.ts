@@ -1,5 +1,5 @@
+import { Subject } from "@ledgerhq/device-sdk-reactivity";
 import { Just } from "purify-ts";
-import { Subject } from "rxjs";
 
 import { type DeviceId, DeviceModel } from "@api/device/DeviceModel";
 import { deviceModelStubBuilder } from "@api/device-model/model/DeviceModel.stub";

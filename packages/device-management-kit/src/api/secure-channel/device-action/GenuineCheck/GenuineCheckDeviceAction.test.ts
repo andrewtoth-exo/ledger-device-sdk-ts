@@ -1,5 +1,5 @@
+import { concat, of, throwError } from "@ledgerhq/device-sdk-reactivity";
 import { Left, Right } from "purify-ts";
-import { concat, of, throwError } from "rxjs";
 
 import { CommandResultFactory } from "@api/command/model/CommandResult";
 import { DeviceStatus } from "@api/device/DeviceStatus";

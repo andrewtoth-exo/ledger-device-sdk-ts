@@ -11,10 +11,10 @@ import { RootScreens } from "_navigators/RootNavigator.constants.ts";
 import { useDeviceSessionsContext } from "_providers/deviceSessionsProvider.tsx";
 import { useDmk } from "_providers/dmkProvider.tsx";
 import { type DiscoveredDevice } from "@ledgerhq/device-management-kit";
+import { first } from "@ledgerhq/device-sdk-reactivity";
 import { rnHidTransportIdentifier } from "@ledgerhq/device-transport-kit-react-native-hid";
 import { Button, Text } from "@ledgerhq/native-ui";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
-import { first } from "rxjs/operators";
 import styled from "styled-components/native";
 
 import { DiscoveredDeviceItem } from "./DiscoveredDeviceItem";
@@ -56,7 +56,7 @@ export const ConnectDeviceScreen: React.FC = () => {
   const dmk = useDmk();
   const [devices, setDevices] = React.useState<DiscoveredDevice[]>([]);
   const [listenToAvailableDevicesError, setListenToAvailableDevicesError] =
-    React.useState<Error | null>(null);
+    React.useState<unknown>(null);
   const [connectionError, setConnectionError] = React.useState<unknown>(null);
   const [isScanningDevices, setIsScanningDevices] = React.useState(false);
   const {

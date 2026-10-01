@@ -1,5 +1,5 @@
+import { Observable } from "@ledgerhq/device-sdk-reactivity";
 import { Either, Left } from "purify-ts";
-import { Observable } from "rxjs";
 
 import { type DmkConfig } from "@api/DmkConfig";
 import { connectedDeviceStubBuilder } from "@api/transport/model/TransportConnectedDevice.stub";
