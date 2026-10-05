@@ -1,3 +1,5 @@
+import { fromHex, toHex } from "@exodus/bytes/hex.js";
+
 import { Curve } from "@api/crypto/CryptoService";
 import { SigFormat } from "@api/crypto/KeyPair";
 
@@ -113,4 +115,3 @@ describe("NobleKeyPair", () => {
     expect(hexPublicKey.length).toBeGreaterThan(0);
   });
 });
-import { fromHex, toHex } from "@exodus/bytes/hex.js";

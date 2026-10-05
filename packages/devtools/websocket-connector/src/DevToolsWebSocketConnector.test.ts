@@ -55,16 +55,48 @@ describe("global WebSocket connector", () => {
     expect(socket.close).toHaveBeenCalledOnce();
   });
 
-  it("handles a generic error event without accessing EventTarget.readyState", () => {
+  it("reconnects on close after a generic error event while closing", () => {
     const connector = DevToolsWebSocketConnector.getInstance().connect({
+      url: "ws://localhost:10001",
+    });
+    const socket = MockWebSocket.instances[0]!;
+    socket.readyState = 2;
+    socket.onerror!(new Event("error"));
+    socket.readyState = MockWebSocket.CLOSED;
+    socket.onclose!();
+    vi.advanceTimersByTime(5000);
+    expect(MockWebSocket.instances).toHaveLength(2);
+    expect(connector).toBe(DevToolsWebSocketConnector.getInstance());
+  });
+
+  it("ignores events from a replaced socket", () => {
+    const connector = DevToolsWebSocketConnector.getInstance().connect({
+      url: "ws://localhost:10001",
+    });
+    const previous = MockWebSocket.instances[0]!;
+    connector.connect({ url: "ws://localhost:10002" });
+    const current = MockWebSocket.instances[1]!;
+    current.readyState = MockWebSocket.OPEN;
+    current.onopen!();
+    previous.onclose!();
+    connector.sendMessage("test", "current");
+    expect(current.send).toHaveBeenCalledWith(
+      'message|{"type":"test","payload":"current"}',
+    );
+    vi.advanceTimersByTime(5000);
+    expect(MockWebSocket.instances).toHaveLength(2);
+  });
+
+  it("cancels pending reconnections on destroy", () => {
+    DevToolsWebSocketConnector.getInstance().connect({
       url: "ws://localhost:10001",
     });
     const socket = MockWebSocket.instances[0]!;
     socket.readyState = MockWebSocket.CLOSED;
     socket.onerror!(new Event("error"));
-    vi.advanceTimersByTime(5000);
-    expect(MockWebSocket.instances).toHaveLength(2);
-    expect(connector).toBe(DevToolsWebSocketConnector.getInstance());
+    socket.onclose!();
+    DevToolsWebSocketConnector.destroyInstance();
+    expect(vi.getTimerCount()).toBe(0);
   });
 
   it("fails explicitly when no global constructor is available", () => {

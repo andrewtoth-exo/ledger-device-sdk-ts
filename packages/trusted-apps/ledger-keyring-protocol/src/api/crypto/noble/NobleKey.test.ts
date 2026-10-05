@@ -1,3 +1,5 @@
+import { fromHex } from "@exodus/bytes/hex.js";
+
 import { AES256_BLOCK_SIZE, AES256_KEY_SIZE } from "@api/crypto/Key";
 
 import { NobleKey } from "./NobleKey";
@@ -38,4 +40,3 @@ describe("NobleKey", () => {
     expect(decryptedData).toEqual(testData);
   });
 });
-import { fromHex } from "@exodus/bytes/hex.js";
