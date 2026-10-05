@@ -444,15 +444,15 @@ export class Actor<Machine extends AnyMachine> {
 
   stop(): this {
     if (this.snapshot.status !== "active") return this;
+    this.snapshot = {
+      ...this.snapshot,
+      status: "stopped",
+      output: undefined,
+      error: undefined,
+    } as SnapshotFrom<Machine>;
     try {
       this.cleanup();
     } finally {
-      this.snapshot = {
-        ...this.snapshot,
-        status: "stopped",
-        output: undefined,
-        error: undefined,
-      } as SnapshotFrom<Machine>;
       for (const subscriber of this.subscribers) subscriber.complete();
     }
     return this;

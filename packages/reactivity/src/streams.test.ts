@@ -236,6 +236,30 @@ describe.each([
     expect(trace).toEqual(["teardown", "recover", "finalize"]);
   });
 
+  it.each([false, true])(
+    "finalizes concatenated sources before subscribing to the next (async: %s)",
+    (asynchronous) => {
+      const trace: string[] = [];
+      let complete!: () => void;
+      const source = new api.Observable<number>((sink) => {
+        complete = () => sink.complete();
+        if (!asynchronous) complete();
+        return () => trace.push("teardown");
+      });
+      api
+        .concat(
+          source,
+          api.defer(() => {
+            trace.push("next");
+            return api.of(42);
+          }),
+        )
+        .subscribe();
+      if (asynchronous) complete();
+      expect(trace).toEqual(["teardown", "next"]);
+    },
+  );
+
   it("retries with a fresh producer and tears down every attempt", async () => {
     let attempts = 0;
     const teardown = vi.fn();
@@ -251,6 +275,30 @@ describe.each([
     expect(await api.lastValueFrom(source.pipe(api.retry(2)))).toBe(7);
     expect(attempts).toBe(3);
     expect(teardown).toHaveBeenCalledTimes(3);
+  });
+
+  it("concatenates synchronous sources without recursion and stops on cancellation or error", async () => {
+    expect(
+      await api.lastValueFrom(
+        api.concat(
+          ...Array.from({ length: 5000 }, () => api.of<number>()),
+          api.of(42),
+        ),
+      ),
+    ).toBe(42);
+    const next = vi.fn(() => api.of(2));
+    await expect(
+      api.firstValueFrom(api.concat(api.of(1), api.defer(next))),
+    ).resolves.toBe(1);
+    await expect(
+      api.lastValueFrom(
+        api.concat(
+          api.throwError(() => new Error("failed")),
+          api.defer(next),
+        ),
+      ),
+    ).rejects.toThrow("failed");
+    expect(next).not.toHaveBeenCalled();
   });
 
   it("shares one producer, disconnects at zero subscribers, and reconnects", () => {

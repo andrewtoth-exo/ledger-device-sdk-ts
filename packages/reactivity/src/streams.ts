@@ -715,16 +715,35 @@ export function concat<Value>(
 ): Observable<Value> {
   return new Observable((sink) => {
     let index = 0;
+    let subscribing = false;
     const next = () => {
-      if (sink.closed) return;
-      if (index === sources.length) {
-        sink.complete();
-        return;
+      if (subscribing) return;
+      while (!sink.closed) {
+        if (index === sources.length) {
+          sink.complete();
+          return;
+        }
+        let completed = false;
+        let upstream: Subscriber<Value>;
+        subscribing = true;
+        connect(
+          from(sources[index++]!),
+          sink,
+          {
+            next: (value) => sink.next(value),
+            complete: () => {
+              upstream.unsubscribe();
+              completed = true;
+              next();
+            },
+          },
+          (subscriber) => {
+            upstream = subscriber;
+          },
+        );
+        subscribing = false;
+        if (!completed) return;
       }
-      connect(from(sources[index++]!), sink, {
-        next: (value) => sink.next(value),
-        complete: next,
-      });
     };
     next();
   });

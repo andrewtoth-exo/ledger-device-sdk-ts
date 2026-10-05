@@ -335,6 +335,38 @@ describe.each([
     expect(complete).toHaveBeenCalledTimes(1);
   });
 
+  it("ignores events sent by promise cancellation during stop", () => {
+    const enter = vi.fn();
+    const actor = api.createActor(
+      api
+        .setup({
+          types: {} as { context: Record<string, never> },
+          actors: {
+            work: api.fromPromise(
+              ({ signal }) =>
+                new Promise(() => {
+                  signal.addEventListener("abort", () =>
+                    actor.send({ type: "next" }),
+                  );
+                }),
+            ),
+          },
+        })
+        .createMachine({
+          initial: "running",
+          states: {
+            running: { invoke: { src: "work" }, on: { next: "unexpected" } },
+            unexpected: { entry: enter },
+          },
+        }),
+    );
+    actor.start();
+    actor.stop();
+    expect(enter).not.toHaveBeenCalled();
+    expect(actor.getSnapshot().status).toBe("stopped");
+    expect(actor.getSnapshot().value).toBe("running");
+  });
+
   it("handles synchronous invocation factory errors through onError", () => {
     const fail = () => {
       throw new Error("factory failed");
