@@ -34,7 +34,7 @@
  * @see CustomLockScreenDeviceActions.md for full documentation
  */
 
-import { gzip } from "pako";
+import pako from "pako";
 
 import { concatUint8Arrays } from "@api/customLockScreenUtils/codec/byteUtils";
 import type { ScreenSpecs } from "@api/customLockScreenUtils/screenSpecs";
@@ -250,7 +250,7 @@ export async function encodeImageForDevice(
 
   const compressedChunks: Uint8Array[] = await Promise.all(
     chunkedImgData.map(async (chunk) => {
-      const compressedChunk = gzip(chunk);
+      const compressedChunk = pako.gzip(chunk);
 
       // Create 2-byte LE size prefix
       const sizePrefix = new Uint8Array(2);

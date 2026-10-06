@@ -8,7 +8,7 @@ import {
   type TransactionInstruction,
   TransactionMessage,
   VersionedTransaction,
-} from "@solana/web3.js";
+} from "@exodus/solana-web3.js";
 import { describe, expect, it, vi } from "vitest";
 
 import { DefaultBs58Encoder } from "@internal/app-binder/services/bs58Encoder";
@@ -329,6 +329,36 @@ describe("TransactionParser", () => {
         MalformedTransactionError,
       );
     });
+
+    it.each(["legacy", 0] as const)(
+      "rejects a truncated %s message instead of padding missing data",
+      async (version) => {
+        const payer = Keypair.generate();
+        const message = new TransactionMessage({
+          payerKey: payer.publicKey,
+          recentBlockhash: DUMMY_BLOCKHASH,
+          instructions: [
+            SystemProgram.transfer({
+              fromPubkey: payer.publicKey,
+              toPubkey: Keypair.generate().publicKey,
+              lamports: 1,
+            }),
+          ],
+        });
+        const bytes = (
+          version === "legacy"
+            ? message.compileToLegacyMessage()
+            : message.compileToV0Message()
+        ).serialize();
+        const result = await new TransactionParser()
+          .parse(bytes.subarray(0, -1))
+          .run();
+        expect(result.isLeft()).toBe(true);
+        expect(result.swap().unsafeCoerce()).toBeInstanceOf(
+          MalformedTransactionError,
+        );
+      },
+    );
 
     it("returns OversizedAccountArrayError when an instruction declares more than 256 accounts", () => {
       // Exercise the guard directly through the exported helper: web3.js may

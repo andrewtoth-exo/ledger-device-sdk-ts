@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
+  Keypair,
+  PublicKey,
+  Transaction,
+  TransactionInstruction,
+} from "@exodus/solana-web3.js";
+import {
   type ClearSignContext,
   ClearSignContextType,
   type ContextModule,
 } from "@ledgerhq/context-module";
 import { DeviceModelId } from "@ledgerhq/device-management-kit";
-import {
-  Keypair,
-  PublicKey,
-  Transaction,
-  TransactionInstruction,
-} from "@solana/web3.js";
 import { Buffer } from "buffer";
 import { Right } from "purify-ts";
 import { describe, expect, it, vi } from "vitest";

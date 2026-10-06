@@ -4,7 +4,7 @@ import {
   type PublicKey,
   SystemProgram,
   Transaction,
-} from "@solana/web3.js";
+} from "@exodus/solana-web3.js";
 import { describe, expect, it } from "vitest";
 
 import {

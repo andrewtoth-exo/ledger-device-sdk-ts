@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "@ledgerhq/signer-utils": "workspace:^",
-    "pako": "^2.1.0",
+    "pako": "1.0.11",
     "purify-ts": "catalog:",
     "rxjs": "catalog:",
     "semver": "catalog:",

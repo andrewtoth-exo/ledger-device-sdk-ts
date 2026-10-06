@@ -1,4 +1,4 @@
-import { PublicKey } from "@solana/web3.js";
+import { PublicKey } from "@exodus/solana-web3.js";
 import { describe, expect, it } from "vitest";
 
 import { TOKEN_2022_PROGRAM_ID } from "@internal/app-binder/services/utils/splToken";

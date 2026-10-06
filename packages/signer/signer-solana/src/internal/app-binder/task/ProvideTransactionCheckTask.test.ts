@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { PublicKey, SystemProgram, Transaction } from "@exodus/solana-web3.js";
 import {
   ClearSignContextType,
   SolanaTransactionScanChainId,
@@ -7,7 +8,6 @@ import {
   CommandResultFactory,
   DeviceModelId,
 } from "@ledgerhq/device-management-kit";
-import { PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
 import { beforeEach, describe, expect, it, type Mock, vi } from "vitest";
 
 import { GetChallengeCommand } from "@internal/app-binder/command/GetChallengeCommand";

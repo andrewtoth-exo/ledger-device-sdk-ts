@@ -2,4 +2,4 @@
 "@ledgerhq/device-signer-kit-solana": patch
 ---
 
-Replace direct encoding and cryptographic dependencies with Exodus primitives.
+Use Exodus encoding and Solana packages; replace Connection with HTTP RPC for blockhash and address lookup table queries.

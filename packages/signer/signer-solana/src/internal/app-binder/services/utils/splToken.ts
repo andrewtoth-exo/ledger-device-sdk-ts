@@ -2,7 +2,7 @@ import {
   type AccountMeta,
   PublicKey,
   TransactionInstruction,
-} from "@solana/web3.js";
+} from "@exodus/solana-web3.js";
 
 // Inlined from `@solana/spl-token` to keep its unpatched transitive
 // `bigint-buffer` advisory (CVE-2025-3194) out of the dependency graph.

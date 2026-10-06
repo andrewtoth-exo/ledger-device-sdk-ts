@@ -1,4 +1,4 @@
-import { Keypair, type PublicKey, SystemProgram } from "@solana/web3.js";
+import { Keypair, type PublicKey, SystemProgram } from "@exodus/solana-web3.js";
 import { describe, expect, it } from "vitest";
 
 import {

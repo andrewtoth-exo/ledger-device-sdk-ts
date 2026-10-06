@@ -91,8 +91,10 @@
   "pnpm": {
     "overrides": {
       "zod@>=4.4.0": "4.3.6",
+      "rpc-websockets@9.1.1>eventemitter3": "5.0.4",
       "@exodus/crypto>@exodus/bytes": "1.16.0",
       "@exodus/ethereumjs>@exodus/crypto": "1.0.0-rc.34",
+      "@exodus/solana-web3.js>@exodus/crypto": "1.0.0-rc.34",
       "@exodus/ethereumjs>rlp": "2.2.6",
       "@exodus/ethersproject-bignumber>bn.js": "4.12.2",
       "rlp@2.2.6>bn.js": "4.12.2",

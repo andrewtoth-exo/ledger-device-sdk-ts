@@ -1,4 +1,10 @@
 import {
+  Keypair,
+  PublicKey,
+  Transaction,
+  TransactionInstruction,
+} from "@exodus/solana-web3.js";
+import {
   BlindSignReason,
   type ContextModule,
   SigningMethod,
@@ -8,12 +14,6 @@ import {
   DeviceModelId,
   type LoggerPublisherService,
 } from "@ledgerhq/device-management-kit";
-import {
-  Keypair,
-  PublicKey,
-  Transaction,
-  TransactionInstruction,
-} from "@solana/web3.js";
 import { Buffer } from "buffer";
 import { describe, expect, it, vi } from "vitest";
 

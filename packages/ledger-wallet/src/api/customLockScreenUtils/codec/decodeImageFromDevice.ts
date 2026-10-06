@@ -7,7 +7,7 @@
  * @see CustomLockScreenDeviceActions.md for full documentation
  */
 
-import { ungzip } from "pako";
+import pako from "pako";
 
 import { concatUint8Arrays } from "./byteUtils";
 
@@ -113,7 +113,7 @@ export function decodeImageFromDevice(
       offset += chunkSize;
 
       // Decompress chunk
-      const decompressedChunk = ungzip(compressedChunk);
+      const decompressedChunk = pako.ungzip(compressedChunk);
       decompressedChunks.push(decompressedChunk);
     }
 

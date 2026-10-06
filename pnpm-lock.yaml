@@ -45,6 +45,9 @@ catalogs:
     '@exodus/ethersproject-rlp':
       specifier: 5.4.2-exodus.2
       version: 5.4.2-exodus.2
+    '@exodus/solana-web3.js':
+      specifier: 1.63.1-exodus.9-rc7
+      version: 1.63.1-exodus.9-rc7
     '@inquirer/prompts':
       specifier: ^7.3.3
       version: 7.3.3
@@ -328,8 +331,8 @@ catalogs:
       specifier: 7.8.2
       version: 7.8.2
     semver:
-      specifier: 7.7.2
-      version: 7.7.2
+      specifier: 7.7.4
+      version: 7.7.4
     styled-components:
       specifier: ^5.3.11
       version: 5.3.11
@@ -378,8 +381,10 @@ catalogs:
 
 overrides:
   zod@>=4.4.0: 4.3.6
+  rpc-websockets@9.1.1>eventemitter3: 5.0.4
   '@exodus/crypto>@exodus/bytes': 1.16.0
   '@exodus/ethereumjs>@exodus/crypto': 1.0.0-rc.34
+  '@exodus/solana-web3.js>@exodus/crypto': 1.0.0-rc.34
   '@exodus/ethereumjs>rlp': 2.2.6
   '@exodus/ethersproject-bignumber>bn.js': 4.12.2
   rlp@2.2.6>bn.js: 4.12.2
@@ -444,7 +449,7 @@ importers:
         version: 6.0.1
       semver:
         specifier: 'catalog:'
-        version: 7.7.2
+        version: 7.7.4
       tsc-alias:
         specifier: 'catalog:'
         version: 1.8.10
@@ -510,7 +515,7 @@ importers:
         version: 7.8.2
       semver:
         specifier: 'catalog:'
-        version: 7.7.2
+        version: 7.7.4
       undici:
         specifier: ^8.8.0
         version: 8.10.2
@@ -860,7 +865,7 @@ importers:
         version: 7.8.2
       semver:
         specifier: 'catalog:'
-        version: 7.7.2
+        version: 7.7.4
       tsx:
         specifier: 'catalog:'
         version: 4.19.2
@@ -1264,7 +1269,7 @@ importers:
         version: 0.2.2
       semver:
         specifier: 'catalog:'
-        version: 7.7.2
+        version: 7.7.4
       xstate:
         specifier: 'catalog:'
         version: 5.19.2
@@ -1313,7 +1318,7 @@ importers:
         version: 0.2.2
       semver:
         specifier: 'catalog:'
-        version: 7.7.2
+        version: 7.7.4
       xstate:
         specifier: 'catalog:'
         version: 5.19.2
@@ -1575,8 +1580,8 @@ importers:
         specifier: workspace:^
         version: link:../signer/signer-utils
       pako:
-        specifier: ^2.1.0
-        version: 2.1.0
+        specifier: 1.0.11
+        version: 1.0.11
       purify-ts:
         specifier: 'catalog:'
         version: 2.1.0
@@ -1585,7 +1590,7 @@ importers:
         version: 7.8.2
       semver:
         specifier: 'catalog:'
-        version: 7.7.2
+        version: 7.7.4
       xstate:
         specifier: 'catalog:'
         version: 5.19.2
@@ -1947,7 +1952,7 @@ importers:
         version: 0.2.2
       semver:
         specifier: 'catalog:'
-        version: 7.7.2
+        version: 7.7.4
       xstate:
         specifier: 'catalog:'
         version: 5.19.2
@@ -2123,6 +2128,9 @@ importers:
       '@exodus/bytes':
         specifier: 'catalog:'
         version: 1.16.0(@noble/hashes@2.0.1)
+      '@exodus/solana-web3.js':
+        specifier: 'catalog:'
+        version: 1.63.1-exodus.9-rc7
       '@ledgerhq/context-module':
         specifier: workspace:^
         version: link:../context-module
@@ -2132,9 +2140,6 @@ importers:
       '@solana/transaction-messages':
         specifier: 'catalog:'
         version: 8.3.0(typescript@5.9.2)
-      '@solana/web3.js':
-        specifier: 'catalog:'
-        version: 1.98.2(bufferutil@4.0.9)(encoding@0.1.13)(typescript@5.9.2)(utf-8-validate@5.0.10)
       buffer:
         specifier: 'catalog:'
         version: 6.0.3
@@ -2149,7 +2154,7 @@ importers:
         version: 0.2.2
       semver:
         specifier: 'catalog:'
-        version: 7.7.2
+        version: 7.7.4
       xstate:
         specifier: 'catalog:'
         version: 5.19.2
@@ -2244,7 +2249,7 @@ importers:
     dependencies:
       semver:
         specifier: 'catalog:'
-        version: 7.7.2
+        version: 7.7.4
     devDependencies:
       '@ledgerhq/device-management-kit':
         specifier: workspace:^
@@ -4657,6 +4662,10 @@ packages:
     resolution: {integrity: sha512-Z5kJ+wU3oA7MMIqVR9tyZRtjYPr4OC004Q4Rw7pgOKUOKkJfZ3O24nz3WYfGRpMDNmcOi3TwQOmgm7B7Tpii0w==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
+  '@exodus/bigint-buffer@1.1.5-exodus.1':
+    resolution: {integrity: sha512-FpuaB1YsPC5EJQ7GVQt6oJbxK7Tr3rs/PXshEJgx06hnaU2nFmmtbVi6pqIfXKDOO7whmi/1t5NtBlfC/H0y+w==}
+    engines: {node: '>= 10.0.0'}
+
   '@exodus/bytes@1.16.0':
     resolution: {integrity: sha512-IcpW84uEn3N7ETtNZMlxKhfl6Pec8rUNGOTBtWbK1FKhJxIFAptZyVrvVRVBimAJxJCgc3PxepxkdWWG4DVzfA==}
     engines: {node: ^20.19.0 || ^22.12.0 || >=24.0.0}
@@ -4690,6 +4699,14 @@ packages:
 
   '@exodus/ethersproject-strings@5.4.2-exodus.2':
     resolution: {integrity: sha512-lI3rgB5ktbjSb5aeAJP99E9eHJ66zQPWVScctPFnBuy+uZsck0+8s2BLDmMF46vwBKeZAYIDGrPdmAhFx5VqOw==}
+
+  '@exodus/solana-buffer-layout@4.0.0-exodus.0':
+    resolution: {integrity: sha512-Sj9EvOMzj8lBsn2UKy5hMb/0fjJUPU/qsyjomDHEDBYh0o0Tf7t4KawGDbNGZrSX/U/hNmsUoFPL0Lu7llXvew==}
+    engines: {node: '>=5.10'}
+
+  '@exodus/solana-web3.js@1.63.1-exodus.9-rc7':
+    resolution: {integrity: sha512-vCdN5DLINTcAQSpqVQyuPoe8vj3HXnS5E2XGS/w0gkKb3WJeMHrH3PKjPrlgRMQsqCYFzWwXhdddVvC3AUkeJg==}
+    engines: {node: '>=12.20.0'}
 
   '@floating-ui/core@1.6.2':
     resolution: {integrity: sha512-+2XpQV9LLZeanU4ZevzRnGFg2neDeKHgFLjP6YLW+tly0IvrhqT4u8enLGjLH3qeh85g19xY5rsAusfwTdn5lg==}
@@ -9250,8 +9267,8 @@ packages:
     resolution: {integrity: sha512-8q3LsZjRezbFZ2PN+uP+Q7pnHUMmAOziU2vA2OwoFaKIXxlxl38IylhSSgUorWu/rf4er67w0ikBqjBFk/pomA==}
     engines: {node: '>=10.13.0'}
 
-  eventemitter3@5.0.1:
-    resolution: {integrity: sha512-GWkBvjiSZK87ELrYOSESUYeVIc9mvLLf/nXalMOS5dYrgZq9o5OVkbZAVM06CVxYsCwH9BDZFPlQTlPA1j4ahA==}
+  eventemitter3@5.0.4:
+    resolution: {integrity: sha512-mlsTRyGaPBjPedk6Bvw+aqbsXDtoAyAzm5MO7JgU+yVRyMQ5O8bD4Kcci7BS85f93veegeCPkL8R4GLClnjLFw==}
 
   events@3.3.0:
     resolution: {integrity: sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==}
@@ -11630,9 +11647,6 @@ packages:
   pako@1.0.11:
     resolution: {integrity: sha512-4hLB8Py4zZce5s4yd9XzopqwVv/yGNhV1Bl8NTmCq1763HeK2+EwVTv+leGeL13Dnh2wfbqowVPXCIO0z4taYw==}
 
-  pako@2.1.0:
-    resolution: {integrity: sha512-w+eufiZ1WuJYgPXbV/PO3NCMEc3xqylkKHzp8bxp1uW4qaSNQUkwmLLEc3kKsfz8lpV1F8Ht3U1Cm+9Srog2ug==}
-
   param-case@2.1.1:
     resolution: {integrity: sha512-eQE845L6ot89sk2N8liD8HAuH4ca6Vvr7VWAWwt7+kvvG5aBcPmmphQ68JsEG2qa9n1TykS2DLeMt363AAH8/w==}
 
@@ -12817,13 +12831,13 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  semver@7.7.2:
-    resolution: {integrity: sha512-RF0Fw+rO5AMf9MAyaRXI4AV0Ulj5lMHqVxxdSgiVbixSCXoEmmX/jk0CuJw4+3SqroYO9VoUh+HcuJivvtJemA==}
+  semver@7.7.3:
+    resolution: {integrity: sha512-SdsKMrI9TdgjdweUSR9MweHA4EJ8YxHn8DFaDisvhVlUOe4BF1tLD7GAj0lIqWVl+dPb/rExr0Btby5loQm20Q==}
     engines: {node: '>=10'}
     hasBin: true
 
-  semver@7.7.3:
-    resolution: {integrity: sha512-SdsKMrI9TdgjdweUSR9MweHA4EJ8YxHn8DFaDisvhVlUOe4BF1tLD7GAj0lIqWVl+dPb/rExr0Btby5loQm20Q==}
+  semver@7.7.4:
+    resolution: {integrity: sha512-vFKC2IEtQnVhpT78h1Yp8wzwrf8CM+MzKMHGJZfBtzhZNycRFnXsHk6E5TxIkkMsgNS7mdX3AGB7x2QM2di4lA==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -13196,6 +13210,9 @@ packages:
   superjson@1.13.3:
     resolution: {integrity: sha512-mJiVjfd2vokfDxsQPOwJ/PtanO87LhpYY88ubI5dUB1Ab58Txbyje3+jpm+/83R/fevaq/107NNhtYBLuoTrFg==}
     engines: {node: '>=10'}
+
+  superstruct@0.14.2:
+    resolution: {integrity: sha512-nPewA6m9mR3d6k7WkZ8N8zpTWfenFH3q9pA2PkuiZxINr9DKB2+40wEQf0ixn8VaGuJ78AB6iWOtStI+/4FKZQ==}
 
   superstruct@2.0.2:
     resolution: {integrity: sha512-uV+TFRZdXsqXTL2pRvujROjdZQ4RAlBUS5BTh9IGm+jTqQntYThciG/qu57Gs69yjnVUSqdxF9YLmSnpupBW9A==}
@@ -15239,7 +15256,7 @@ snapshots:
       outdent: 0.5.0
       prettier: 2.8.8
       resolve-from: 5.0.0
-      semver: 7.7.3
+      semver: 7.7.4
 
   '@changesets/assemble-release-plan@6.0.9':
     dependencies:
@@ -15248,7 +15265,7 @@ snapshots:
       '@changesets/should-skip-package': 0.1.2
       '@changesets/types': 6.1.0
       '@manypkg/get-packages': 1.1.3
-      semver: 7.7.3
+      semver: 7.7.4
 
   '@changesets/changelog-git@0.2.1':
     dependencies:
@@ -15289,7 +15306,7 @@ snapshots:
       package-manager-detector: 0.2.11
       picocolors: 1.1.1
       resolve-from: 5.0.0
-      semver: 7.7.3
+      semver: 7.7.4
       spawndamnit: 3.0.1
       term-size: 2.2.1
     transitivePeerDependencies:
@@ -15314,7 +15331,7 @@ snapshots:
       '@changesets/types': 6.1.0
       '@manypkg/get-packages': 1.1.3
       picocolors: 1.1.1
-      semver: 7.7.3
+      semver: 7.7.4
 
   '@changesets/get-github-info@0.6.0(encoding@0.1.13)':
     dependencies:
@@ -16054,6 +16071,8 @@ snapshots:
       '@eslint/core': 0.15.2
       levn: 0.4.1
 
+  '@exodus/bigint-buffer@1.1.5-exodus.1': {}
+
   '@exodus/bytes@1.16.0(@noble/hashes@2.0.1)':
     optionalDependencies:
       '@noble/hashes': 2.0.1
@@ -16106,6 +16125,21 @@ snapshots:
       '@exodus/ethersproject-bytes': 5.4.2-exodus.2
       '@exodus/ethersproject-constants': 5.4.2-exodus.2
       '@exodus/ethersproject-logger': 5.4.2-exodus.2
+
+  '@exodus/solana-buffer-layout@4.0.0-exodus.0':
+    dependencies:
+      buffer: 6.0.3
+
+  '@exodus/solana-web3.js@1.63.1-exodus.9-rc7':
+    dependencies:
+      '@exodus/bigint-buffer': 1.1.5-exodus.1
+      '@exodus/crypto': 1.0.0-rc.34(patch_hash=a086ca12f13cdb3406cf98d4c949e695f54cf3f686fb740c8af7274f55b445a0)
+      '@exodus/solana-buffer-layout': 4.0.0-exodus.0
+      bn.js: 5.2.2
+      borsh: 0.7.0
+      bs58: 4.0.1
+      buffer: 6.0.3
+      superstruct: 0.14.2
 
   '@floating-ui/core@1.6.2':
     dependencies:
@@ -20567,7 +20601,7 @@ snapshots:
       dot-prop: 9.0.0
       env-paths: 3.0.0
       json-schema-typed: 8.0.1
-      semver: 7.7.3
+      semver: 7.7.4
       uint8array-extras: 1.4.0
 
   confbox@0.1.8: {}
@@ -21793,7 +21827,7 @@ snapshots:
 
   event-target-shim@6.0.2: {}
 
-  eventemitter3@5.0.1: {}
+  eventemitter3@5.0.4: {}
 
   events@3.3.0: {}
 
@@ -23046,7 +23080,7 @@ snapshots:
       '@babel/parser': 7.28.5
       '@istanbuljs/schema': 0.1.3
       istanbul-lib-coverage: 3.2.2
-      semver: 7.7.3
+      semver: 7.7.4
     transitivePeerDependencies:
       - supports-color
 
@@ -23318,7 +23352,7 @@ snapshots:
       lodash.isstring: 4.0.1
       lodash.once: 4.1.1
       ms: 2.1.3
-      semver: 7.7.3
+      semver: 7.7.4
 
   jsx-ast-utils@3.3.5:
     dependencies:
@@ -23585,7 +23619,7 @@ snapshots:
 
   make-dir@4.0.0:
     dependencies:
-      semver: 7.7.3
+      semver: 7.7.4
 
   make-error@1.3.6: {}
 
@@ -24107,13 +24141,13 @@ snapshots:
 
   metro@0.81.1(bufferutil@4.0.9)(utf-8-validate@5.0.10):
     dependencies:
-      '@babel/code-frame': 7.27.1
+      '@babel/code-frame': 7.29.7
       '@babel/core': 7.28.3
-      '@babel/generator': 7.28.3
-      '@babel/parser': 7.28.5
-      '@babel/template': 7.27.2
+      '@babel/generator': 7.29.7
+      '@babel/parser': 7.29.7
+      '@babel/template': 7.29.7
       '@babel/traverse': 7.28.3(supports-color@5.5.0)
-      '@babel/types': 7.28.5
+      '@babel/types': 7.29.7
       accepts: 1.3.8
       chalk: 4.1.2
       ci-info: 2.0.0
@@ -24987,7 +25021,7 @@ snapshots:
       ky: 1.7.2
       registry-auth-token: 5.0.2
       registry-url: 6.0.1
-      semver: 7.7.3
+      semver: 7.7.4
 
   package-manager-detector@0.2.11:
     dependencies:
@@ -25004,8 +25038,6 @@ snapshots:
       '@pagefind/windows-x64': 1.5.2
 
   pako@1.0.11: {}
-
-  pako@2.1.0: {}
 
   param-case@2.1.1:
     dependencies:
@@ -26433,7 +26465,7 @@ snapshots:
       '@types/uuid': 8.3.4
       '@types/ws': 8.5.14
       buffer: 6.0.3
-      eventemitter3: 5.0.1
+      eventemitter3: 5.0.4
       uuid: 8.3.2
       ws: 8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
     optionalDependencies:
@@ -26521,9 +26553,9 @@ snapshots:
     dependencies:
       lru-cache: 6.0.0
 
-  semver@7.7.2: {}
-
   semver@7.7.3: {}
+
+  semver@7.7.4: {}
 
   send@0.19.0:
     dependencies:
@@ -26960,6 +26992,8 @@ snapshots:
   superjson@1.13.3:
     dependencies:
       copy-anything: 3.0.5
+
+  superstruct@0.14.2: {}
 
   superstruct@2.0.2: {}
 
@@ -27449,7 +27483,7 @@ snapshots:
       is-npm: 6.0.0
       latest-version: 9.0.0
       pupa: 3.1.0
-      semver: 7.7.3
+      semver: 7.7.4
       xdg-basedir: 5.1.0
 
   upper-case-first@1.1.2:

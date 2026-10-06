@@ -1,9 +1,14 @@
+import { toBase64 } from "@exodus/bytes/base64.js";
 import {
+  AddressLookupTableAccount,
+  AddressLookupTableProgram,
   Keypair,
   SystemProgram,
   Transaction,
   TransactionInstruction,
-} from "@solana/web3.js";
+  TransactionMessage,
+  VersionedTransaction,
+} from "@exodus/solana-web3.js";
 import { describe, expect, it } from "vitest";
 
 import { DefaultBs58Encoder } from "@internal/app-binder/services/bs58Encoder";
@@ -58,6 +63,68 @@ function makeSignedRawTx(
 }
 
 describe("TransactionInspector", () => {
+  it("resolves a v0 SPL transfer's lookup table over HTTP", async () => {
+    const owner = Keypair.generate();
+    const source = Keypair.generate().publicKey;
+    const destination = Keypair.generate().publicKey;
+    const table = new AddressLookupTableAccount({
+      key: Keypair.generate().publicKey,
+      state: {
+        deactivationSlot: 0xffffffffffffffffn,
+        lastExtendedSlot: 0,
+        lastExtendedSlotStartIndex: 0,
+        addresses: [source, destination],
+      },
+    });
+    const message = new TransactionMessage({
+      payerKey: owner.publicKey,
+      recentBlockhash: DUMMY_BLOCKHASH,
+      instructions: [
+        createTransferInstruction(source, destination, owner.publicKey, 42n),
+      ],
+    }).compileToV0Message([table]);
+    const transaction = new VersionedTransaction(message);
+    transaction.sign([owner]);
+    const data = new Uint8Array(56 + 2 * 32);
+    const view = new DataView(data.buffer);
+    view.setUint32(0, 1, true);
+    view.setBigUint64(4, 0xffffffffffffffffn, true);
+    data.set(source.toBytes(), 56);
+    data.set(destination.toBytes(), 88);
+    const fetchMock = vi.fn<typeof fetch>().mockResolvedValue(
+      Response.json({
+        jsonrpc: "2.0",
+        id: 1,
+        result: {
+          value: {
+            owner: AddressLookupTableProgram.programId.toBase58(),
+            data: [toBase64(data), "base64"],
+          },
+        },
+      }),
+    );
+    vi.stubGlobal("fetch", fetchMock);
+    try {
+      const result = await new TransactionInspector(
+        "https://rpc.example.com",
+      ).inspectTransactionType(transaction.serialize());
+      expect(result.transactionType).toBe(SolanaTransactionTypes.SPL);
+      expect(result.data.tokenAddress).toBe(destination.toBase58());
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+      expect(
+        JSON.parse(fetchMock.mock.calls[0]![1]!.body as string),
+      ).toMatchObject({
+        method: "getAccountInfo",
+        params: [
+          table.key.toBase58(),
+          { commitment: "confirmed", encoding: "base64" },
+        ],
+      });
+    } finally {
+      vi.unstubAllGlobals();
+    }
+  });
+
   it("falls back to STANDARD for a plain SystemProgram transfer", async () => {
     const payer = Keypair.generate();
     const dest = Keypair.generate().publicKey;

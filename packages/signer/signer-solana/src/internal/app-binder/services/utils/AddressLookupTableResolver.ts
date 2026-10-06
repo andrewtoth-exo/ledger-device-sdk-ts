@@ -1,8 +1,6 @@
-import {
-  type Connection,
-  type PublicKey,
-  type VersionedMessage,
-} from "@solana/web3.js";
+import { type PublicKey, type VersionedMessage } from "@exodus/solana-web3.js";
+
+import { type SolanaRpc } from "./SolanaRpc";
 
 export type LoadedAddresses = { writable: PublicKey[]; readonly: PublicKey[] };
 
@@ -20,7 +18,7 @@ export interface AddressLookupTableResolver {
 export class RpcAddressLookupTableResolver
   implements AddressLookupTableResolver
 {
-  constructor(private readonly connection: Connection) {}
+  constructor(private readonly rpc: Pick<SolanaRpc, "getAddressLookupTable">) {}
 
   async resolve(msg: VersionedMessage): Promise<LoadedAddresses | undefined> {
     const lookups = msg.addressTableLookups ?? [];
@@ -30,8 +28,7 @@ export class RpcAddressLookupTableResolver
     const readonly: PublicKey[] = [];
 
     for (const lu of lookups) {
-      const res = await this.connection.getAddressLookupTable(lu.accountKey);
-      const table = res.value;
+      const table = await this.rpc.getAddressLookupTable(lu.accountKey);
       if (!table) continue;
       const addrs = table.state.addresses;
 

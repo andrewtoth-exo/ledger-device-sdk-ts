@@ -1,10 +1,11 @@
 import { getCompiledTransactionMessageDecoder } from "@solana/transaction-messages";
-import { VersionedTransaction } from "@solana/web3.js";
+
+import { getTransactionMessageOffset } from "./utils/solanaDecoding";
 
 const SIGNATURE_LENGTH = 64;
 
 // SIMD-0385 "Transaction V1" wire format: VersionByte(0x81) is unsupported by
-// @solana/web3.js, so its message boundary is decoded via @solana/transaction-messages
+// @exodus/solana-web3.js, so its message boundary is decoded via @solana/transaction-messages
 // instead (a lightweight, officially-maintained sub-package of the Solana Kit
 // ecosystem). Its decoder ignores any trailing bytes and just reports how far it
 // read, so it can be pointed at a buffer that may or may not carry trailing
@@ -26,9 +27,7 @@ export type NormalizedTransactionInput = {
  * full wire-format (used internally to forward co-signer signatures to
  * Transaction Check without re-serialization).
  *
- * Handles legacy/v0 (via `@solana/web3.js`) and v1 (SIMD-0385, via
- * `@solana/transaction-messages`, since web3.js does not support it yet)
- * transaction formats.
+ * Handles legacy, v0 and v1 (SIMD-0385) transaction formats.
  */
 export class TransactionInputNormaliser {
   normalize(bytes: Uint8Array): NormalizedTransactionInput {
@@ -36,33 +35,17 @@ export class TransactionInputNormaliser {
       return this.normalizeV1(bytes);
     }
 
+    let messageOffset: number;
     try {
-      VersionedTransaction.deserialize(bytes);
+      messageOffset = getTransactionMessageOffset(bytes);
     } catch {
       return { messageBytes: bytes };
     }
 
     // Full wire-format. Extract message bytes directly from the raw bytes so
     // the slice is byte-identical to what the loader validates against.
-    const { byteLength, value: sigCount } = this.decodeCompactU16(bytes);
-    const messageOffset = byteLength + sigCount * SIGNATURE_LENGTH;
     const messageBytes = bytes.subarray(messageOffset);
     return { messageBytes, serializedForTxCheck: bytes };
-  }
-
-  private decodeCompactU16(bytes: Uint8Array): {
-    value: number;
-    byteLength: number;
-  } {
-    let value = 0;
-    let shift = 0;
-    for (let i = 0; i < bytes.length; i++) {
-      const byte = bytes[i]!;
-      value |= (byte & 0x7f) << shift;
-      if ((byte & 0x80) === 0) return { value, byteLength: i + 1 };
-      shift += 7;
-    }
-    return { value, byteLength: bytes.length };
   }
 
   private normalizeV1(bytes: Uint8Array): NormalizedTransactionInput {

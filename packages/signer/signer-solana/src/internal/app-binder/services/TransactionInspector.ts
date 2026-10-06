@@ -1,6 +1,7 @@
-import { Connection, type PublicKey } from "@solana/web3.js";
+import { type PublicKey } from "@exodus/solana-web3.js";
 
 import { RpcAddressLookupTableResolver } from "@internal/app-binder/services/utils/AddressLookupTableResolver";
+import { SolanaRpc } from "@internal/app-binder/services/utils/SolanaRpc";
 import {
   ASSOCIATED_TOKEN_PROGRAM_ID,
   getAssociatedTokenAddressSync,
@@ -116,9 +117,7 @@ export class TransactionInspector {
 
   constructor(rpcUrl?: string) {
     const resolver = rpcUrl
-      ? new RpcAddressLookupTableResolver(
-          new Connection(rpcUrl, { commitment: "confirmed" }),
-        )
+      ? new RpcAddressLookupTableResolver(new SolanaRpc(rpcUrl))
       : undefined;
     this.parser = new TransactionParser(resolver);
   }

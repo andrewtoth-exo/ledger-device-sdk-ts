@@ -1,12 +1,11 @@
-import { base64StringToBuffer } from "@ledgerhq/device-management-kit";
 import {
   type Message,
   type MessageV0,
   PublicKey,
   Transaction,
-  VersionedMessage,
   VersionedTransaction,
-} from "@solana/web3.js";
+} from "@exodus/solana-web3.js";
+import { base64StringToBuffer } from "@ledgerhq/device-management-kit";
 import { type Either, EitherAsync, Left, Right } from "purify-ts";
 
 import {
@@ -27,6 +26,10 @@ import {
   type ParserError,
   TruncatedTransactionError,
 } from "./ParserError";
+import {
+  deserializeSolanaMessage,
+  getTransactionMessageOffset,
+} from "./solanaDecoding";
 
 const VERSION_PREFIX_MASK = 0x7f;
 // Pads `allKeys` at unresolved ALT slots. The all-zero key is base58 the
@@ -218,11 +221,12 @@ function tryDeserialiseVersioned(
   rawBytes: Uint8Array,
 ): Either<ParserError, Message | MessageV0> {
   try {
+    getTransactionMessageOffset(rawBytes);
     const tx = VersionedTransaction.deserialize(rawBytes);
     return Right(tx.message as Message | MessageV0);
   } catch (signedErr) {
     try {
-      return Right(VersionedMessage.deserialize(rawBytes));
+      return Right(deserializeSolanaMessage(rawBytes));
     } catch (msgErr) {
       return Left(
         new MalformedTransactionError(
@@ -238,6 +242,7 @@ function tryDeserialiseLegacy(
   rawBytes: Uint8Array,
 ): Either<ParserError, Message> {
   try {
+    getTransactionMessageOffset(rawBytes);
     return Right(Transaction.from(rawBytes).compileMessage());
   } catch (err) {
     return Left(

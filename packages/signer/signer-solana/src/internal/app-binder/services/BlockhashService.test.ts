@@ -1,4 +1,5 @@
 import { fromBase58 } from "@exodus/bytes/base58.js";
+import { PublicKey, SystemProgram, Transaction } from "@exodus/solana-web3.js";
 import {
   AccountRole,
   address,
@@ -13,17 +14,8 @@ import {
   setTransactionMessageLifetimeUsingBlockhash,
   setTransactionMessageLifetimeUsingDurableNonce,
 } from "@solana/kit";
-import { PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
 
 import { BlockhashService } from "./BlockhashService";
-
-vi.mock("@solana/web3.js", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@solana/web3.js")>();
-  return {
-    ...actual,
-    Connection: vi.fn(),
-  };
-});
 
 const BLOCKHASH = "a3PD566oU2nE9JHwuC897aaT7ispdqaQ63Si6jzyKAg";
 const BLOCKHASH_BYTES = fromBase58(BLOCKHASH);
@@ -316,29 +308,35 @@ describe("BlockhashService", () => {
   });
 
   describe("fetchLatestBlockhash", () => {
+    afterEach(() => vi.unstubAllGlobals());
+
     it("should fetch and decode a blockhash from the RPC", async () => {
-      const { Connection } = await import("@solana/web3.js");
-      const mockGetLatestBlockhash = vi.fn().mockResolvedValue({
-        blockhash: BLOCKHASH,
-        lastValidBlockHeight: 100,
-      });
-      vi.mocked(Connection).mockImplementation(
-        () =>
-          ({
-            getLatestBlockhash: mockGetLatestBlockhash,
-          }) as unknown as InstanceType<typeof Connection>,
+      const fetchMock = vi.fn<typeof fetch>().mockResolvedValue(
+        Response.json({
+          jsonrpc: "2.0",
+          id: 1,
+          result: {
+            value: { blockhash: BLOCKHASH, lastValidBlockHeight: 100 },
+          },
+        }),
       );
+      vi.stubGlobal("fetch", fetchMock);
 
       const result = await service.fetchLatestBlockhash(
         "https://api.mainnet-beta.solana.com",
       );
 
       expect(result).toEqual(BLOCKHASH_BYTES);
-      expect(Connection).toHaveBeenCalledWith(
+      expect(fetchMock).toHaveBeenCalledWith(
         "https://api.mainnet-beta.solana.com",
-        { commitment: "finalized" },
+        expect.objectContaining({ method: "POST" }),
       );
-      expect(mockGetLatestBlockhash).toHaveBeenCalledWith("finalized");
+      expect(JSON.parse(fetchMock.mock.calls[0]![1]!.body as string)).toEqual({
+        jsonrpc: "2.0",
+        id: 1,
+        method: "getLatestBlockhash",
+        params: [{ commitment: "finalized" }],
+      });
     });
   });
 });

@@ -4,7 +4,7 @@ import {
   SystemProgram,
   SYSVAR_RENT_PUBKEY,
   TransactionInstruction,
-} from "@solana/web3.js";
+} from "@exodus/solana-web3.js";
 
 import {
   addSigners,

@@ -1,4 +1,10 @@
 import {
+  PublicKey,
+  SystemProgram,
+  TransactionInstruction,
+  TransactionMessage,
+} from "@exodus/solana-web3.js";
+import {
   AccountRole,
   appendTransactionMessageInstructions,
   blockhash,
@@ -13,26 +19,36 @@ import {
   setTransactionMessagePriorityFeeLamports,
   signTransactionMessageWithSigners,
 } from "@solana/kit";
-import { VersionedTransaction } from "@solana/web3.js";
 
 import { TransactionInputNormaliser } from "./TransactionInputNormaliser";
 
-vi.mock("@solana/web3.js", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@solana/web3.js")>();
-  return {
-    ...actual,
-    VersionedTransaction: {
-      ...actual.VersionedTransaction,
-      deserialize: vi.fn(),
-    },
-  };
-});
-
-const deserializeMock = VersionedTransaction.deserialize as ReturnType<
-  typeof vi.fn
->;
-
 const SIGNATURE_LENGTH = 64;
+
+function buildMessage(version: "legacy" | 0, signerCount = 1): Uint8Array {
+  const keys = [1, 2].map(
+    (value) => new PublicKey(new Uint8Array(32).fill(value)),
+  );
+  const message = new TransactionMessage({
+    payerKey: keys[0]!,
+    recentBlockhash: PublicKey.default.toBase58(),
+    instructions: [
+      new TransactionInstruction({
+        programId: SystemProgram.programId,
+        keys: keys.map((pubkey, index) => ({
+          pubkey,
+          isSigner: index < signerCount,
+          isWritable: true,
+        })),
+        data: Buffer.from([1, 2, 3]),
+      }),
+    ],
+  });
+  return (
+    version === "legacy"
+      ? message.compileToLegacyMessage()
+      : message.compileToV0Message()
+  ).serialize();
+}
 
 function buildWireFormat(sigCount: number, message: Uint8Array): Uint8Array {
   // compact-u16 for values < 128 is a single byte
@@ -159,44 +175,45 @@ describe("TransactionInputNormaliser", () => {
     normaliser = new TransactionInputNormaliser();
   });
 
-  it("passes raw message bytes through unchanged when deserialize throws", () => {
-    deserializeMock.mockImplementation(() => {
-      throw new Error("not a valid wire-format transaction");
-    });
+  it.each(["legacy", 0] as const)(
+    "passes bare %s message bytes through unchanged",
+    (version) => {
+      const message = buildMessage(version);
+      const result = normaliser.normalize(message);
 
-    const message = new Uint8Array([1, 0, 3, 0xf0, 0xca, 0xcc, 0x1a]);
-    const result = normaliser.normalize(message);
+      expect(result.messageBytes).toBe(message);
+      expect(result.serializedForTxCheck).toBeUndefined();
+    },
+  );
 
-    expect(result.messageBytes).toBe(message);
-    expect(result.serializedForTxCheck).toBeUndefined();
-  });
+  it.each(["legacy", 0] as const)(
+    "extracts %s message bytes and preserves the original transaction",
+    (version) => {
+      const message = buildMessage(version);
+      const wire = buildWireFormat(1, message);
+      wire.fill(42, 1, 1 + SIGNATURE_LENGTH);
+      const result = normaliser.normalize(wire);
 
-  it("extracts message bytes and sets serializedForTxCheck when deserialize succeeds (1 signer)", () => {
-    deserializeMock.mockReturnValue({});
+      expect(Array.from(result.messageBytes)).toEqual(Array.from(message));
+      expect(result.serializedForTxCheck).toBe(wire);
+    },
+  );
 
-    const message = new Uint8Array([1, 0, 3, 0xf0, 0xca, 0xcc, 0x1a]);
-    const wire = buildWireFormat(1, message);
-    const result = normaliser.normalize(wire);
+  it.each(["legacy", 0] as const)(
+    "extracts %s message bytes correctly for a 2-signer transaction",
+    (version) => {
+      const message = buildMessage(version, 2);
+      const wire = buildWireFormat(2, message);
+      wire.fill(42, 1, 1 + 2 * SIGNATURE_LENGTH);
+      const result = normaliser.normalize(wire);
 
-    expect(Array.from(result.messageBytes)).toEqual(Array.from(message));
-    expect(result.serializedForTxCheck).toBe(wire);
-  });
-
-  it("extracts message bytes correctly for a 2-signer transaction", () => {
-    deserializeMock.mockReturnValue({});
-
-    const message = new Uint8Array([2, 0, 3, 0xf0, 0xca, 0xcc, 0x1a]);
-    const wire = buildWireFormat(2, message);
-    const result = normaliser.normalize(wire);
-
-    expect(Array.from(result.messageBytes)).toEqual(Array.from(message));
-    expect(result.serializedForTxCheck).toBe(wire);
-  });
+      expect(Array.from(result.messageBytes)).toEqual(Array.from(message));
+      expect(result.serializedForTxCheck).toBe(wire);
+    },
+  );
 
   it("messageBytes is a subarray of the original wire buffer (no copy)", () => {
-    deserializeMock.mockReturnValue({});
-
-    const message = new Uint8Array([0xf0, 0xca, 0xcc, 0x1a]);
+    const message = buildMessage(0);
     const wire = buildWireFormat(1, message);
     const result = normaliser.normalize(wire);
 
@@ -204,11 +221,7 @@ describe("TransactionInputNormaliser", () => {
     expect(result.messageBytes.buffer).toBe(wire.buffer);
   });
 
-  it("falls back to raw bytes when deserialize throws on garbage input", () => {
-    deserializeMock.mockImplementation(() => {
-      throw new Error("malformed");
-    });
-
+  it("falls back to raw bytes on garbage input", () => {
     const garbage = new Uint8Array([0xf0, 0xca, 0xcc, 0x1a]);
     const result = normaliser.normalize(garbage);
 
@@ -216,15 +229,28 @@ describe("TransactionInputNormaliser", () => {
     expect(result.serializedForTxCheck).toBeUndefined();
   });
 
+  it.each([
+    new Uint8Array([0x80]),
+    new Uint8Array([0xff, 0xff, 0xff, 0x00]),
+    new Uint8Array([0xff, 0xff, 0x04]),
+    buildWireFormat(2, buildMessage(0)),
+    buildWireFormat(1, buildMessage(0)).subarray(0, -1),
+    buildWireFormat(1, buildMessage("legacy")).subarray(0, -1),
+    buildWireFormat(1, buildMessage(0)).subarray(0, 64),
+  ])("does not strip signatures from malformed or truncated input", (bytes) => {
+    const result = normaliser.normalize(bytes);
+    expect(result.messageBytes).toBe(bytes);
+    expect(result.serializedForTxCheck).toBeUndefined();
+  });
+
   describe("v1 transactions (SIMD-0385, built with @solana/kit)", () => {
-    it("passes a bare v1 message through unchanged (never calls web3.js deserialize)", async () => {
+    it("passes a bare v1 message through unchanged", async () => {
       const { messageBytes } = await buildRandomV1Transaction();
 
       const result = normaliser.normalize(messageBytes);
 
       expect(result.messageBytes).toBe(messageBytes);
       expect(result.serializedForTxCheck).toBeUndefined();
-      expect(deserializeMock).not.toHaveBeenCalled();
     });
 
     it("extracts message bytes and sets serializedForTxCheck for a signed full-wire v1 transaction", async () => {
