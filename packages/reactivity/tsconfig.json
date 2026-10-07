@@ -1,9 +1,0 @@
-{
-  "extends": "@ledgerhq/tsconfig-dsdk/tsconfig.sdk",
-  "compilerOptions": {
-    "outDir": "./lib/types",
-    "rootDir": ".",
-    "emitDeclarationOnly": true
-  },
-  "include": ["src"]
-}

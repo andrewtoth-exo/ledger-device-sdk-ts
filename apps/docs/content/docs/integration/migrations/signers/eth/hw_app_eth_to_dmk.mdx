@@ -37,7 +37,7 @@ Before reading this guide, complete the [general LedgerJS → DMK migration](../
 RxJS is no longer a peer dependency. If you import stream operators, use the SDK wrapper instead:
 
 ```bash
-npm install @ledgerhq/device-sdk-reactivity
+npm install @exodus/device-reactivity
 ```
 
 ---
@@ -382,7 +382,7 @@ If you want to migrate incrementally, use the `toPromise` helper from the [gener
 | Issue                                          | Solution                                                                                                                                                                                            |
 | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Observable never reaches `Completed`           | The device may be waiting for user confirmation. Check `state.intermediateValue.requiredUserInteraction` in the `Pending` state.                                                                    |
-| Stream operators not found                     | Run `npm install @ledgerhq/device-sdk-reactivity` (import SDK operators from this package).                                                                                                         |
+| Stream operators not found                     | Run `npm install @exodus/device-reactivity` (import SDK operators from this package).                                                                                                               |
 | Transaction bytes rejected                     | Ensure you are passing a `Uint8Array` (or `Buffer`), not a hex string. `Buffer.from(rawTxHex, "hex")` converts correctly.                                                                           |
 | `signEIP712HashedMessage` not available in DMK | The DMK does not expose a hashed-message signing API. Use `signTypedData` if you have the full structured data.                                                                                     |
 | No Transaction Checks shown on device          | Pass an `originToken` to `SignerEthBuilder`. Contact Ledger to obtain one.                                                                                                                          |

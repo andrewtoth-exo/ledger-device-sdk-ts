@@ -1,5 +1,5 @@
+import { createActor } from "@exodus/device-reactivity/state-machine";
 import { type ContextModule } from "@ledgerhq/context-module";
-import { createActor } from "@ledgerhq/device-sdk-reactivity/state-machine";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { type SignTransactionDAInput } from "@api/app-binder/SignTransactionDeviceActionTypes";

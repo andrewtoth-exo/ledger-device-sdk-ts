@@ -1,5 +1,6 @@
 import "zx/globals";
 
+import { Observable } from "@exodus/device-reactivity";
 import { input } from "@inquirer/prompts";
 import { appTypes } from "@ldmk/app/di/app.types";
 import {
@@ -12,7 +13,6 @@ import {
   type DeviceActionState,
 } from "@ledgerhq/device-management-kit";
 import { DeviceManagementKit } from "@ledgerhq/device-management-kit";
-import { Observable } from "@ledgerhq/device-sdk-reactivity";
 import { SignerEthBuilder } from "@ledgerhq/device-signer-kit-ethereum";
 import { VerifySafeAddressDAError } from "@ledgerhq/device-signer-kit-ethereum/api/app-binder/VerifySafeAddressDeviceActionTypes.js";
 import { inject, injectable } from "inversify";

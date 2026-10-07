@@ -4,7 +4,7 @@ import {
   enqueueActions,
   type EventObject,
   type MachineContext,
-} from "@ledgerhq/device-sdk-reactivity/state-machine";
+} from "@exodus/device-reactivity/state-machine";
 import { type Either, Left } from "purify-ts";
 
 type UnwrapEither<T extends Either<unknown, unknown>> =

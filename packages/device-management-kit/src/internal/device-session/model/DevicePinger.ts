@@ -1,4 +1,4 @@
-import { type Subscription } from "@ledgerhq/device-sdk-reactivity";
+import { type Subscription } from "@exodus/device-reactivity";
 
 import { DeviceModelId } from "@api/device/DeviceModel";
 import {

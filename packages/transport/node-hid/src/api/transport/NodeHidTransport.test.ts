@@ -1,4 +1,5 @@
 /* eslint @typescript-eslint/consistent-type-imports: off */
+import { lastValueFrom, toArray } from "@exodus/device-reactivity";
 import {
   type ApduReceiverServiceFactory,
   type ApduResponse,
@@ -18,7 +19,6 @@ import {
   type TransportDiscoveredDevice,
   UnknownDeviceError,
 } from "@ledgerhq/device-management-kit";
-import { lastValueFrom, toArray } from "@ledgerhq/device-sdk-reactivity";
 import type { Device as NodeHIDDevice } from "node-hid";
 import { Left, Right } from "purify-ts";
 

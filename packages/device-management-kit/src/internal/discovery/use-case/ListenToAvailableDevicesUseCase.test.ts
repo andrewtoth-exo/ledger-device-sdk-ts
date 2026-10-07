@@ -1,4 +1,4 @@
-import { Subject } from "@ledgerhq/device-sdk-reactivity";
+import { Subject } from "@exodus/device-reactivity";
 import { Just } from "purify-ts";
 
 import { type DeviceId, DeviceModel } from "@api/device/DeviceModel";

@@ -1,4 +1,9 @@
 import {
+  assign,
+  fromPromise,
+  setup,
+} from "@exodus/device-reactivity/state-machine";
+import {
   type ApplicationDependency,
   type DeviceActionStateMachine,
   hexaStringToBuffer,
@@ -11,11 +16,6 @@ import {
   UserInteractionRequired,
   XStateDeviceAction,
 } from "@ledgerhq/device-management-kit";
-import {
-  assign,
-  fromPromise,
-  setup,
-} from "@ledgerhq/device-sdk-reactivity/state-machine";
 import { Left, Right } from "purify-ts";
 
 import { isMasterConsentSupported } from "@api/command/OsUpdate/Restore/RequestMasterConsentCommand";

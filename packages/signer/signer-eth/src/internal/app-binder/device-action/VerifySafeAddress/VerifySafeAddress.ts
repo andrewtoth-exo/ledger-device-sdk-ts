@@ -1,3 +1,8 @@
+import {
+  assign,
+  fromPromise,
+  setup,
+} from "@exodus/device-reactivity/state-machine";
 import { type EthereumClearSignContextSuccess } from "@ledgerhq/context-module";
 import {
   type DeviceActionStateMachine,
@@ -8,11 +13,6 @@ import {
   UserInteractionRequired,
   XStateDeviceAction,
 } from "@ledgerhq/device-management-kit";
-import {
-  assign,
-  fromPromise,
-  setup,
-} from "@ledgerhq/device-sdk-reactivity/state-machine";
 import { type Either, Left, Right } from "purify-ts";
 
 import {

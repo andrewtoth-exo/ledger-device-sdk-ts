@@ -1,4 +1,4 @@
-import { type Observable } from "@ledgerhq/device-sdk-reactivity";
+import { type Observable } from "@exodus/device-reactivity";
 import { type Container, type Factory } from "inversify";
 
 import { commandTypes } from "@api/command/di/commandTypes";

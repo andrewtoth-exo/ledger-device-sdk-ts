@@ -1,4 +1,4 @@
-import { concat, of, throwError } from "@ledgerhq/device-sdk-reactivity";
+import { concat, of, throwError } from "@exodus/device-reactivity";
 
 import { DeviceStatus } from "@api/device/DeviceStatus";
 import { makeDeviceActionInternalApiMock } from "@api/device-action/__test-utils__/makeInternalApi";

@@ -5,14 +5,14 @@ import {
   map,
   type Observable,
   switchMap,
-} from "@ledgerhq/device-sdk-reactivity";
-import { timeout } from "@ledgerhq/device-sdk-reactivity";
+} from "@exodus/device-reactivity";
+import { timeout } from "@exodus/device-reactivity";
 import {
   assign,
   fromObservable,
   fromPromise,
   setup,
-} from "@ledgerhq/device-sdk-reactivity/state-machine";
+} from "@exodus/device-reactivity/state-machine";
 import { Left, Right } from "purify-ts";
 
 import { isSuccessCommandResult } from "@api/command/model/CommandResult";

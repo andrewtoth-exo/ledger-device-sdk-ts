@@ -1,3 +1,4 @@
+import { Subject } from "@exodus/device-reactivity";
 import {
   DeviceModelId,
   DisconnectError,
@@ -9,7 +10,6 @@ import {
   TransportConnectedDevice,
   type TransportDiscoveredDevice,
 } from "@ledgerhq/device-management-kit";
-import { Subject } from "@ledgerhq/device-sdk-reactivity";
 import { Left, Right } from "purify-ts/Either";
 
 import { TRANSPORT_IDENTIFIER } from "@api/transport/rnHidTransportIdentifier";

@@ -4,7 +4,7 @@ import {
   lastValueFrom,
   type Observable,
   timeout,
-} from "@ledgerhq/device-sdk-reactivity";
+} from "@exodus/device-reactivity";
 import { type Either } from "purify-ts";
 import { v4 as uuidv4 } from "uuid";
 

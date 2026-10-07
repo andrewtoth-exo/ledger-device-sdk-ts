@@ -1,4 +1,4 @@
-import { Observable, ReplaySubject } from "@ledgerhq/device-sdk-reactivity";
+import { Observable, ReplaySubject } from "@exodus/device-reactivity";
 import { inject, injectable } from "inversify";
 import { Either, Maybe } from "purify-ts";
 

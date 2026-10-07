@@ -1,14 +1,14 @@
+import {
+  ReplaySubject,
+  Subject,
+  type Subscription,
+} from "@exodus/device-reactivity";
 import { type Connector } from "@ledgerhq/device-management-kit-devtools-core";
 import {
   formatSocketMessage,
   parseSocketMessage,
   WEBSOCKET_MESSAGE_TYPES,
 } from "@ledgerhq/device-management-kit-devtools-websocket-common";
-import {
-  ReplaySubject,
-  Subject,
-  type Subscription,
-} from "@ledgerhq/device-sdk-reactivity";
 import WebSocket from "isomorphic-ws";
 
 type Params = {

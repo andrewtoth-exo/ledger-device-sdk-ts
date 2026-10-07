@@ -1,3 +1,4 @@
+import { from } from "@exodus/device-reactivity";
 import {
   CallTaskInAppDeviceAction,
   CommandResultFactory,
@@ -8,7 +9,6 @@ import {
   SendCommandInAppDeviceAction,
   UserInteractionRequired,
 } from "@ledgerhq/device-management-kit";
-import { from } from "@ledgerhq/device-sdk-reactivity";
 import { vi } from "vitest";
 
 import { GetAddressCommand } from "@internal/app-binder/command/GetAddressCommand";

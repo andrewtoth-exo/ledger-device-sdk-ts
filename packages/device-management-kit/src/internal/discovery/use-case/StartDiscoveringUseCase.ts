@@ -1,4 +1,4 @@
-import { map, mergeMap, Observable, of } from "@ledgerhq/device-sdk-reactivity";
+import { map, mergeMap, Observable, of } from "@exodus/device-reactivity";
 import { inject, injectable } from "inversify";
 
 import { DeviceModel } from "@api/device/DeviceModel";

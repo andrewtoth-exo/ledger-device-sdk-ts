@@ -5,7 +5,7 @@ import {
   Observable,
   of,
   scan,
-} from "@ledgerhq/device-sdk-reactivity";
+} from "@exodus/device-reactivity";
 import { inject, injectable } from "inversify";
 
 import { DeviceModel } from "@api/device/DeviceModel";

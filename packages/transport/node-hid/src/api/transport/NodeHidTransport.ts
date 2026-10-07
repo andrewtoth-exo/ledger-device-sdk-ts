@@ -1,4 +1,11 @@
 import {
+  BehaviorSubject,
+  from,
+  map,
+  type Observable,
+  switchMap,
+} from "@exodus/device-reactivity";
+import {
   type ApduReceiverServiceFactory,
   type ApduSenderServiceFactory,
   type ConnectError,
@@ -22,13 +29,6 @@ import {
   type TransportIdentifier,
   UnknownDeviceError,
 } from "@ledgerhq/device-management-kit";
-import {
-  BehaviorSubject,
-  from,
-  map,
-  type Observable,
-  switchMap,
-} from "@ledgerhq/device-sdk-reactivity";
 import { type Device as NodeHIDDevice, devicesAsync, HIDAsync } from "node-hid";
 import {
   type Either,

@@ -1,13 +1,9 @@
-import {
-  Observable,
-  ReplaySubject,
-  share,
-} from "@ledgerhq/device-sdk-reactivity";
+import { Observable, ReplaySubject, share } from "@exodus/device-reactivity";
 import {
   createActor,
   type SnapshotFrom,
   type StateMachine,
-} from "@ledgerhq/device-sdk-reactivity/state-machine";
+} from "@exodus/device-reactivity/state-machine";
 
 import {
   type DeviceAction,

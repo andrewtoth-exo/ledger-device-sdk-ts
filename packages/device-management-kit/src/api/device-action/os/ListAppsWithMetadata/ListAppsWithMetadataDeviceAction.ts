@@ -4,7 +4,7 @@ import {
   fromCallback,
   fromPromise,
   setup,
-} from "@ledgerhq/device-sdk-reactivity/state-machine";
+} from "@exodus/device-reactivity/state-machine";
 import { type EitherAsync, Left, Right } from "purify-ts";
 
 import { type ListAppsResponse } from "@api/command/os/ListAppsCommand";

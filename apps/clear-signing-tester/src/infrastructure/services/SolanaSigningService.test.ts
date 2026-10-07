@@ -1,5 +1,5 @@
+import { Subject } from "@exodus/device-reactivity";
 import { DeviceActionStatus } from "@ledgerhq/device-management-kit";
-import { Subject } from "@ledgerhq/device-sdk-reactivity";
 import { type SignerSolana } from "@ledgerhq/device-signer-kit-solana";
 import { describe, expect, it, vi } from "vitest";
 

@@ -29,7 +29,7 @@
     "semver": "catalog:",
     "tsx": "catalog:",
     "zx": "catalog:",
-    "@ledgerhq/device-sdk-reactivity": "workspace:^"
+    "@exodus/device-reactivity": "catalog:"
   },
   "devDependencies": {
     "@ledgerhq/eslint-config-dsdk": "workspace:^",

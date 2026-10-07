@@ -1,4 +1,10 @@
 import {
+  BehaviorSubject,
+  from,
+  type Observable,
+} from "@exodus/device-reactivity";
+import { switchMap } from "@exodus/device-reactivity";
+import {
   type ApduReceiverServiceFactory,
   type ApduSenderServiceFactory,
   type ConnectError,
@@ -17,12 +23,6 @@ import {
   type TransportIdentifier,
   UnknownDeviceError,
 } from "@ledgerhq/device-management-kit";
-import {
-  BehaviorSubject,
-  from,
-  type Observable,
-} from "@ledgerhq/device-sdk-reactivity";
-import { switchMap } from "@ledgerhq/device-sdk-reactivity";
 import { type Either, Left, Right } from "purify-ts";
 
 import {

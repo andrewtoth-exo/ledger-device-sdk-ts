@@ -1,4 +1,4 @@
-import { Observable } from "@ledgerhq/device-sdk-reactivity";
+import { Observable } from "@exodus/device-reactivity";
 
 import { CommandUtils } from "@api/command/utils/CommandUtils";
 import type { InternalApi } from "@api/device-action/DeviceAction";

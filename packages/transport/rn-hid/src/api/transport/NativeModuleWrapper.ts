@@ -1,9 +1,9 @@
+import { type Observable } from "@exodus/device-reactivity";
 import {
   type LogParams,
   type SendApduResult,
   type TransportDiscoveredDevice,
 } from "@ledgerhq/device-management-kit";
-import { type Observable } from "@ledgerhq/device-sdk-reactivity";
 
 import {
   type InternalConnectionResult,

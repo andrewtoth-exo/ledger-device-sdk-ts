@@ -1,9 +1,9 @@
+import { type Subscription } from "@exodus/device-reactivity";
 import {
   type DeviceManagementKit,
   type DeviceSessionId,
   type DeviceSessionState,
 } from "@ledgerhq/device-management-kit";
-import { type Subscription } from "@ledgerhq/device-sdk-reactivity";
 
 import { type Connector } from "../types";
 import { INSPECTOR_MESSAGE_TYPES } from "./constants";

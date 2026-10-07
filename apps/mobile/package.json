@@ -35,7 +35,7 @@
     "react-native-svg": "catalog:",
     "styled-components": "catalog:",
     "util": "catalog:",
-    "@ledgerhq/device-sdk-reactivity": "workspace:^"
+    "@exodus/device-reactivity": "catalog:"
   },
   "devDependencies": {
     "@babel/core": "catalog:",

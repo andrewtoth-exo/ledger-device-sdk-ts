@@ -2,4 +2,4 @@
 "@ledgerhq/device-trusted-app-kit-ledger-keyring-protocol": minor
 ---
 
-Replace RxJS and XState dependencies with the observer-util-backed SDK reactivity package. Consumers importing stream operators or building custom state machines must switch to `@ledgerhq/device-sdk-reactivity`; subscription and cancellation APIs are unchanged.
+Replace RxJS and XState dependencies with the observer-util-backed SDK reactivity package. Consumers importing stream operators or building custom state machines must switch to `@exodus/device-reactivity`; subscription and cancellation APIs are unchanged.

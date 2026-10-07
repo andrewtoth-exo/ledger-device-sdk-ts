@@ -39,7 +39,7 @@
     "purify-ts": "catalog:",
     "uuid": "catalog:",
     "usb": "catalog:",
-    "@ledgerhq/device-sdk-reactivity": "workspace:^"
+    "@exodus/device-reactivity": "catalog:"
   },
   "devDependencies": {
     "@ledgerhq/device-management-kit": "workspace:*",

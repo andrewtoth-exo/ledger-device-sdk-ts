@@ -2,7 +2,7 @@ import {
   assign,
   fromPromise,
   setup,
-} from "@ledgerhq/device-sdk-reactivity/state-machine";
+} from "@exodus/device-reactivity/state-machine";
 import { Left, Right } from "purify-ts";
 
 import { isSuccessCommandResult } from "@api/command/model/CommandResult";

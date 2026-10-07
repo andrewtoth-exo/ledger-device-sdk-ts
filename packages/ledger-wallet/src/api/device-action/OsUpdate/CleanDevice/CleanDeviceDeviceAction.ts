@@ -1,4 +1,9 @@
 import {
+  assign,
+  fromPromise,
+  setup,
+} from "@exodus/device-reactivity/state-machine";
+import {
   type DeviceActionStateMachine,
   type InternalApi,
   isDashboardName,
@@ -6,11 +11,6 @@ import {
   UserInteractionRequired,
   XStateDeviceAction,
 } from "@ledgerhq/device-management-kit";
-import {
-  assign,
-  fromPromise,
-  setup,
-} from "@ledgerhq/device-sdk-reactivity/state-machine";
 import { Left, Right } from "purify-ts";
 
 import { isCustomLockScreenSupported } from "@api/customLockScreenUtils/screenSpecs";

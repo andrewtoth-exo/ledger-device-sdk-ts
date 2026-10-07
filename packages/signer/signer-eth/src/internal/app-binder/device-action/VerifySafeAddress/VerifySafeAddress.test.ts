@@ -1,4 +1,5 @@
 /* eslint @typescript-eslint/consistent-type-imports: 0 */
+import { lastValueFrom, Observable } from "@exodus/device-reactivity";
 import {
   ClearSignContextType,
   type ContextModule,
@@ -13,7 +14,6 @@ import {
   TransportDeviceModel,
   UserInteractionRequired,
 } from "@ledgerhq/device-management-kit";
-import { lastValueFrom, Observable } from "@ledgerhq/device-sdk-reactivity";
 import { Left, Right } from "purify-ts";
 
 import {

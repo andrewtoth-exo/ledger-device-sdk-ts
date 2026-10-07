@@ -43,7 +43,7 @@
     "js-base64": "catalog:",
     "purify-ts": "catalog:",
     "uuid": "catalog:",
-    "@ledgerhq/device-sdk-reactivity": "workspace:^"
+    "@exodus/device-reactivity": "catalog:"
   },
   "devDependencies": {
     "@ledgerhq/device-management-kit": "workspace:^",

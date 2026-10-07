@@ -1,10 +1,10 @@
+import { from } from "@exodus/device-reactivity";
 import {
   type DeviceManagementKit,
   type DeviceSessionId,
   SendCommandInAppDeviceAction,
   UserInteractionRequired,
 } from "@ledgerhq/device-management-kit";
-import { from } from "@ledgerhq/device-sdk-reactivity";
 import { vi } from "vitest";
 
 import { GetAppConfigCommand } from "@internal/app-binder/command/GetAppConfigCommand";

@@ -1,4 +1,4 @@
-import { of } from "@ledgerhq/device-sdk-reactivity";
+import { of } from "@exodus/device-reactivity";
 import { Maybe } from "purify-ts";
 
 import { DeviceModel } from "@api/device/DeviceModel";

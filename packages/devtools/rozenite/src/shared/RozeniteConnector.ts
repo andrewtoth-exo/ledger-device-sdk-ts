@@ -4,7 +4,7 @@ import {
   ReplaySubject,
   Subject,
   type Subscription,
-} from "@ledgerhq/device-sdk-reactivity";
+} from "@exodus/device-reactivity";
 import { PluginEvents } from "./PluginEvents";
 
 export class RozeniteConnector implements Connector {

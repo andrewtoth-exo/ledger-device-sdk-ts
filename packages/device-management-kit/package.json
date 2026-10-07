@@ -45,7 +45,7 @@
     "semver": "catalog:",
     "uuid": "catalog:",
     "ws": "catalog:",
-    "@ledgerhq/device-sdk-reactivity": "workspace:^"
+    "@exodus/device-reactivity": "catalog:"
   },
   "peerDependencies": {},
   "devDependencies": {

@@ -37,7 +37,7 @@
     "inversify": "catalog:",
     "semver": "catalog:",
     "undici": "^8.8.0",
-    "@ledgerhq/device-sdk-reactivity": "workspace:^"
+    "@exodus/device-reactivity": "catalog:"
   },
   "devDependencies": {
     "@ledgerhq/vitest-config-dmk": "workspace:^",

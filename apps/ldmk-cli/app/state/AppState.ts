@@ -1,10 +1,10 @@
+import { Subscription } from "@exodus/device-reactivity";
 import {
   type DeviceId,
   type DeviceSessionId,
   type DeviceStatus,
   type DiscoveredDevice,
 } from "@ledgerhq/device-management-kit";
-import { Subscription } from "@ledgerhq/device-sdk-reactivity";
 import { injectable } from "inversify";
 
 @injectable()

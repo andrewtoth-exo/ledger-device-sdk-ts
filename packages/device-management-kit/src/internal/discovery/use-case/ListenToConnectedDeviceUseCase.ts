@@ -1,4 +1,4 @@
-import { map, Observable } from "@ledgerhq/device-sdk-reactivity";
+import { map, Observable } from "@exodus/device-reactivity";
 import { inject, injectable } from "inversify";
 
 import { LoggerPublisherService } from "@api/logger-publisher/service/LoggerPublisherService";

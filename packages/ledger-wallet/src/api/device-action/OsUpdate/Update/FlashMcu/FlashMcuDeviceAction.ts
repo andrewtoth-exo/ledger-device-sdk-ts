@@ -1,4 +1,10 @@
 import {
+  assign,
+  fromObservable,
+  fromPromise,
+  setup,
+} from "@exodus/device-reactivity/state-machine";
+import {
   type DeviceActionStateMachine,
   type InternalApi,
   SecureChannelEventType,
@@ -6,12 +12,6 @@ import {
   UserInteractionRequired,
   XStateDeviceAction,
 } from "@ledgerhq/device-management-kit";
-import {
-  assign,
-  fromObservable,
-  fromPromise,
-  setup,
-} from "@ledgerhq/device-sdk-reactivity/state-machine";
 import { Left, Right } from "purify-ts";
 
 import { getOsVersion } from "@api/device-action/OsUpdate/Shared/Substeps/GetOsVersion";

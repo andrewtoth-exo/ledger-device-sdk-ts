@@ -1,4 +1,15 @@
 import {
+  catchError,
+  defer,
+  from,
+  map,
+  mergeMap,
+  type Observable,
+  of,
+  switchMap,
+  timer,
+} from "@exodus/device-reactivity";
+import {
   type ApduResponse,
   type ConnectError,
   type DeviceId,
@@ -24,17 +35,6 @@ import {
   type Device,
   MockClient,
 } from "@ledgerhq/device-mockserver-client";
-import {
-  catchError,
-  defer,
-  from,
-  map,
-  mergeMap,
-  type Observable,
-  of,
-  switchMap,
-  timer,
-} from "@ledgerhq/device-sdk-reactivity";
 import { type Either, Left, Right } from "purify-ts";
 
 export const mockserverIdentifier: TransportIdentifier = "MOCKSERVER";

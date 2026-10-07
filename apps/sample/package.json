@@ -61,7 +61,7 @@
     "react-dom": "catalog:",
     "react-redux": "catalog:",
     "styled-components": "catalog:",
-    "@ledgerhq/device-sdk-reactivity": "workspace:^"
+    "@exodus/device-reactivity": "catalog:"
   },
   "devDependencies": {
     "@ledgerhq/device-mock-server": "workspace:^",

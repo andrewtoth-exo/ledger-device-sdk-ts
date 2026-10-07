@@ -1,4 +1,4 @@
-import { Observable } from "@ledgerhq/device-sdk-reactivity";
+import { Observable } from "@exodus/device-reactivity";
 import { Either, Left } from "purify-ts";
 
 import { type DmkConfig } from "@api/DmkConfig";

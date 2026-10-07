@@ -1,4 +1,5 @@
 /* eslint @typescript-eslint/consistent-type-imports: off */
+import { lastValueFrom, Subject, toArray } from "@exodus/device-reactivity";
 import {
   type ApduReceiverServiceFactory,
   type ApduResponse,
@@ -18,11 +19,6 @@ import {
   type TransportDiscoveredDevice,
   UnknownDeviceError,
 } from "@ledgerhq/device-management-kit";
-import {
-  lastValueFrom,
-  Subject,
-  toArray,
-} from "@ledgerhq/device-sdk-reactivity";
 import { Left, Right } from "purify-ts";
 
 import { RECONNECT_DEVICE_TIMEOUT } from "@api/data/WebHidConfig";

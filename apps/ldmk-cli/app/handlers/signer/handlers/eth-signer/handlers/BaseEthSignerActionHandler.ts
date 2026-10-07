@@ -1,5 +1,6 @@
 import "zx/globals";
 
+import { type Observable } from "@exodus/device-reactivity";
 import { input } from "@inquirer/prompts";
 import { type EthSignerActionHandler } from "@ldmk/app/handlers/signer/handlers/eth-signer/handlers/EthSignerActionHandler";
 import {
@@ -14,7 +15,6 @@ import {
   DeviceActionStatus,
   type DeviceManagementKit,
 } from "@ledgerhq/device-management-kit";
-import { type Observable } from "@ledgerhq/device-sdk-reactivity";
 
 export abstract class BaseEthSignerActionHandler<
   Output,

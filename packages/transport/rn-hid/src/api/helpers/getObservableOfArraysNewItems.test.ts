@@ -1,4 +1,4 @@
-import { from } from "@ledgerhq/device-sdk-reactivity";
+import { from } from "@exodus/device-reactivity";
 
 import { getObservableOfArraysNewItems } from "./getObservableOfArraysNewItems";
 

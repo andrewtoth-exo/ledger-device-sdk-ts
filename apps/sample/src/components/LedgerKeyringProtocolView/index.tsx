@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef } from "react";
 import { useSelector } from "react-redux";
+import { catchError, from, map, of, tap } from "@exodus/device-reactivity";
 import {
   bufferToHexaString,
   type DeviceActionState,
@@ -9,13 +10,6 @@ import {
   type ExecuteDeviceActionReturnType,
   hexaStringToBuffer,
 } from "@ledgerhq/device-management-kit";
-import {
-  catchError,
-  from,
-  map,
-  of,
-  tap,
-} from "@ledgerhq/device-sdk-reactivity";
 import {
   type AuthenticateDAError,
   type AuthenticateDAIntermediateValue,

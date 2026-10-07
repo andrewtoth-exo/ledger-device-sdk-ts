@@ -7,7 +7,7 @@ import {
   tap,
   timer,
   withLatestFrom,
-} from "@ledgerhq/device-sdk-reactivity";
+} from "@exodus/device-reactivity";
 
 import { DeviceModelId } from "@api/device/DeviceModel";
 import { type TransportConnectedDevice } from "@api/transport/model/TransportConnectedDevice";

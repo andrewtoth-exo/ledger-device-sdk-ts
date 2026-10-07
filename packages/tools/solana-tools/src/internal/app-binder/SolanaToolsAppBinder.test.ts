@@ -1,10 +1,10 @@
+import { from } from "@exodus/device-reactivity";
 import {
   type DeviceActionState,
   DeviceActionStatus,
   type DeviceManagementKit,
   type DeviceSessionId,
 } from "@ledgerhq/device-management-kit";
-import { from } from "@ledgerhq/device-sdk-reactivity";
 
 import {
   type CraftTransactionDAError,

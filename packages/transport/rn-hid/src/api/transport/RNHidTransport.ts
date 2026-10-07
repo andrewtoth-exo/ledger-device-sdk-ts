@@ -1,3 +1,4 @@
+import { Observable } from "@exodus/device-reactivity";
 import {
   type ConnectError,
   type DeviceId,
@@ -12,7 +13,6 @@ import {
   type TransportDiscoveredDevice,
   type TransportIdentifier,
 } from "@ledgerhq/device-management-kit";
-import { Observable } from "@ledgerhq/device-sdk-reactivity";
 import { type Either, Left, Right } from "purify-ts";
 
 import { getObservableOfArraysNewItems } from "@api/helpers/getObservableOfArraysNewItems";

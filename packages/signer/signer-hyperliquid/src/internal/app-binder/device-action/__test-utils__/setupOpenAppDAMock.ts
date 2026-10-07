@@ -1,11 +1,8 @@
+import { assign, createMachine } from "@exodus/device-reactivity/state-machine";
 import {
   OpenAppDeviceAction,
   UserInteractionRequired,
 } from "@ledgerhq/device-management-kit";
-import {
-  assign,
-  createMachine,
-} from "@ledgerhq/device-sdk-reactivity/state-machine";
 import { Left, Right } from "purify-ts";
 import { type Mock } from "vitest";
 

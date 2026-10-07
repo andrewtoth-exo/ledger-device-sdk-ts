@@ -1,4 +1,4 @@
-import { concat, of, throwError } from "@ledgerhq/device-sdk-reactivity";
+import { concat, of, throwError } from "@exodus/device-reactivity";
 import { Left, Right } from "purify-ts";
 
 import { CommandResultFactory } from "@api/command/model/CommandResult";

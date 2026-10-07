@@ -1,7 +1,7 @@
 import {
   type BehaviorSubject,
   type Subscription,
-} from "@ledgerhq/device-sdk-reactivity";
+} from "@exodus/device-reactivity";
 
 import { type DeviceSessionState } from "@api/device-session/DeviceSessionState";
 import {

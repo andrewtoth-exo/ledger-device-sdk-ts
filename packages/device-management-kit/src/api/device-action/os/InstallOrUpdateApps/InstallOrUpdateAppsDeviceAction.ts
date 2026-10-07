@@ -1,10 +1,10 @@
-import { type Observable } from "@ledgerhq/device-sdk-reactivity";
+import { type Observable } from "@exodus/device-reactivity";
 import {
   assign,
   fromObservable,
   fromPromise,
   setup,
-} from "@ledgerhq/device-sdk-reactivity/state-machine";
+} from "@exodus/device-reactivity/state-machine";
 import { Left, Right } from "purify-ts";
 
 import { type InternalApi } from "@api/device-action/DeviceAction";

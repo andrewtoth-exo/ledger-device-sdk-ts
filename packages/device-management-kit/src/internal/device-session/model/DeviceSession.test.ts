@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { of, Subject, throwError } from "@ledgerhq/device-sdk-reactivity";
-import { delay, take } from "@ledgerhq/device-sdk-reactivity";
+import { of, Subject, throwError } from "@exodus/device-reactivity";
+import { delay, take } from "@exodus/device-reactivity";
 import { Left, Right } from "purify-ts";
 import { type Mocked } from "vitest";
 

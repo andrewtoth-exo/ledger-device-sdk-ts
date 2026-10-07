@@ -1,3 +1,4 @@
+import { type Observable } from "@exodus/device-reactivity";
 import { type DeviceActionHandler } from "@ldmk/app/handlers/device-action/handlers/DeviceActionHandler";
 import {
   type DeviceActionType,
@@ -11,7 +12,6 @@ import {
   DeviceActionStatus,
   type DeviceManagementKit,
 } from "@ledgerhq/device-management-kit";
-import { type Observable } from "@ledgerhq/device-sdk-reactivity";
 
 export abstract class BaseDeviceActionHandler<
   Output,

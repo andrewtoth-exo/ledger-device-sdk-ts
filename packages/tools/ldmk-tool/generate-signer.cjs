@@ -1065,7 +1065,7 @@ async function generateSigner() {
         inversify: "catalog:",
         "purify-ts": "catalog:",
         "reflect-metadata": "catalog:",
-        "@ledgerhq/device-sdk-reactivity": "workspace:^",
+        "@exodus/device-reactivity": "catalog:",
       },
       devDependencies: {
         "@ledgerhq/device-management-kit": "workspace:^",
@@ -2213,7 +2213,7 @@ ${useCaseSections.join("\n\n")}
 
 ## 🔹 Observable Behavior
 
-Each method returns an [Observable](https://github.com/ExodusForks/ledger-device-sdk-ts/blob/develop/packages/reactivity/README.md) emitting updates structured as [\`DeviceActionState\`](https://github.com/LedgerHQ/device-sdk-ts/blob/develop/packages/device-management-kit/src/api/device-action/model/DeviceActionState.ts). These updates reflect the operation's progress and status:
+Each method returns an [Observable](https://www.npmjs.com/package/@exodus/device-reactivity) emitting updates structured as [\`DeviceActionState\`](https://github.com/LedgerHQ/device-sdk-ts/blob/develop/packages/device-management-kit/src/api/device-action/model/DeviceActionState.ts). These updates reflect the operation's progress and status:
 
 - **NotStarted**: The operation hasn't started.
 - **Pending**: The operation is in progress and may require user interaction.

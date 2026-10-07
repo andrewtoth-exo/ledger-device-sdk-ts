@@ -1,5 +1,5 @@
-import { of, Subject, throwError } from "@ledgerhq/device-sdk-reactivity";
-import { delay } from "@ledgerhq/device-sdk-reactivity";
+import { of, Subject, throwError } from "@exodus/device-reactivity";
+import { delay } from "@exodus/device-reactivity";
 
 import { type LoggerPublisherService } from "@api/logger-publisher/service/LoggerPublisherService";
 import { type DeviceSessionEventDispatcher } from "@internal/device-session/model/DeviceSessionEventDispatcher";

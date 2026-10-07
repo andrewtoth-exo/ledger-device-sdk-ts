@@ -1,4 +1,4 @@
-import { of, throwError } from "@ledgerhq/device-sdk-reactivity";
+import { of, throwError } from "@exodus/device-reactivity";
 
 import { CommandResultFactory } from "@api/command/model/CommandResult";
 import { DeleteLanguagePackCommandError } from "@api/command/os/DeleteLanguagePackCommand";

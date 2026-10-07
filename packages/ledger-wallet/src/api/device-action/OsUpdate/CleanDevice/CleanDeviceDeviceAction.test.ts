@@ -1,3 +1,4 @@
+import { assign, createMachine } from "@exodus/device-reactivity/state-machine";
 import {
   DeleteLanguagePackDAError,
   DeviceActionStatus,
@@ -7,10 +8,6 @@ import {
   UnknownDAError,
   UserInteractionRequired,
 } from "@ledgerhq/device-management-kit";
-import {
-  assign,
-  createMachine,
-} from "@ledgerhq/device-sdk-reactivity/state-machine";
 import { type Either, Left, Right } from "purify-ts";
 
 import { makeDeviceActionInternalApiMock } from "@api/device-action/__test-utils__/makeInternalApi";

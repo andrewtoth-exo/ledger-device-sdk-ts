@@ -9,7 +9,7 @@ packages:
   - packages/trusted-apps/*
 
 catalog:
-  '@nx-js/observer-util': 4.2.2
+  '@exodus/device-reactivity': 0.1.1
   '@babel/core': ^7.25.2
   '@babel/preset-env': ^7.25.3
   '@babel/runtime': ^7.28.3
@@ -122,7 +122,6 @@ catalog:
   reflect-metadata: 0.2.2
   rimraf: ^6.0.1
   rozenite: 1.1.0
-  rxjs: 7.8.2
   semver: 7.7.2
   styled-components: ^5.3.11
   tailwind-merge: ^1.14.0
@@ -141,7 +140,6 @@ catalog:
   vitest: 3.2.6
   vitest-react-native: ^0.1.5
   ws: ^8.18.0
-  xstate: 5.19.2
   zx: 8.5.3
 
 onlyBuiltDependencies:

@@ -1,5 +1,5 @@
+import { filter, firstValueFrom, map } from "@exodus/device-reactivity";
 import { DeviceActionStatus } from "@ledgerhq/device-management-kit";
-import { filter, firstValueFrom, map } from "@ledgerhq/device-sdk-reactivity";
 import { type SolanaTools } from "@ledgerhq/solana-tools";
 import { injectable } from "inversify";
 

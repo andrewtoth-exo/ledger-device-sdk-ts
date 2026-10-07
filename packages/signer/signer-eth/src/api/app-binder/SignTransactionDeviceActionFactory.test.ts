@@ -1,6 +1,6 @@
+import { createActor } from "@exodus/device-reactivity/state-machine";
 import { type ContextModule } from "@ledgerhq/context-module";
 import { type LoggerPublisherService } from "@ledgerhq/device-management-kit";
-import { createActor } from "@ledgerhq/device-sdk-reactivity/state-machine";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { makeDeviceActionInternalApiMock } from "@internal/app-binder/device-action/__test-utils__/makeInternalApi";

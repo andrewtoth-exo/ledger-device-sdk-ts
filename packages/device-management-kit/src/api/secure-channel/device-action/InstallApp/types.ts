@@ -1,4 +1,4 @@
-import { type Observable } from "@ledgerhq/device-sdk-reactivity";
+import { type Observable } from "@exodus/device-reactivity";
 import { type EitherAsync } from "purify-ts";
 
 import { type CommandErrorResult } from "@api/command/model/CommandResult";

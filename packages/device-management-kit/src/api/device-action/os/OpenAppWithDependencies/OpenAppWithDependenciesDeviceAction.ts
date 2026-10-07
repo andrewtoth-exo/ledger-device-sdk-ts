@@ -1,4 +1,4 @@
-import { assign, setup } from "@ledgerhq/device-sdk-reactivity/state-machine";
+import { assign, setup } from "@exodus/device-reactivity/state-machine";
 import { Left, Right } from "purify-ts";
 
 import { type InternalApi } from "@api/device-action/DeviceAction";

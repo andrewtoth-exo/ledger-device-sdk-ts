@@ -161,7 +161,7 @@ const signerEth = new SignerEthBuilder({ dmk, sessionId }).build();
 
 Every method in LedgerJS returned a `Promise`. Every method in the DMK returns an object with two properties:
 
-- `observable`: an [Observable](https://github.com/ExodusForks/ledger-device-sdk-ts/blob/develop/packages/reactivity/README.md) that emits [`DeviceActionState`](https://github.com/LedgerHQ/device-sdk-ts/blob/develop/packages/device-management-kit/src/api/device-action/model/DeviceActionState.ts) updates
+- `observable`: an [Observable](https://www.npmjs.com/package/@exodus/device-reactivity) that emits [`DeviceActionState`](https://github.com/LedgerHQ/device-sdk-ts/blob/develop/packages/device-management-kit/src/api/device-action/model/DeviceActionState.ts) updates
 - `cancel`: a function to cancel the in-progress action
 
 ```typescript
@@ -192,7 +192,7 @@ observable.subscribe({
 If your codebase is heavily promise-based, you can use this helper to keep the call sites familiar while you migrate incrementally:
 
 ```typescript
-import { type Observable } from "@ledgerhq/device-sdk-reactivity";
+import { type Observable } from "@exodus/device-reactivity";
 import { DeviceActionStatus } from "@ledgerhq/device-management-kit";
 
 function toPromise<Output>(action: {
@@ -240,5 +240,5 @@ LedgerJS had no reconnection logic. The DMK exposes `dmk.reconnect({ device, ses
 RxJS is no longer a peer dependency. If you import stream operators, install the SDK wrapper and import them from it instead:
 
 ```bash
-npm install @ledgerhq/device-sdk-reactivity
+npm install @exodus/device-reactivity
 ```

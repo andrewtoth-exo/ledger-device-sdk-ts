@@ -1,4 +1,9 @@
 import {
+  assign,
+  fromPromise,
+  setup,
+} from "@exodus/device-reactivity/state-machine";
+import {
   base64StringToBuffer,
   type CommandResult,
   type DeviceActionStateMachine,
@@ -10,11 +15,6 @@ import {
   UserInteractionRequired,
   XStateDeviceAction,
 } from "@ledgerhq/device-management-kit";
-import {
-  assign,
-  fromPromise,
-  setup,
-} from "@ledgerhq/device-sdk-reactivity/state-machine";
 import {
   GetPubKeyCommand,
   type GetPubKeyCommandResponse,

@@ -1,3 +1,4 @@
+import { Observable, of } from "@exodus/device-reactivity";
 import {
   DeviceActionStatus,
   type GetOsVersionResponse,
@@ -8,7 +9,6 @@ import {
   UnknownDAError,
   UserInteractionRequired,
 } from "@ledgerhq/device-management-kit";
-import { Observable, of } from "@ledgerhq/device-sdk-reactivity";
 import { type Either, Left, Right } from "purify-ts";
 
 import { makeDeviceActionInternalApiMock } from "@api/device-action/__test-utils__/makeInternalApi";

@@ -3,7 +3,7 @@ import {
   type Observable,
   Subject,
   type Subscription,
-} from "@ledgerhq/device-sdk-reactivity";
+} from "@exodus/device-reactivity";
 
 import {
   type DeviceSessionEventDispatcher,

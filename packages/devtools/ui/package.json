@@ -48,7 +48,7 @@
     "react-inspector": "9.0.0",
     "react-resizable-panels": "^4.4.1",
     "styled-components": "catalog:",
-    "@ledgerhq/device-sdk-reactivity": "workspace:^"
+    "@exodus/device-reactivity": "catalog:"
   },
   "devDependencies": {
     "@ledgerhq/device-management-kit": "workspace:^",

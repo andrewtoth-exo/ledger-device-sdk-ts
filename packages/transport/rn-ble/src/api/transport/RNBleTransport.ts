@@ -8,6 +8,19 @@ import {
   type Subscription as BleSubscription,
 } from "react-native-ble-plx";
 import {
+  BehaviorSubject,
+  defer,
+  finalize,
+  first,
+  from,
+  type Observable,
+  retry,
+  type Subscription,
+  switchMap,
+  tap,
+  throttleTime,
+} from "@exodus/device-reactivity";
+import {
   type ApduReceiverServiceFactory,
   type ApduSenderServiceFactory,
   type BleDeviceInfos,
@@ -27,19 +40,6 @@ import {
   type TransportIdentifier,
   UnknownDeviceError,
 } from "@ledgerhq/device-management-kit";
-import {
-  BehaviorSubject,
-  defer,
-  finalize,
-  first,
-  from,
-  type Observable,
-  retry,
-  type Subscription,
-  switchMap,
-  tap,
-  throttleTime,
-} from "@ledgerhq/device-sdk-reactivity";
 import { Either, EitherAsync, Left, Maybe, Right } from "purify-ts";
 
 import {

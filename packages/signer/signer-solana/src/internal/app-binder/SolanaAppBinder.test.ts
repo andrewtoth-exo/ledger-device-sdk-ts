@@ -1,3 +1,4 @@
+import { from } from "@exodus/device-reactivity";
 import { type ContextModule } from "@ledgerhq/context-module";
 import {
   type CommandResult,
@@ -10,7 +11,6 @@ import {
   type DmkError,
   UserInteractionRequired,
 } from "@ledgerhq/device-management-kit";
-import { from } from "@ledgerhq/device-sdk-reactivity";
 
 import {
   type GetAppConfigurationDAError,

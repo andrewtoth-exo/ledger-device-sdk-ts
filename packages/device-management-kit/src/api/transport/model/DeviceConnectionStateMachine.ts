@@ -4,7 +4,7 @@ import {
   createActor,
   emit,
   setup,
-} from "@ledgerhq/device-sdk-reactivity/state-machine";
+} from "@exodus/device-reactivity/state-machine";
 import { type Either, Left, Maybe, Nothing, Right } from "purify-ts";
 
 import { GetAppAndVersionCommand } from "@api/command/os/GetAppAndVersionCommand";

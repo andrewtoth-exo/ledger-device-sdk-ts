@@ -1,4 +1,4 @@
-import { type Observable } from "@ledgerhq/device-sdk-reactivity";
+import { type Observable } from "@exodus/device-reactivity";
 import { type Either } from "purify-ts";
 
 import { type DmkError } from "@api/Error";

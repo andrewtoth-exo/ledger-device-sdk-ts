@@ -1,5 +1,6 @@
 import "zx/globals";
 
+import { Observable } from "@exodus/device-reactivity";
 import { appTypes } from "@ldmk/app/di/app.types";
 import {
   DeviceActionType,
@@ -14,7 +15,6 @@ import {
   GetDeviceStatusDeviceAction,
 } from "@ledgerhq/device-management-kit";
 import { DeviceManagementKit } from "@ledgerhq/device-management-kit";
-import { Observable } from "@ledgerhq/device-sdk-reactivity";
 import { inject, injectable } from "inversify";
 
 import { BaseDeviceActionHandler } from "./BaseDeviceActionHandler";

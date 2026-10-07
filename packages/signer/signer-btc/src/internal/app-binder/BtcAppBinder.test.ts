@@ -1,3 +1,4 @@
+import { from, type Subscription } from "@exodus/device-reactivity";
 import {
   type DeviceActionState,
   DeviceActionStatus,
@@ -5,7 +6,6 @@ import {
   type DeviceSessionId,
   UserInteractionRequired,
 } from "@ledgerhq/device-management-kit";
-import { from, type Subscription } from "@ledgerhq/device-sdk-reactivity";
 
 import {
   type GetExtendedDAIntermediateValue,

@@ -4,6 +4,7 @@ import {
   type Device,
   type Subscription as BleCharacteristicSubscription,
 } from "react-native-ble-plx";
+import { BehaviorSubject, type Subscription } from "@exodus/device-reactivity";
 import {
   type ApduReceiverService,
   type ApduReceiverServiceFactory,
@@ -20,10 +21,6 @@ import {
   type LoggerPublisherService,
   SendApduTimeoutError,
 } from "@ledgerhq/device-management-kit";
-import {
-  BehaviorSubject,
-  type Subscription,
-} from "@ledgerhq/device-sdk-reactivity";
 import { Base64 } from "js-base64";
 import { type Either, Left, Maybe, Nothing, Right } from "purify-ts";
 

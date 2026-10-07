@@ -1,4 +1,4 @@
-import { Observable } from "@ledgerhq/device-sdk-reactivity";
+import { Observable } from "@exodus/device-reactivity";
 import WebSocket from "isomorphic-ws";
 import { type Either } from "purify-ts";
 
